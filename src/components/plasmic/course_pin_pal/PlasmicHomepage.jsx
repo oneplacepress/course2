@@ -149,7 +149,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.link3
                 )}
                 component={Link}
-                href={`/`}
+                href={`/pricing`}
                 platform={"gatsby"}
               >
                 {"Pricing"}
@@ -164,10 +164,23 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.link2
                 )}
                 component={Link}
-                href={"#"}
+                href={`/story`}
                 platform={"gatsby"}
               >
                 {"Story"}
+              </PlasmicLink__>
+              <PlasmicLink__
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  projectcss.__wab_text,
+                  sty.link2
+                )}
+                component={Link}
+                href={`/gallery`}
+                platform={"gatsby"}
+              >
+                {"PinPal Audio & Video"}
               </PlasmicLink__>
             </div>
             <div
@@ -188,7 +201,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.text___0JDf2
                     )}
                   >
-                    {"Start Learning"}
+                    {"Try It Now!"}
                   </div>
                 }
                 roundedFull={true}
@@ -253,7 +266,9 @@ function PlasmicHomepage__RenderFunc(props) {
                         sty.mainHeading
                       )}
                     >
-                      {"The Ultimate Guide to High-Performance Landing Pages"}
+                      {
+                        "The Ultimate Guide to AI-Powered Location-Based Applications"
+                      }
                     </h1>
                     <p
                       data-plasmic-name={"peraBanner"}
@@ -272,7 +287,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         )}
                       >
                         {
-                          "Your go-to guide for both B2B and B2C digital marketing pages.\n\nWe will share with you the hard-won tips and tricks we've gained from developing over 75 high-converting landing pages clients across multiple industries. Everything from ad image and copy, to page design and conversion strategies are shared here in broad strokes for you to take home and deploy."
+                          "Unlock the future of real estate and tourism with our courses on AI audio QR pins and embedded systems. We'll show you how to leverage tools like n8n to create amazing automation for your location-based applications."
                         }
                       </div>
                     </p>
@@ -306,7 +321,7 @@ function PlasmicHomepage__RenderFunc(props) {
                               sty.text__ygpgO
                             )}
                           >
-                            {"Access the course"}
+                            {"Try It Now!"}
                           </div>
                         }
                         roundedFull={true}
@@ -335,7 +350,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 sty.subHeading
               )}
             >
-              {"Used by marketers at:"}
+              {"Trusted by industry leaders"}
             </h2>
             <Stack__
               as={"div"}
@@ -343,189 +358,7 @@ function PlasmicHomepage__RenderFunc(props) {
               data-plasmic-override={overrides.logoContainer}
               hasGap={true}
               className={classNames(projectcss.all, sty.logoContainer)}
-            >
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__p2DZv)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "77px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "100px"
-                    : "180px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group3MWjXt8Vs4OYf,
-                  fullWidth: 180,
-                  fullHeight: 77,
-                  aspectRatio: 2.337662
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__b44Jv)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "85px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "100px"
-                    : "180px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group6Jl9Y9EZ2CXfg,
-                  fullWidth: 180,
-                  fullHeight: 85,
-                  aspectRatio: 2.117647
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__z4Vv6)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "66px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "120px"
-                    : "157px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: groupFo8MicJzjAhG,
-                  fullWidth: 157,
-                  fullHeight: 66,
-                  aspectRatio: 2.378788
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img___6TiGi)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "80.999px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "100px"
-                    : "164.999px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group5GbdDd7GnzVxw,
-                  fullWidth: 164.999,
-                  fullHeight: 80.999,
-                  aspectRatio: 2.037037
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img___2QO77)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "auto"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "100px"
-                    : "143px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group7PrOnVj2DmlBv,
-                  fullWidth: 143,
-                  fullHeight: 91,
-                  aspectRatio: 1.571429
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__ehMg)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "76.999px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "138px"
-                    : "168.999px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group2KziJpgqXNlyG,
-                  fullWidth: 168.999,
-                  fullHeight: 76.999,
-                  aspectRatio: 2.194805
-                }}
-              />
-
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__svkMn)}
-                displayHeight={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "auto"
-                    : "87px"
-                }
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={
-                  hasVariant(globalVariants, "screen", "mobileOnly")
-                    ? "100px"
-                    : "152.999px"
-                }
-                loading={"lazy"}
-                src={{
-                  src: group4BV7FeZ8CbuY7,
-                  fullWidth: 152.999,
-                  fullHeight: 87,
-                  aspectRatio: 1.758621
-                }}
-              />
-            </Stack__>
+            ></Stack__>
           </Stack__>
           <section
             data-plasmic-name={"section3"}
@@ -579,7 +412,9 @@ function PlasmicHomepage__RenderFunc(props) {
                               sty.peraContent
                             )}
                           >
-                            {"How this course will take you from zero to hero:"}
+                            {
+                              "Our courses cover everything from the basics of AI-powered location services to advanced implementation techniques:"
+                            }
                           </p>
                           <ul
                             data-plasmic-name={"unorderList"}
@@ -591,102 +426,130 @@ function PlasmicHomepage__RenderFunc(props) {
                             )}
                           >
                             <li
-                              data-plasmic-name={"listIteam"}
-                              data-plasmic-override={overrides.listIteam}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/ai-audio-qr-pins"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"AI Audio QR Pins"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam3"}
-                              data-plasmic-override={overrides.listIteam3}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam3
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/real-estate-applications"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"Real-Estate Applications"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam4"}
-                              data-plasmic-override={overrides.listIteam4}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam4
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/tourism-applications"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"Tourism Applications"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam5"}
-                              data-plasmic-override={overrides.listIteam5}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam5
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/embedded-systems"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"Embedded Systems"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam6"}
-                              data-plasmic-override={overrides.listIteam6}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam6
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/n8n-automation"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"n8n Automation"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam7"}
-                              data-plasmic-override={overrides.listIteam7}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam7
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/location-based-services"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"Location-Based Services"}
+                              </PlasmicLink__>
                             </li>
                             <li
-                              data-plasmic-name={"listIteam8"}
-                              data-plasmic-override={overrides.listIteam8}
                               className={classNames(
                                 projectcss.all,
                                 projectcss.li,
-                                projectcss.__wab_text,
                                 sty.listIteam8
                               )}
                             >
-                              {
-                                "Describe some topic covered in this info product."
-                              }
+                              <PlasmicLink__
+                                href={"/advanced-qr-techniques"}
+                                className={classNames(
+                                  projectcss.all,
+                                  projectcss.a,
+                                  projectcss.__wab_text
+                                )}
+                              >
+                                {"Advanced QR Techniques"}
+                              </PlasmicLink__>
                             </li>
                           </ul>
                         </h2>
@@ -715,7 +578,7 @@ function PlasmicHomepage__RenderFunc(props) {
                               sty.text__oKwhB
                             )}
                           >
-                            {"Start learning"}
+                            {"Explore Courses"}
                           </div>
                         }
                         roundedFull={true}
@@ -804,7 +667,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       )}
                     >
                       {
-                        "\u201cThis course is a must-take for anyone in digital marketing. Worth every penny.\u201d"
+                        '"PinPal.io has revolutionized how we showcase our properties. The AI audio QR pins are a game-changer!"'
                       }
                     </h2>
                     <p
@@ -817,7 +680,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         sty.position
                       )}
                     >
-                      {"Jane Doe, Sr. Marketing Manager at Company"}
+                      {"Sarah Johnson, CEO of Lux Real Estate"}
                     </p>
                   </div>
                 </div>
@@ -844,7 +707,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.subHeading3
                 )}
               >
-                {"Curriculum Overview"}
+                {"Our Features"}
               </h2>
               <div
                 data-plasmic-name={"line2"}
@@ -866,7 +729,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__jFAkD
                     )}
                   >
-                    {"Chapter Title"}
+                    {"AI Audio QR Pins"}
                   </h2>
                   <p
                     className={classNames(
@@ -877,7 +740,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Create dynamic, location-aware audio experiences with our AI-powered QR pins. Perfect for real estate tours, museum guides, and more."
                     }
                   </p>
                 </div>
@@ -890,7 +753,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__n0IAa
                     )}
                   >
-                    {"Chapter Title"}
+                    {"Embedded Systems"}
                   </h2>
                   <p
                     className={classNames(
@@ -901,7 +764,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Learn to build and program custom hardware for your location-based projects. Our courses cover everything from basic electronics to advanced programming."
                     }
                   </p>
                 </div>
@@ -914,7 +777,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__scN9
                     )}
                   >
-                    {"Chapter Title"}
+                    {"n8n Automation"}
                   </h2>
                   <p
                     className={classNames(
@@ -925,7 +788,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Automate your workflows and create powerful integrations with n8n. We'll show you how to connect your apps and services to create seamless experiences."
                     }
                   </p>
                 </div>
@@ -938,7 +801,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__lmS1
                     )}
                   >
-                    {"Chapter Title"}
+                    {"Real-Estate Solutions"}
                   </h2>
                   <p
                     className={classNames(
@@ -949,7 +812,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Transform your property listings with interactive tours and virtual open houses. Our solutions are designed to help you sell faster and smarter."
                     }
                   </p>
                 </div>
@@ -962,7 +825,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__tkly4
                     )}
                   >
-                    {"Chapter Title"}
+                    {"Tourism & Travel"}
                   </h2>
                   <p
                     className={classNames(
@@ -973,7 +836,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Create unforgettable travel experiences with our location-based storytelling tools. From self-guided tours to interactive exhibits, the possibilities are endless."
                     }
                   </p>
                 </div>
@@ -986,7 +849,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__z90P6
                     )}
                   >
-                    {"Chapter Title"}
+                    {"Advanced Analytics"}
                   </h2>
                   <p
                     className={classNames(
@@ -997,7 +860,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Gain valuable insights into user behavior with our advanced analytics dashboard. Track engagement, measure ROI, and optimize your experiences."
                     }
                   </p>
                 </div>
@@ -1014,8 +877,12 @@ function PlasmicHomepage__RenderFunc(props) {
               data-plasmic-override={overrides.twoSideBox2}
               className={classNames(projectcss.all, sty.twoSideBox2)}
             >
-              <div className={classNames(projectcss.all, sty.columns__u6Q9Q)}>
-                <div className={classNames(projectcss.all, sty.column__pxHal)}>
+              <div
+                className={classNames(projectcss.all, sty.columns__u6Q9Q)}
+              >
+                <div
+                  className={classNames(projectcss.all, sty.column__pxHal)}
+                >
                   <div
                     className={classNames(projectcss.all, sty.freeBox__hqIai)}
                   >
@@ -1035,7 +902,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           sty.text__eUn1Q
                         )}
                       >
-                        {"Practical exercises"}
+                        {"Hands-On Projects"}
                       </div>
                       <p
                         data-plasmic-name={"peraContent2"}
@@ -1047,7 +914,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           sty.peraContent2
                         )}
                       >
-                        {"How you'll implement what you learn"}
+                        {"Apply what you learn with real-world projects."}
                       </p>
                       <ul
                         data-plasmic-name={"unorderList2"}
@@ -1068,7 +935,7 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam2
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {"Build a real-time property tracking app."}
                         </li>
                         <li
                           data-plasmic-name={"listIteam9"}
@@ -1080,7 +947,7 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam9
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {"Create an AI-powered audio tour guide."}
                         </li>
                         <li
                           data-plasmic-name={"listIteam10"}
@@ -1092,7 +959,9 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam10
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {
+                            "Develop a custom embedded system for a smart-city application."
+                          }
                         </li>
                         <li
                           data-plasmic-name={"listIteam11"}
@@ -1104,7 +973,7 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam11
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {"Automate your marketing with n8n workflows."}
                         </li>
                         <li
                           data-plasmic-name={"listIteam12"}
@@ -1116,7 +985,7 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam12
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {"Design and implement advanced QR code solutions."}
                         </li>
                         <li
                           data-plasmic-name={"listIteam13"}
@@ -1128,17 +997,25 @@ function PlasmicHomepage__RenderFunc(props) {
                             sty.listIteam13
                           )}
                         >
-                          {"Describe a practice exercise."}
+                          {
+                            "Build a complete location-based service from scratch."
+                          }
                         </li>
                       </ul>
                     </h2>
                   </div>
                   <Button
-                    className={classNames("__wab_instance", sty.button__rkugu)}
+                    className={classNames(
+                      "__wab_instance",
+                      sty.button__rkugu
+                    )}
                     color={undefined}
                     end={
                       <Icon4Icon
-                        className={classNames(projectcss.all, sty.svg__k4HxD)}
+                        className={classNames(
+                          projectcss.all,
+                          sty.svg__k4HxD
+                        )}
                         role={"img"}
                       />
                     }
@@ -1151,13 +1028,15 @@ function PlasmicHomepage__RenderFunc(props) {
                           sty.text__npA9Z
                         )}
                       >
-                        {"Start learning"}
+                        {"Start Building"}
                       </div>
                     }
                     roundedFull={true}
                   />
                 </div>
-                <div className={classNames(projectcss.all, sty.column__d4XEl)}>
+                <div
+                  className={classNames(projectcss.all, sty.column__d4XEl)}
+                >
                   <div
                     data-plasmic-name={"bannerImage3"}
                     data-plasmic-override={overrides.bannerImage3}
@@ -1240,7 +1119,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.text___07Zrq
                     )}
                   >
-                    {"Marketers"}
+                    {"For Real Estate Agents"}
                   </div>
                   <li
                     className={classNames(
@@ -1250,7 +1129,9 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__xQld2
                     )}
                   >
-                    {"Learn how all of the marketing pieces fit together"}
+                    {
+                      "Create interactive property tours with AI audio QR pins."
+                    }
                   </li>
                   <li
                     className={classNames(
@@ -1260,7 +1141,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__wEsp
                     )}
                   >
-                    {"Master digital marketing for any business"}
+                    {"Automate lead capture and follow-up with n8n."}
                   </li>
                   <li
                     className={classNames(
@@ -1270,7 +1151,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__jaaBm
                     )}
                   >
-                    {"Get access to marketing gurus and their tips"}
+                    {"Provide virtual open houses 24/7."}
                   </li>
                   <li
                     className={classNames(
@@ -1280,7 +1161,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__xS3I
                     )}
                   >
-                    {"Prepare killer presentations and collateral"}
+                    {"Enhance property listings with rich media."}
                   </li>
                 </div>
               </div>
@@ -1300,7 +1181,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.text__o9KtB
                     )}
                   >
-                    {"Product managers"}
+                    {"For Tourism Operators"}
                   </div>
                   <li
                     className={classNames(
@@ -1310,7 +1191,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li___7VqP0
                     )}
                   >
-                    {"Understand the context of your product work"}
+                    {"Create self-guided city tours with audio narration."}
                   </li>
                   <li
                     className={classNames(
@@ -1320,7 +1201,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__kBcN9
                     )}
                   >
-                    {"Learn how to segment your audience properly"}
+                    {"Develop interactive museum exhibits."}
                   </li>
                   <li
                     className={classNames(
@@ -1330,7 +1211,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__kaX2N
                     )}
                   >
-                    {"Implement brand voice and style in your work"}
+                    {"Offer personalized travel experiences."}
                   </li>
                   <li
                     className={classNames(
@@ -1340,7 +1221,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__phWjz
                     )}
                   >
-                    {"Connect top of funnel activities with your flow"}
+                    {"Increase engagement with gamified tours."}
                   </li>
                 </div>
               </div>
@@ -1352,7 +1233,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.text__hS4Jc
                   )}
                 >
-                  {"Designers"}
+                  {"For Developers"}
                 </div>
                 <li
                   className={classNames(
@@ -1369,7 +1250,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__m9U48
                     )}
                   >
-                    {"Learn how your design can inspire action"}
+                    {"Learn to build embedded systems for location tracking."}
                   </li>
                   <div
                     className={classNames(
@@ -1378,7 +1259,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.text__c9S9W
                     )}
                   >
-                    {"Gain big picture insights that affect design"}
+                    {"Integrate with our powerful APIs."}
                   </div>
                   <div
                     data-plasmic-name={"blockChapterContent2"}
@@ -1396,7 +1277,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         sty.li__mFuy4
                       )}
                     >
-                      {"Make advertisements that convert"}
+                      {"Create custom solutions with our SDKs."}
                     </li>
                     <li
                       className={classNames(
@@ -1406,7 +1287,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         sty.li__q43Np
                       )}
                     >
-                      {"Create digital assets for the right audience"}
+                      {"Explore advanced n8n automation workflows."}
                     </li>
                   </div>
                 </li>
@@ -1427,7 +1308,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.text__jlam
                     )}
                   >
-                    {"Business owners"}
+                    {"For Entrepreneurs"}
                   </div>
                   <li
                     className={classNames(
@@ -1437,7 +1318,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li___2SIb
                     )}
                   >
-                    {"Kickstart your marketing plan and efforts"}
+                    {"Discover new business opportunities."}
                   </li>
                   <li
                     className={classNames(
@@ -1447,7 +1328,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__aAlda
                     )}
                   >
-                    {"Upgrade your brand, website and social media"}
+                    {"Learn to build a location-based startup."}
                   </li>
                   <li
                     className={classNames(
@@ -1457,7 +1338,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__x8GPr
                     )}
                   >
-                    {"Prepare effective collateral for your business"}
+                    {"Get inspired by our success stories."}
                   </li>
                   <li
                     className={classNames(
@@ -1467,7 +1348,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.li__tTfpJ
                     )}
                   >
-                    {"Start advertising your company online"}
+                    {"Join our community of innovators."}
                   </li>
                 </div>
               </div>
@@ -1493,7 +1374,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.h2__pSbFq
                     )}
                   >
-                    {"About the instructor"}
+                    {"About PinPal.io"}
                   </h2>
                   <p
                     className={classNames(
@@ -1503,7 +1384,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.p__eNn9Q
                     )}
                   >
-                    {"Jane Doe, Title"}
+                    {"The Future of Location-Based Experiences"}
                   </p>
                   <p
                     className={classNames(
@@ -1514,7 +1395,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "PinPal.io is a pioneer in creating immersive, location-based experiences. We specialize in AI-powered audio QR pins and embedded systems that are transforming the real estate and tourism industries."
                     }
                   </p>
                   <p
@@ -1526,7 +1407,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "Our team of experts has years of experience in developing cutting-edge solutions that are not only innovative but also practical and easy to implement. We are passionate about helping businesses unlock new opportunities and create unforgettable experiences for their customers."
                     }
                   </p>
                   <p
@@ -1538,7 +1419,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     )}
                   >
                     {
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                      "With our powerful automation capabilities using tools like n8n, we can help you streamline your workflows and create dynamic, data-driven experiences that will set you apart from the competition."
                     }
                   </p>
                 </div>
@@ -1592,26 +1473,129 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.h2__bsAh3
                 )}
               >
-                {"Access the course today"}
+                {"Choose Your Plan"}
               </h2>
             </div>
-            <Button
-              className={classNames("__wab_instance", sty.button__nnY4I)}
-              color={"neutral"}
-              label={
+            <div className={classNames(projectcss.all, sty.columns__enUtn)}>
+              <div className={classNames(projectcss.all, sty.column__eVhgc)}>
                 <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__hPyxs
-                  )}
+                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
                 >
-                  {"Access the course"}
+                  <h3
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.h3,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"Starter"}
+                  </h3>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"For individuals and small teams"}
+                  </p>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"$49/mo"}
+                  </p>
+                  <Button
+                    className={classNames("__wab_instance", sty.button__nnY4I)}
+                    color={"neutral"}
+                    label={"Get Started"}
+                    roundedFull={true}
+                  />
                 </div>
-              }
-              roundedFull={true}
-              size={"extraLarge"}
-            />
+              </div>
+              <div className={classNames(projectcss.all, sty.column__uMscq)}>
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
+                >
+                  <h3
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.h3,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"Pro"}
+                  </h3>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"For growing businesses"}
+                  </p>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"$199/mo"}
+                  </p>
+                  <Button
+                    className={classNames("__wab_instance", sty.button__nnY4I)}
+                    color={"neutral"}
+                    label={"Get Started"}
+                    roundedFull={true}
+                  />
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.column__d4XEl)}>
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
+                >
+                  <h3
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.h3,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"Enterprise"}
+                  </h3>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"For large organizations"}
+                  </p>
+                  <p
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.p,
+                      projectcss.__wab_text
+                    )}
+                  >
+                    {"Contact us for pricing"}
+                  </p>
+                  <Button
+                    className={classNames("__wab_instance", sty.button__nnY4I)}
+                    color={"neutral"}
+                    label={"Contact Us"}
+                    roundedFull={true}
+                    link={`mailto:cto@pinpal.io`}
+                  />
+                </div>
+              </div>
+            </div>
           </section>
           <footer
             data-plasmic-name={"footer"}
@@ -1655,7 +1639,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.h3__xkUeT
                   )}
                 >
-                  {"Company"}
+                  {"PinPal.io"}
                 </h3>
                 <PlasmicLink__
                   data-plasmic-name={"footerLink"}
@@ -1667,10 +1651,10 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink
                   )}
                   component={Link}
-                  href={`/`}
+                  href={"https://pinpal.io"}
                   platform={"gatsby"}
                 >
-                  {"Story"}
+                  {"Website"}
                 </PlasmicLink__>
                 <PlasmicLink__
                   data-plasmic-name={"footerLink2"}
@@ -1682,10 +1666,10 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink2
                   )}
                   component={Link}
-                  href={`/`}
+                  href={`mailto:cto@pinpal.io`}
                   platform={"gatsby"}
                 >
-                  {"Pricing"}
+                  {"Contact"}
                 </PlasmicLink__>
               </div>
               <div className={classNames(projectcss.all, sty.column__oBhTf)}>
@@ -1747,9 +1731,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 >
                   <React.Fragment>
                     <React.Fragment>
-                      {
-                        "\u00a9 Company. All rights reserved. This site proudly built with "
-                      }
+                      {"\u00a9 PinPal.io. All rights reserved. "}
                     </React.Fragment>
                     {
                       <PlasmicLink__
@@ -1761,12 +1743,10 @@ function PlasmicHomepage__RenderFunc(props) {
                           sty.link__tm6ET
                         )}
                         component={Link}
-                        href={"https://www.plasmic.app"}
+                        href={"https://pinpal.io"}
                         platform={"gatsby"}
                       >
-                        {hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "Plasmic"
-                          : "Plasmic"}
+                        {"PinPal.io"}
                       </PlasmicLink__>
                     }
                     <React.Fragment>{"."}</React.Fragment>
@@ -2099,14 +2079,7 @@ const PlasmicDescendants = {
 
   peraContent: ["peraContent"],
   unorderList: [
-    "unorderList",
-    "listIteam",
-    "listIteam3",
-    "listIteam4",
-    "listIteam5",
-    "listIteam6",
-    "listIteam7",
-    "listIteam8"
+    "unorderList"
   ],
 
   listIteam: ["listIteam"],
