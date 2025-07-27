@@ -1,7 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Stars, Float, Text } from "@react-three/drei";
+
+// Client-side only wrapper
+const ClientOnly = ({ children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+      <div style={{
+        height: "400px",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
+        color: "white",
+        fontSize: "1.5rem",
+        borderRadius: "20px"
+      }}>
+        📍 Loading Location Services Visualization...
+      </div>
+    );
+  }
+
+  return children;
+};
 
 const FloatingGlobe = () => {
   const meshRef = useRef();
@@ -223,28 +252,30 @@ const LocationBasedServicesPage = () => {
         height: "100%", 
         zIndex: -1
       }}>
-        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
-          <FloatingGlobe />
-          <FloatingPins />
-          {/* Dark particles for visibility */}
-          <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
-            <group>
-              {[...Array(30)].map((_, i) => (
-                <mesh key={i} position={[
-                  (Math.random() - 0.5) * 15,
-                  (Math.random() - 0.5) * 15,
-                  (Math.random() - 0.5) * 15
-                ]}>
-                  <sphereGeometry args={[0.03]} />
-                  <meshStandardMaterial color="#333" opacity={0.7} transparent />
-                </mesh>
-              ))}
-            </group>
-          </Float>
-        </Canvas>
+        <ClientOnly>
+          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} intensity={0.8} />
+            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
+            <FloatingGlobe />
+            <FloatingPins />
+            {/* Dark particles for visibility */}
+            <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
+              <group>
+                {[...Array(30)].map((_, i) => (
+                  <mesh key={i} position={[
+                    (Math.random() - 0.5) * 15,
+                    (Math.random() - 0.5) * 15,
+                    (Math.random() - 0.5) * 15
+                  ]}>
+                    <sphereGeometry args={[0.03]} />
+                    <meshStandardMaterial color="#333" opacity={0.7} transparent />
+                  </mesh>
+                ))}
+              </group>
+            </Float>
+          </Canvas>
+        </ClientOnly>
       </div>
 
       {/* Content Overlay */}
@@ -325,9 +356,11 @@ const LocationBasedServicesPage = () => {
             position: "relative",
             zIndex: 10
           }}>
-            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-              <LocationServicesScene />
-            </Canvas>
+            <ClientOnly>
+              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+                <LocationServicesScene />
+              </Canvas>
+            </ClientOnly>
           </div>
 
           {/* Feature Cards */}

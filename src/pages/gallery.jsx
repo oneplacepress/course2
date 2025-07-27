@@ -1,7 +1,36 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Text } from "@react-three/drei";
+
+// Client-side only wrapper
+const ClientOnly = ({ children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+      <div style={{
+        height: "400px",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
+        color: "white",
+        fontSize: "1.5rem",
+        borderRadius: "20px"
+      }}>
+        🖼️ Loading Gallery Visualization...
+      </div>
+    );
+  }
+
+  return children;
+};
 
 const getFileName = (url) => {
   const fileName = url.split('/').pop();
@@ -271,9 +300,11 @@ const PinPalGalleryPage = () => {
           position: "relative",
           zIndex: 10
         }}>
-          <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-            <MediaGalleryScene />
-          </Canvas>
+          <ClientOnly>
+            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+              <MediaGalleryScene />
+            </Canvas>
+          </ClientOnly>
         </div>
 
         {/* Audio Section */}

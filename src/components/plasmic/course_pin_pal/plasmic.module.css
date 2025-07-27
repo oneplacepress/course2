@@ -586,6 +586,71 @@
 .__wab_expr_html_text {
   white-space: normal;
 }
+
+.__wab_text {
+  display: inline;
+}
+
+/* Add missing regular class definitions for Plasmic imports */
+.all {
+  /* This class is used by Plasmic for global styles */
+}
+
+.root_reset {
+  /* This class is used by Plasmic for root reset styles */
+}
+
+.a {
+  /* Link styles */
+}
+
+.h1 {
+  /* Heading 1 styles */
+}
+
+.h2 {
+  /* Heading 2 styles */
+}
+
+.h3 {
+  /* Heading 3 styles */
+}
+
+.h4 {
+  /* Heading 4 styles */
+}
+
+.h5 {
+  /* Heading 5 styles */
+}
+
+.h6 {
+  /* Heading 6 styles */
+}
+
+.p {
+  /* Paragraph styles */
+}
+
+.ul {
+  /* Unordered list styles */
+}
+
+.li {
+  /* List item styles */
+}
+
+.code {
+  /* Code styles */
+}
+
+.pre {
+  /* Preformatted text styles */
+}
+
+.ol {
+  /* Ordered list styles */
+}
 :where(.root_reset) {
   font-family: var(--mixin-PMxj-C2y1jcn_font-family);
   font-size: var(--mixin-PMxj-C2y1jcn_font-size);

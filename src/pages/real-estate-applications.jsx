@@ -1,7 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Stars, Float } from "@react-three/drei";
+
+// Client-side only wrapper
+const ClientOnly = ({ children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+      <div style={{
+        height: "400px",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
+        color: "white",
+        fontSize: "1.5rem",
+        borderRadius: "20px"
+      }}>
+        🏠 Loading Real Estate Visualization...
+      </div>
+    );
+  }
+
+  return children;
+};
 
 const FloatingHouse = () => {
   const meshRef = useRef();
@@ -235,14 +264,16 @@ const RealEstateApplicationsPage = () => {
         height: "100%", 
         zIndex: -1
       }}>
-        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
-          <FloatingHouse />
-          <FloatingKey />
-        </Canvas>
+        <ClientOnly>
+          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
+            <ambientLight intensity={0.8} />
+            <pointLight position={[10, 10, 10]} intensity={1.2} />
+            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
+            <FloatingHouse />
+            <FloatingKey />
+          </Canvas>
+        </ClientOnly>
       </div>
 
       {/* Content Overlay */}
@@ -323,9 +354,11 @@ const RealEstateApplicationsPage = () => {
             position: "relative",
             zIndex: 10
           }}>
-            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-              <RealEstateScene />
-            </Canvas>
+            <ClientOnly>
+              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+                <RealEstateScene />
+              </Canvas>
+            </ClientOnly>
           </div>
 
           {/* Feature Cards */}

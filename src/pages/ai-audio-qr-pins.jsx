@@ -1,7 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
+import { Stars, Float, Text } from "@react-three/drei";
+
+// Client-side only wrapper
+const ClientOnly = ({ children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+      <div style={{
+        height: "400px",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
+        color: "white",
+        fontSize: "1.5rem",
+        borderRadius: "20px"
+      }}>
+        🎵 Loading Audio Visualization...
+      </div>
+    );
+  }
+
+  return children;
+};
 
 const FloatingAudioPin = () => {
   const meshRef = useRef();
@@ -244,15 +273,17 @@ const AIAudioQRPinsPage = () => {
         height: "100%", 
         zIndex: -1
       }}>
-        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
-          <FloatingAudioPin />
-          <FloatingQRCode />
-          <SoundWaves />
-        </Canvas>
+        <ClientOnly>
+          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
+            <ambientLight intensity={0.8} />
+            <pointLight position={[10, 10, 10]} intensity={1.2} />
+            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
+            <FloatingAudioPin />
+            <FloatingQRCode />
+            <SoundWaves />
+          </Canvas>
+        </ClientOnly>
       </div>
 
       {/* Content Overlay */}
@@ -331,49 +362,51 @@ const AIAudioQRPinsPage = () => {
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
             background: "linear-gradient(135deg, rgba(28,40,51,0.8), rgba(52,73,94,0.9))"
           }}>
-            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-              <ambientLight intensity={0.6} />
-              <pointLight position={[5, 5, 5]} intensity={1} />
-              <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-              <directionalLight position={[0, 10, 0]} intensity={0.5} />
-              
-              {/* AI Audio Wave Elements */}
-              <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-                <group position={[-3, 0, 1]}>
-                  {[...Array(7)].map((_, i) => (
-                    <mesh key={i} position={[(i - 3) * 0.3, Math.sin(i) * 0.2, 0]}>
-                      <boxGeometry args={[0.15, 1 + Math.sin(i) * 0.5, 0.15]} />
-                      <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
+            <ClientOnly>
+              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+                <ambientLight intensity={0.6} />
+                <pointLight position={[5, 5, 5]} intensity={1} />
+                <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
+                <directionalLight position={[0, 10, 0]} intensity={0.5} />
+                
+                {/* AI Audio Wave Elements */}
+                <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
+                  <group position={[-3, 0, 1]}>
+                    {[...Array(7)].map((_, i) => (
+                      <mesh key={i} position={[(i - 3) * 0.3, Math.sin(i) * 0.2, 0]}>
+                        <boxGeometry args={[0.15, 1 + Math.sin(i) * 0.5, 0.15]} />
+                        <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
+                      </mesh>
+                    ))}
+                  </group>
+                </Float>
+                
+                {/* QR Code Elements */}
+                <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+                  <mesh position={[2, 0, -1]}>
+                    <boxGeometry args={[1.5, 1.5, 0.1]} />
+                    <meshStandardMaterial color="#000" />
+                    <mesh position={[0, 0, 0.06]}>
+                      <boxGeometry args={[1.2, 1.2, 0.05]} />
+                      <meshStandardMaterial color="#fff" />
                     </mesh>
-                  ))}
-                </group>
-              </Float>
-              
-              {/* QR Code Elements */}
-              <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-                <mesh position={[2, 0, -1]}>
-                  <boxGeometry args={[1.5, 1.5, 0.1]} />
-                  <meshStandardMaterial color="#000" />
-                  <mesh position={[0, 0, 0.06]}>
-                    <boxGeometry args={[1.2, 1.2, 0.05]} />
-                    <meshStandardMaterial color="#fff" />
                   </mesh>
-                </mesh>
-              </Float>
-              
-              {/* Floating Text */}
-              <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-                <Text
-                  position={[0, 3, 0]}
-                  fontSize={0.8}
-                  color="#fff"
-                  anchorX="center"
-                  anchorY="middle"
-                >
-                  AI Audio QR Experience
-                </Text>
-              </Float>
-            </Canvas>
+                </Float>
+                
+                {/* Floating Text */}
+                <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
+                  <Text
+                    position={[0, 3, 0]}
+                    fontSize={0.8}
+                    color="#fff"
+                    anchorX="center"
+                    anchorY="middle"
+                  >
+                    AI Audio QR Experience
+                  </Text>
+                </Float>
+              </Canvas>
+            </ClientOnly>
           </div>
 
           {/* Feature Cards */}
