@@ -149,7 +149,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.link3
                 )}
                 component={Link}
-                href={`/pricing`}
+                href={`/#pricing`}
                 platform={"gatsby"}
               >
                 {"Pricing"}
@@ -179,8 +179,9 @@ function PlasmicHomepage__RenderFunc(props) {
                 component={Link}
                 href={`/gallery`}
                 platform={"gatsby"}
+                style={{ whiteSpace: "nowrap" }}
               >
-                {"PinPal Audio & Video"}
+                {"PinPal AI Audio & Video"}
               </PlasmicLink__>
               <PlasmicLink__
                 className={classNames(
@@ -1476,6 +1477,7 @@ function PlasmicHomepage__RenderFunc(props) {
             </div>
           </section>
           <section
+            id="pricing"
             data-plasmic-name={"section9"}
             data-plasmic-override={overrides.section9}
             className={classNames(projectcss.all, sty.section9)}

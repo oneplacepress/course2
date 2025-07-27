@@ -54,8 +54,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
         <ambientLight intensity={0.6} />
@@ -65,8 +65,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -156,7 +156,7 @@ const AdvancedQRTechniquesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(142,68,173,0.3)" 
           }}>
-            <h2 style={{ color: "#8e44ad", marginBottom: "15px" }}>🔄 Dynamic QR Codes</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔄 Dynamic QR Codes</h2>
             <p>Create QR codes that can be updated without reprinting. Change destinations, track scans, and gather analytics while keeping the same physical code in place.</p>
           </div>
 
@@ -166,7 +166,7 @@ const AdvancedQRTechniquesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(230,126,34,0.3)" 
           }}>
-            <h2 style={{ color: "#e67e22", marginBottom: "15px" }}>🎨 Designer QR Codes</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎨 Designer QR Codes</h2>
             <p>Design beautiful, branded QR codes that maintain scannability while incorporating logos, colors, and custom styling. Learn error correction and artistic QR techniques.</p>
           </div>
 
@@ -176,7 +176,7 @@ const AdvancedQRTechniquesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(142,68,173,0.3)" 
           }}>
-            <h2 style={{ color: "#8e44ad", marginBottom: "15px" }}>🎬 Video Hosting for Job Applicants</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎬 Video Hosting for Job Applicants</h2>
             <p>Revolutionary feature allowing job seekers to create video resumes accessible via QR codes. Boost interview chances with compelling video introductions delivered instantly.</p>
           </div>
 
@@ -186,7 +186,7 @@ const AdvancedQRTechniquesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(230,126,34,0.3)" 
           }}>
-            <h2 style={{ color: "#e67e22", marginBottom: "15px" }}>🤖 Instant QR + AI Audio Generation</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🤖 Instant QR + AI Audio Generation</h2>
             <p>Combine instant QR code generation with AI-powered audio creation using n8n workflows. Generate codes with custom audio content automatically triggered by user interactions.</p>
           </div>
         </div>

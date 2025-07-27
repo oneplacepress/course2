@@ -63,8 +63,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={2500} factor={4} saturation={0} fade />
         <ambientLight intensity={0.6} />
@@ -74,8 +74,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -165,7 +165,7 @@ const N8NAutomationPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(22,160,133,0.3)" 
           }}>
-            <h2 style={{ color: "#16a085", marginBottom: "15px" }}>🔗 Workflow Automation</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔗 Workflow Automation</h2>
             <p>Design sophisticated automation workflows that trigger instantly when QR codes are scanned. Capture leads, send emails, update databases, and trigger actions across multiple platforms seamlessly.</p>
           </div>
 
@@ -175,7 +175,7 @@ const N8NAutomationPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(243,156,18,0.3)" 
           }}>
-            <h2 style={{ color: "#f39c12", marginBottom: "15px" }}>🔌 App Integration</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔌 App Integration</h2>
             <p>Connect over 400+ apps and services including CRM systems, email platforms, social media, and cloud storage. Create powerful integrations that eliminate manual work forever.</p>
           </div>
 
@@ -185,7 +185,7 @@ const N8NAutomationPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(22,160,133,0.3)" 
           }}>
-            <h2 style={{ color: "#16a085", marginBottom: "15px" }}>🎨 Custom Nodes</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎨 Custom Nodes</h2>
             <p>Build custom n8n nodes for specialized PinPal.io functions. Create reusable components for AI audio generation, QR code creation, and location-based triggers that extend your automation capabilities.</p>
           </div>
 
@@ -195,7 +195,7 @@ const N8NAutomationPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(243,156,18,0.3)" 
           }}>
-            <h2 style={{ color: "#f39c12", marginBottom: "15px" }}>🎁 Free Workflows</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎁 Free Workflows</h2>
             <p>Access our library of pre-built n8n workflows specifically designed for PinPal.io users. Get instant QR generation, lead capture, email sequences, and analytics - all completely free!</p>
           </div>
         </div>

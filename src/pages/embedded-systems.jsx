@@ -54,8 +54,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={3500} factor={4} saturation={0} fade />
         <ambientLight intensity={0.6} />
@@ -65,8 +65,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -156,7 +156,7 @@ const EmbeddedSystemsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(155,89,182,0.3)" 
           }}>
-            <h2 style={{ color: "#9b59b6", marginBottom: "15px" }}>🔌 Hardware Design</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔌 Hardware Design</h2>
             <p>Learn to design custom PCBs and select components for location-based devices. Master power management, signal integrity, and miniaturization techniques for portable QR pin systems.</p>
           </div>
 
@@ -166,7 +166,7 @@ const EmbeddedSystemsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(230,126,34,0.3)" 
           }}>
-            <h2 style={{ color: "#e67e22", marginBottom: "15px" }}>💻 Firmware Development</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>💻 Firmware Development</h2>
             <p>Program microcontrollers using C/C++ and embedded Linux. Implement real-time systems, interrupt handling, and low-level hardware interfaces for our pin technology.</p>
           </div>
 
@@ -176,7 +176,7 @@ const EmbeddedSystemsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(155,89,182,0.3)" 
           }}>
-            <h2 style={{ color: "#9b59b6", marginBottom: "15px" }}>📡 LoRaWAN & Private Networks</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>📡 LoRaWAN & Private Networks</h2>
             <p>Configure LoRaWAN modules and establish private network infrastructure. Learn mesh networking protocols and long-range communication for remote pin deployments.</p>
           </div>
 
@@ -186,7 +186,7 @@ const EmbeddedSystemsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(230,126,34,0.3)" 
           }}>
-            <h2 style={{ color: "#e67e22", marginBottom: "15px" }}>🔋 Power Management</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔋 Power Management</h2>
             <p>Optimize battery life and implement energy harvesting solutions. Design sleep modes, power rails, and charging circuits for long-term autonomous operation.</p>
           </div>
         </div>

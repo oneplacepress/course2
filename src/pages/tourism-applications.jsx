@@ -61,8 +61,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={4000} factor={4} saturation={0} fade />
         <ambientLight intensity={0.5} />
@@ -72,8 +72,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -163,7 +163,7 @@ const TourismApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(116,185,255,0.3)" 
           }}>
-            <h2 style={{ color: "#74b9ff", marginBottom: "15px" }}>🚶‍♂️ Self-Guided Tours</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🚶‍♂️ Self-Guided Tours</h2>
             <p>Enable tourists to explore at their own pace with AI-narrated audio guides. QR pins at key locations trigger immersive stories about local history, culture, and hidden gems.</p>
           </div>
 
@@ -173,7 +173,7 @@ const TourismApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(0,184,148,0.3)" 
           }}>
-            <h2 style={{ color: "#00b894", marginBottom: "15px" }}>🏛️ Interactive Museum Exhibits</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🏛️ Interactive Museum Exhibits</h2>
             <p>Transform museums and cultural sites with interactive audio experiences. Visitors scan QR codes to hear detailed explanations, stories, and multimedia content about exhibits.</p>
           </div>
 
@@ -183,7 +183,7 @@ const TourismApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(116,185,255,0.3)" 
           }}>
-            <h2 style={{ color: "#74b9ff", marginBottom: "15px" }}>🎮 Gamified Tours</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎮 Gamified Tours</h2>
             <p>Create engaging scavenger hunts and interactive games using QR pins. Tourists collect digital badges, unlock rewards, and compete with friends while exploring destinations.</p>
           </div>
 
@@ -193,7 +193,7 @@ const TourismApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(0,184,148,0.3)" 
           }}>
-            <h2 style={{ color: "#00b894", marginBottom: "15px" }}>💝 Personalized Experiences</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>💝 Personalized Experiences</h2>
             <p>Use AI to customize tours based on visitor preferences, interests, and time constraints. Each tourist gets a unique, tailored experience that matches their perfect vacation.</p>
           </div>
         </div>

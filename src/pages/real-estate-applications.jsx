@@ -62,8 +62,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade />
         <ambientLight intensity={0.6} />
@@ -73,8 +73,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -164,7 +164,7 @@ const RealEstateApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(231,76,60,0.3)" 
           }}>
-            <h2 style={{ color: "#e74c3c", marginBottom: "15px" }}>🏡 Virtual Open Houses</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🏡 Virtual Open Houses</h2>
             <p>Create stunning virtual open houses with AI-powered audio narration. Prospects can tour properties remotely while hearing detailed descriptions of every room and feature.</p>
           </div>
 
@@ -174,7 +174,7 @@ const RealEstateApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(243,156,18,0.3)" 
           }}>
-            <h2 style={{ color: "#f39c12", marginBottom: "15px" }}>🎯 Interactive Property Tours</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎯 Interactive Property Tours</h2>
             <p>Set up QR pins throughout properties that trigger location-specific audio content. Visitors learn about features, neighborhood amenities, and property history as they explore.</p>
           </div>
 
@@ -184,7 +184,7 @@ const RealEstateApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(231,76,60,0.3)" 
           }}>
-            <h2 style={{ color: "#e74c3c", marginBottom: "15px" }}>📈 Lead Capture & Automation</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>📈 Lead Capture & Automation</h2>
             <p>Automatically capture leads when prospects scan QR codes. Follow up with personalized content and schedule showings using our n8n automation workflows.</p>
           </div>
 
@@ -194,7 +194,7 @@ const RealEstateApplicationsPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(243,156,18,0.3)" 
           }}>
-            <h2 style={{ color: "#f39c12", marginBottom: "15px" }}>🎬 Video Resumes for Agents</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎬 Video Resumes for Agents</h2>
             <p>Create compelling video introductions that prospects can access via QR codes. Build trust and personal connections before ever meeting in person.</p>
           </div>
         </div>

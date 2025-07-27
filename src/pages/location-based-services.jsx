@@ -63,8 +63,8 @@ const PageLayout = ({ title, children }) => (
       overflow: "hidden"
     }}
   >
-    {/* Three.js Background */}
-    <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+         {/* Three.js Background */}
+     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         <Stars radius={100} depth={50} count={4500} factor={4} saturation={0} fade />
         <ambientLight intensity={0.5} />
@@ -74,8 +74,8 @@ const PageLayout = ({ title, children }) => (
       </Canvas>
     </div>
 
-    {/* Content Overlay */}
-    <div style={{ position: "relative", zIndex: 2, padding: "20px" }}>
+         {/* Content Overlay */}
+     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
       <header style={{ marginBottom: "40px" }}>
         <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
           <Link 
@@ -165,7 +165,7 @@ const LocationBasedServicesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(39,174,96,0.3)" 
           }}>
-            <h2 style={{ color: "#27ae60", marginBottom: "15px" }}>🗺️ Mapping & Geocoding</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🗺️ Mapping & Geocoding</h2>
             <p>Master advanced mapping APIs, reverse geocoding, and address validation. Create interactive maps that display QR pin locations with rich contextual information and custom styling.</p>
           </div>
 
@@ -175,7 +175,7 @@ const LocationBasedServicesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(52,152,219,0.3)" 
           }}>
-            <h2 style={{ color: "#3498db", marginBottom: "15px" }}>🧭 Routing & Navigation</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>🧭 Routing & Navigation</h2>
             <p>Implement turn-by-turn navigation and optimal route planning. Guide users between QR pins with real-time traffic updates, alternative routes, and voice-guided directions.</p>
           </div>
 
@@ -185,7 +185,7 @@ const LocationBasedServicesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(39,174,96,0.3)" 
           }}>
-            <h2 style={{ color: "#27ae60", marginBottom: "15px" }}>📍 Geofencing & Beacons</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>📍 Geofencing & Beacons</h2>
             <p>Set up virtual boundaries and proximity detection using geofences and Bluetooth beacons. Trigger automated actions when users enter or exit specific areas around your pins.</p>
           </div>
 
@@ -195,7 +195,7 @@ const LocationBasedServicesPage = () => {
             borderRadius: "15px", 
             border: "1px solid rgba(52,152,219,0.3)" 
           }}>
-            <h2 style={{ color: "#3498db", marginBottom: "15px" }}>📡 Real-Time Tracking</h2>
+                         <h2 style={{ color: "white", marginBottom: "15px" }}>📡 Real-Time Tracking</h2>
             <p>Build live tracking systems for assets, people, and vehicles. Monitor movement patterns, analyze location data, and provide real-time updates to stakeholders and customers.</p>
           </div>
         </div>
