@@ -8,16 +8,27 @@ const FloatingGear = () => {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.rotation.z = clock.getElapsedTime() * 0.5;
+      meshRef.current.rotation.z = clock.getElapsedTime() * 0.8;
+      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.2) * 0.2;
     }
   });
 
   return (
-    <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
-      <mesh ref={meshRef}>
-        <cylinderGeometry args={[1, 1, 0.2, 8]} />
-        <meshStandardMaterial color="#16a085" />
-      </mesh>
+    <Float speed={1.8} rotationIntensity={0.6} floatIntensity={1}>
+      <group ref={meshRef} position={[-2, 0, 0]}>
+        {/* Main Gear */}
+        <mesh position={[0, 0, 0]}>
+          <cylinderGeometry args={[1.2, 1.2, 0.3, 12]} />
+          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
+        </mesh>
+        {/* Gear Teeth */}
+        {[...Array(12)].map((_, i) => (
+          <mesh key={i} position={[1.4 * Math.cos(i * Math.PI / 6), 0, 1.4 * Math.sin(i * Math.PI / 6)]}>
+            <boxGeometry args={[0.2, 0.3, 0.4]} />
+            <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
+          </mesh>
+        ))}
+      </group>
     </Float>
   );
 };
@@ -27,181 +38,231 @@ const FloatingNodes = () => {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(clock.getElapsedTime()) * 0.3;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 2) * 0.3;
+      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.8) * 0.5;
+      meshRef.current.rotation.y = clock.getElapsedTime() * 0.3;
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.8} floatIntensity={1}>
-      <group ref={meshRef} position={[3, 0, 0]}>
+    <Float speed={2} rotationIntensity={0.4} floatIntensity={1.5}>
+      <group ref={meshRef} position={[2, 1, -1]}>
+        {/* Central Node */}
         <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[0.3, 16, 16]} />
-          <meshStandardMaterial color="#e74c3c" />
+          <sphereGeometry args={[0.4]} />
+          <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.3} />
         </mesh>
-        <mesh position={[0.8, 0, 0]}>
-          <sphereGeometry args={[0.2, 16, 16]} />
-          <meshStandardMaterial color="#f39c12" />
-        </mesh>
-        <mesh position={[-0.8, 0, 0]}>
-          <sphereGeometry args={[0.2, 16, 16]} />
-          <meshStandardMaterial color="#3498db" />
-        </mesh>
+        {/* Connected Nodes */}
+        {[...Array(4)].map((_, i) => (
+          <group key={i}>
+            <mesh position={[Math.cos(i * Math.PI / 2) * 1.5, 0, Math.sin(i * Math.PI / 2) * 1.5]}>
+              <sphereGeometry args={[0.2]} />
+              <meshStandardMaterial color="#ffc107" emissive="#ffc107" emissiveIntensity={0.2} />
+            </mesh>
+            {/* Connection Lines */}
+            <mesh position={[Math.cos(i * Math.PI / 2) * 0.75, 0, Math.sin(i * Math.PI / 2) * 0.75]} 
+                  rotation={[0, i * Math.PI / 2, 0]}>
+              <cylinderGeometry args={[0.02, 0.02, 1.1]} />
+              <meshStandardMaterial color="#6c757d" />
+            </mesh>
+          </group>
+        ))}
       </group>
     </Float>
   );
 };
 
-const PageLayout = ({ title, children }) => (
-  <div
-    style={{
+const N8nAutomationPage = () => {
+  return (
+    <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #16a085 0%, #f4d03f 50%, #e74c3c 100%)",
-      color: "white",
+      background: "white",
+      color: "#333",
       fontFamily: "Arial, sans-serif",
       position: "relative",
       overflow: "hidden"
-    }}
-  >
-         {/* Three.js Background */}
-     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <Stars radius={100} depth={50} count={2500} factor={4} saturation={0} fade />
-        <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} />
-        <FloatingGear />
-        <FloatingNodes />
-      </Canvas>
-    </div>
-
-         {/* Content Overlay */}
-     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
-      <header style={{ marginBottom: "40px" }}>
-        <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
-          <Link 
-            to="/" 
-            style={{ 
-              color: "white", 
-              textDecoration: "none", 
-              fontSize: "18px",
-              fontWeight: "bold",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-            }}
-          >
-            🏠 Home
-          </Link>
-        </nav>
-      </header>
-      
+    }}>
+      {/* Three.js Background */}
       <div style={{ 
-        background: "rgba(255,255,255,0.1)", 
-        padding: "40px", 
-        borderRadius: "20px", 
-        backdropFilter: "blur(10px)",
-        border: "1px solid rgba(255,255,255,0.2)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.3)"
+        position: "fixed", 
+        top: 0, 
+        left: 0, 
+        width: "100%", 
+        height: "100%", 
+        zIndex: 1,
+        opacity: 0.5
       }}>
-        <h1 style={{ 
-          fontSize: "3em", 
-          marginBottom: "20px", 
-          textAlign: "center",
-          background: "linear-gradient(45deg, #16a085, #f39c12)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textShadow: "none"
-        }}>{title}</h1>
-        {children}
+        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+          <Stars radius={100} depth={50} count={1500} factor={3} saturation={0} fade />
+          <ambientLight intensity={0.6} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.5} />
+          <FloatingGear />
+          <FloatingNodes />
+        </Canvas>
+      </div>
+
+      {/* Content Overlay */}
+      <div style={{ 
+        position: "relative", 
+        zIndex: 10, 
+        padding: "20px",
+        minHeight: "100vh"
+      }}>
+        <header style={{ marginBottom: "40px" }}>
+          <nav style={{ 
+            background: "rgba(255,255,255,0.95)", 
+            padding: "15px 25px", 
+            borderRadius: "15px", 
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+          }}>
+            <Link 
+              to="/" 
+              style={{ 
+                color: "#007bff",
+                textDecoration: "none",
+                fontSize: "1.1rem",
+                fontWeight: "600"
+              }}
+            >
+              🏠 Back to Home
+            </Link>
+          </nav>
+        </header>
         
-        {/* Call to Action Button */}
-        <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <a
-            href="https://pinpal.io"
-            style={{
-              display: "inline-block",
-              padding: "15px 30px",
-              background: "linear-gradient(45deg, #16a085, #f39c12)",
-              color: "white",
-              textDecoration: "none",
-              borderRadius: "50px",
-              fontSize: "18px",
-              fontWeight: "bold",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-              transition: "transform 0.3s ease",
-              border: "none"
-            }}
-            onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
-            onMouseOut={(e) => e.target.style.transform = "scale(1)"}
-          >
-            ⚙️ Automate Everything!
-          </a>
+        {/* Main Content */}
+        <div style={{
+          background: "rgba(255,255,255,0.98)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "25px",
+          padding: "50px",
+          border: "1px solid rgba(0,0,0,0.1)",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+          maxWidth: "1200px",
+          margin: "0 auto"
+        }}>
+          <h1 style={{
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            background: "linear-gradient(45deg, #007bff, #28a745, #17a2b8)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textAlign: "center",
+            marginBottom: "2rem"
+          }}>
+            🔧 n8n Automation
+          </h1>
+          
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            marginBottom: "3rem",
+            color: "#666",
+            lineHeight: "1.6",
+            maxWidth: "800px",
+            margin: "0 auto 3rem auto"
+          }}>
+            🌟 Harness the power of visual automation workflows to create intelligent, responsive systems that make PinPal.io technology seamlessly autonomous.
+          </p>
+
+          {/* Feature Cards */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "25px",
+            marginTop: "40px"
+          }}>
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>⚡ Workflow Design</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Create sophisticated automation workflows using n8n's visual interface to orchestrate complex business processes and integrations.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🔗 API Integrations</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Master seamless integrations with 200+ services including AI platforms, databases, and communication tools for complete automation.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#17a2b8", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🎯 Trigger Systems</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Implement intelligent trigger systems that respond to QR scans, location changes, and user interactions in real-time.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#ffc107", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📊 Data Processing</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Transform and process data flows with advanced logic, conditional branching, and custom JavaScript functions.
+              </p>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <a
+              href="https://pinpal.io"
+              style={{
+                display: "inline-block",
+                padding: "18px 40px",
+                background: "linear-gradient(45deg, #007bff, #28a745)",
+                color: "white",
+                textDecoration: "none",
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "600",
+                boxShadow: "0 8px 25px rgba(0,123,255,0.3)",
+                transition: "all 0.3s ease",
+                border: "none"
+              }}
+              onMouseOver={(e) => {
+                e.target.style.transform = "scale(1.05)";
+                e.target.style.boxShadow = "0 12px 30px rgba(0,123,255,0.4)";
+              }}
+              onMouseOut={(e) => {
+                e.target.style.transform = "scale(1)";
+                e.target.style.boxShadow = "0 8px 25px rgba(0,123,255,0.3)";
+              }}
+            >
+              🔧 Automate with n8n
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
-
-const N8NAutomationPage = () => {
-  return (
-    <PageLayout title="⚙️ N8N Automation">
-      <div style={{ fontSize: "1.2em", lineHeight: "1.8" }}>
-        <p style={{ 
-          fontSize: "1.3em", 
-          textAlign: "center", 
-          marginBottom: "30px",
-          textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-        }}>
-          🤖 Supercharge your business with powerful n8n automation workflows. Connect apps, automate tasks, and create intelligent workflows that work 24/7 for your success.
-        </p>
-
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-          gap: "30px", 
-          marginTop: "40px" 
-        }}>
-          <div style={{ 
-            background: "rgba(22,160,133,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(22,160,133,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔗 Workflow Automation</h2>
-            <p>Design sophisticated automation workflows that trigger instantly when QR codes are scanned. Capture leads, send emails, update databases, and trigger actions across multiple platforms seamlessly.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(243,156,18,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(243,156,18,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🔌 App Integration</h2>
-            <p>Connect over 400+ apps and services including CRM systems, email platforms, social media, and cloud storage. Create powerful integrations that eliminate manual work forever.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(22,160,133,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(22,160,133,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎨 Custom Nodes</h2>
-            <p>Build custom n8n nodes for specialized PinPal.io functions. Create reusable components for AI audio generation, QR code creation, and location-based triggers that extend your automation capabilities.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(243,156,18,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(243,156,18,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎁 Free Workflows</h2>
-            <p>Access our library of pre-built n8n workflows specifically designed for PinPal.io users. Get instant QR generation, lead capture, email sequences, and analytics - all completely free!</p>
-          </div>
-        </div>
-      </div>
-    </PageLayout>
   );
 };
 
-export default N8NAutomationPage; 
+export default N8nAutomationPage; 

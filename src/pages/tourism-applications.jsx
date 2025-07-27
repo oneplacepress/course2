@@ -8,23 +8,25 @@ const FloatingPlane = () => {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.5) * 2;
-      meshRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.5) * 0.3;
+      const time = clock.getElapsedTime();
+      meshRef.current.position.x = Math.sin(time * 0.5) * 3;
+      meshRef.current.position.y = Math.cos(time * 0.3) * 1;
+      meshRef.current.rotation.z = Math.sin(time * 0.7) * 0.2;
     }
   });
 
   return (
-    <Float speed={1} rotationIntensity={0.3} floatIntensity={1}>
-      <group ref={meshRef}>
-        {/* Plane body */}
-        <mesh>
-          <cylinderGeometry args={[0.1, 0.2, 2, 8]} />
-          <meshStandardMaterial color="#3498db" />
+    <Float speed={1.8} rotationIntensity={0.8} floatIntensity={1.2}>
+      <group ref={meshRef} position={[0, 0, 0]}>
+        {/* Plane Body */}
+        <mesh position={[0, 0, 0]}>
+          <cylinderGeometry args={[0.1, 0.1, 2]} />
+          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
         </mesh>
         {/* Wings */}
-        <mesh position={[0, 0, -0.5]} rotation={[0, 0, Math.PI / 2]}>
-          <boxGeometry args={[0.1, 1.5, 0.2]} />
-          <meshStandardMaterial color="#2980b9" />
+        <mesh position={[0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <boxGeometry args={[3, 0.1, 0.5]} />
+          <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
         </mesh>
       </group>
     </Float>
@@ -36,169 +38,220 @@ const FloatingCompass = () => {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.5;
+      meshRef.current.rotation.y = clock.getElapsedTime() * 0.6;
+      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.2) * 0.3;
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={1.5}>
-      <mesh ref={meshRef} position={[3, -1, 0]}>
-        <cylinderGeometry args={[0.8, 0.8, 0.2, 16]} />
-        <meshStandardMaterial color="#27ae60" />
-      </mesh>
+    <Float speed={2.2} rotationIntensity={0.6} floatIntensity={1.5}>
+      <group ref={meshRef} position={[2, 1, -2]}>
+        {/* Compass Body */}
+        <mesh position={[0, 0, 0]}>
+          <cylinderGeometry args={[0.8, 0.8, 0.2]} />
+          <meshStandardMaterial color="#6c757d" emissive="#6c757d" emissiveIntensity={0.2} />
+        </mesh>
+        {/* Compass Needle */}
+        <mesh position={[0, 0.15, 0]}>
+          <coneGeometry args={[0.1, 0.6, 4]} />
+          <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.3} />
+        </mesh>
+      </group>
     </Float>
   );
 };
 
-const PageLayout = ({ title, children }) => (
-  <div
-    style={{
+const TourismApplicationsPage = () => {
+  return (
+    <div style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #00b894 100%)",
-      color: "white",
+      background: "white",
+      color: "#333",
       fontFamily: "Arial, sans-serif",
       position: "relative",
       overflow: "hidden"
-    }}
-  >
-         {/* Three.js Background */}
-     <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <Stars radius={100} depth={50} count={4000} factor={4} saturation={0} fade />
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <FloatingPlane />
-        <FloatingCompass />
-      </Canvas>
-    </div>
-
-         {/* Content Overlay */}
-     <div style={{ position: "relative", zIndex: 10, padding: "20px" }}>
-      <header style={{ marginBottom: "40px" }}>
-        <nav style={{ background: "rgba(255,255,255,0.1)", padding: "15px", borderRadius: "15px", backdropFilter: "blur(10px)" }}>
-          <Link 
-            to="/" 
-            style={{ 
-              color: "white", 
-              textDecoration: "none", 
-              fontSize: "18px",
-              fontWeight: "bold",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-            }}
-          >
-            🏠 Home
-          </Link>
-        </nav>
-      </header>
-      
+    }}>
+      {/* Three.js Background */}
       <div style={{ 
-        background: "rgba(255,255,255,0.1)", 
-        padding: "40px", 
-        borderRadius: "20px", 
-        backdropFilter: "blur(10px)",
-        border: "1px solid rgba(255,255,255,0.2)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.3)"
+        position: "fixed", 
+        top: 0, 
+        left: 0, 
+        width: "100%", 
+        height: "100%", 
+        zIndex: 1,
+        opacity: 0.5
       }}>
-        <h1 style={{ 
-          fontSize: "3em", 
-          marginBottom: "20px", 
-          textAlign: "center",
-          background: "linear-gradient(45deg, #74b9ff, #00b894)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textShadow: "none"
-        }}>{title}</h1>
-        {children}
+        <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+          <Stars radius={100} depth={50} count={1500} factor={3} saturation={0} fade />
+          <ambientLight intensity={0.6} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.5} />
+          <FloatingPlane />
+          <FloatingCompass />
+        </Canvas>
+      </div>
+
+      {/* Content Overlay */}
+      <div style={{ 
+        position: "relative", 
+        zIndex: 10, 
+        padding: "20px",
+        minHeight: "100vh"
+      }}>
+        <header style={{ marginBottom: "40px" }}>
+          <nav style={{ 
+            background: "rgba(255,255,255,0.95)", 
+            padding: "15px 25px", 
+            borderRadius: "15px", 
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+          }}>
+            <Link 
+              to="/" 
+              style={{ 
+                color: "#007bff",
+                textDecoration: "none",
+                fontSize: "1.1rem",
+                fontWeight: "600"
+              }}
+            >
+              🏠 Back to Home
+            </Link>
+          </nav>
+        </header>
         
-        {/* Call to Action Button */}
-        <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <a
-            href="https://pinpal.io"
-            style={{
-              display: "inline-block",
-              padding: "15px 30px",
-              background: "linear-gradient(45deg, #74b9ff, #00b894)",
-              color: "white",
-              textDecoration: "none",
-              borderRadius: "50px",
-              fontSize: "18px",
-              fontWeight: "bold",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-              transition: "transform 0.3s ease",
-              border: "none"
-            }}
-            onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
-            onMouseOut={(e) => e.target.style.transform = "scale(1)"}
-          >
-            ✈️ Revolutionize Tourism!
-          </a>
+        {/* Main Content */}
+        <div style={{
+          background: "rgba(255,255,255,0.98)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "25px",
+          padding: "50px",
+          border: "1px solid rgba(0,0,0,0.1)",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+          maxWidth: "1200px",
+          margin: "0 auto"
+        }}>
+          <h1 style={{
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            background: "linear-gradient(45deg, #007bff, #28a745, #dc3545)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textAlign: "center",
+            marginBottom: "2rem"
+          }}>
+            ✈️ Tourism Applications
+          </h1>
+          
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            marginBottom: "3rem",
+            color: "#666",
+            lineHeight: "1.6",
+            maxWidth: "800px",
+            margin: "0 auto 3rem auto"
+          }}>
+            🌟 Create unforgettable travel experiences with AI-powered audio guides that transform any destination into an interactive journey.
+          </p>
+
+          {/* Feature Cards */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "25px",
+            marginTop: "40px"
+          }}>
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🏛️ Historical Sites</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Bring ancient monuments and historical landmarks to life with immersive audio narratives that transport visitors through time.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🌍 Cultural Experiences</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Create authentic cultural tours that share local stories, traditions, and hidden gems that only locals know about.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#dc3545", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🗺️ Self-Guided Tours</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Enable tourists to explore at their own pace with QR-triggered audio content at key points of interest.
+              </p>
+            </div>
+
+            <div style={{
+              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              padding: "30px",
+              borderRadius: "20px",
+              border: "1px solid rgba(0,0,0,0.1)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+              transition: "transform 0.3s ease"
+            }}>
+              <h2 style={{ color: "#6c757d", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📱 Multilingual Support</h2>
+              <p style={{ color: "#555", lineHeight: "1.6" }}>
+                Offer tours in multiple languages with AI voice synthesis, making destinations accessible to international visitors.
+              </p>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <a
+              href="https://pinpal.io"
+              style={{
+                display: "inline-block",
+                padding: "18px 40px",
+                background: "linear-gradient(45deg, #007bff, #28a745)",
+                color: "white",
+                textDecoration: "none",
+                borderRadius: "50px",
+                fontSize: "1.2rem",
+                fontWeight: "600",
+                boxShadow: "0 8px 25px rgba(0,123,255,0.3)",
+                transition: "all 0.3s ease",
+                border: "none"
+              }}
+              onMouseOver={(e) => {
+                e.target.style.transform = "scale(1.05)";
+                e.target.style.boxShadow = "0 12px 30px rgba(0,123,255,0.4)";
+              }}
+              onMouseOut={(e) => {
+                e.target.style.transform = "scale(1)";
+                e.target.style.boxShadow = "0 8px 25px rgba(0,123,255,0.3)";
+              }}
+            >
+              ✈️ Discover Tourism Solutions
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
-
-const TourismApplicationsPage = () => {
-  return (
-    <PageLayout title="✈️ Tourism Applications">
-      <div style={{ fontSize: "1.2em", lineHeight: "1.8" }}>
-        <p style={{ 
-          fontSize: "1.3em", 
-          textAlign: "center", 
-          marginBottom: "30px",
-          textShadow: "0 2px 4px rgba(0,0,0,0.3)"
-        }}>
-          🌍 Create unforgettable travel experiences with AI-powered audio tours. Transform how tourists explore destinations and connect with local culture and history.
-        </p>
-
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-          gap: "30px", 
-          marginTop: "40px" 
-        }}>
-          <div style={{ 
-            background: "rgba(116,185,255,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(116,185,255,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🚶‍♂️ Self-Guided Tours</h2>
-            <p>Enable tourists to explore at their own pace with AI-narrated audio guides. QR pins at key locations trigger immersive stories about local history, culture, and hidden gems.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(0,184,148,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(0,184,148,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🏛️ Interactive Museum Exhibits</h2>
-            <p>Transform museums and cultural sites with interactive audio experiences. Visitors scan QR codes to hear detailed explanations, stories, and multimedia content about exhibits.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(116,185,255,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(116,185,255,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>🎮 Gamified Tours</h2>
-            <p>Create engaging scavenger hunts and interactive games using QR pins. Tourists collect digital badges, unlock rewards, and compete with friends while exploring destinations.</p>
-          </div>
-
-          <div style={{ 
-            background: "rgba(0,184,148,0.2)", 
-            padding: "25px", 
-            borderRadius: "15px", 
-            border: "1px solid rgba(0,184,148,0.3)" 
-          }}>
-                         <h2 style={{ color: "white", marginBottom: "15px" }}>💝 Personalized Experiences</h2>
-            <p>Use AI to customize tours based on visitor preferences, interests, and time constraints. Each tourist gets a unique, tailored experience that matches their perfect vacation.</p>
-          </div>
-        </div>
-      </div>
-    </PageLayout>
   );
 };
 
