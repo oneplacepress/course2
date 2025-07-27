@@ -1,42 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'gatsby';
 
 const EasterEgg3Page = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef(null);
-
-  useEffect(() => {
-    // Try to autoplay with muted first, then unmute on interaction
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.log('Autoplay failed:', error);
-        setIsPlaying(false);
-      });
-    }
-  }, []);
 
   const togglePlayPause = () => {
     if (videoRef.current) {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-        videoRef.current.muted = false;
-      }
-      
       if (isPlaying) {
         videoRef.current.pause();
       } else {
         videoRef.current.play();
       }
     }
-  };
-
-  const handleVideoError = (e) => {
-    console.error('Video error:', e);
-    setIsPlaying(false);
   };
 
   return (
@@ -98,13 +74,12 @@ const EasterEgg3Page = () => {
             left: 0,
             zIndex: 1
           }}
-          preload="metadata"
+          autoPlay
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onEnded={(e) => e.target.pause()}
-          onError={handleVideoError}
         >
-          <source src="https://workmates.live/wp-content/uploads/2025/07/PinPal-Radio.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/15m-merits-small.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
