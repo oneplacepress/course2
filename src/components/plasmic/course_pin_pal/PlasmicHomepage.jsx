@@ -182,6 +182,19 @@ function PlasmicHomepage__RenderFunc(props) {
               >
                 {"PinPal Audio & Video"}
               </PlasmicLink__>
+              <PlasmicLink__
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  projectcss.__wab_text,
+                  sty.link2
+                )}
+                component={Link}
+                href={`mailto:cto@pinpal.io`}
+                platform={"gatsby"}
+              >
+                {"Contact"}
+              </PlasmicLink__>
             </div>
             <div
               data-plasmic-name={"navBarButtonBlock"}
@@ -205,6 +218,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   </div>
                 }
                 roundedFull={true}
+                link={"https://pinpal.io"}
               />
             </div>
           </header>
@@ -326,6 +340,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         }
                         roundedFull={true}
                         size={"extraLarge"}
+                        link={"https://pinpal.io"}
                       />
                     </div>
                   </div>
@@ -578,7 +593,7 @@ function PlasmicHomepage__RenderFunc(props) {
                               sty.text__oKwhB
                             )}
                           >
-                            {"Explore Courses"}
+                            {"Explore PinPal Courses"}
                           </div>
                         }
                         roundedFull={true}
@@ -1028,10 +1043,11 @@ function PlasmicHomepage__RenderFunc(props) {
                           sty.text__npA9Z
                         )}
                       >
-                        {"Start Building"}
+                        {"Start PinPal Projects"}
                       </div>
                     }
                     roundedFull={true}
+                    link={"https://pinpal.io"}
                   />
                 </div>
                 <div
@@ -1090,7 +1106,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.subHeading5
                 )}
               >
-                {"Who should take this course?"}
+                {"Who should take this PinPal course?"}
               </h2>
               <div
                 data-plasmic-name={"line3"}
@@ -1513,6 +1529,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     color={"neutral"}
                     label={"Get Started"}
                     roundedFull={true}
+                    link={"https://pinpal.io"}
                   />
                 </div>
               </div>
@@ -1552,6 +1569,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     color={"neutral"}
                     label={"Get Started"}
                     roundedFull={true}
+                    link={"https://pinpal.io"}
                   />
                 </div>
               </div>
@@ -1693,7 +1711,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink4
                   )}
                   component={Link}
-                  href={`/`}
+                  href={`/terms`}
                   platform={"gatsby"}
                 >
                   {"Terms & Conditions"}
@@ -1708,7 +1726,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink5
                   )}
                   component={Link}
-                  href={`/`}
+                  href={`/privacy`}
                   platform={"gatsby"}
                 >
                   {"Privacy Policy"}
