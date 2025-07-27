@@ -1,7 +1,44 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'gatsby';
 
 const EasterEgg5Page = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Try to autoplay with muted first, then unmute on interaction
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
+        console.log('Autoplay failed:', error);
+        setIsPlaying(false);
+      });
+    }
+  }, []);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (!hasInteracted) {
+        setHasInteracted(true);
+        videoRef.current.muted = false;
+      }
+      
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
+  };
+
+  const handleVideoError = (e) => {
+    console.error('Video error:', e);
+    setIsPlaying(false);
+  };
+
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
       {/* Header */}
@@ -51,6 +88,7 @@ const EasterEgg5Page = () => {
         overflow: "hidden"
       }}>
         <video
+          ref={videoRef}
           style={{
             width: "100%",
             height: "100%",
@@ -60,13 +98,50 @@ const EasterEgg5Page = () => {
             left: 0,
             zIndex: 1
           }}
-          autoPlay
-          muted
+          preload="metadata"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
           onEnded={(e) => e.target.pause()}
+          onError={handleVideoError}
         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/take-on-me-2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        
+        {/* Custom Play/Pause Button */}
+        <button
+          onClick={togglePlayPause}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 3,
+            background: "rgba(255, 255, 255, 0.2)",
+            border: "2px solid rgba(255, 255, 255, 0.3)",
+            borderRadius: "50%",
+            width: "80px",
+            height: "80px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            backdropFilter: "blur(10px)",
+            transition: "all 0.3s ease",
+            fontSize: "2rem",
+            color: "#fff"
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = "rgba(255, 255, 255, 0.3)";
+            e.target.style.border = "2px solid rgba(255, 255, 255, 0.5)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = "rgba(255, 255, 255, 0.2)";
+            e.target.style.border = "2px solid rgba(255, 255, 255, 0.3)";
+          }}
+        >
+          {isPlaying ? "⏸" : "▶"}
+        </button>
         
         {/* Overlay Content */}
         <div style={{
