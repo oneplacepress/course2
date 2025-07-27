@@ -59,14 +59,16 @@ const CourseCard = ({ course }) => (
     style={{
       backgroundColor: '#fff',
       borderRadius: '12px',
-      padding: '24px',
+      padding: '20px',
       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      width: '100%',
+      boxSizing: 'border-box'
     }}
     onMouseEnter={(e) => {
       e.currentTarget.style.transform = 'translateY(-8px)';
@@ -92,16 +94,18 @@ const CourseCard = ({ course }) => (
     </div>
     <h3 style={{ 
       color: '#333', 
-      fontSize: '24px', 
+      fontSize: '20px', 
       fontWeight: '600',
       marginBottom: '12px',
-      lineHeight: '1.3'
+      lineHeight: '1.3',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word'
     }}>
       {course.title}
     </h3>
     <p style={{ 
       color: '#666', 
-      fontSize: '16px',
+      fontSize: '14px',
       lineHeight: '1.5',
       marginBottom: '24px',
       flex: 1
@@ -114,12 +118,13 @@ const CourseCard = ({ course }) => (
         display: 'inline-block',
         backgroundColor: course.color,
         color: '#fff',
-        padding: '12px 24px',
+        padding: '12px 20px',
         borderRadius: '8px',
         textDecoration: 'none',
         fontWeight: '500',
         textAlign: 'center',
-        transition: 'opacity 0.3s ease'
+        transition: 'opacity 0.3s ease',
+        fontSize: '14px'
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.opacity = '0.9';
@@ -149,10 +154,12 @@ const CoursesPage = () => {
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 24px',
+          padding: '0 16px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px'
         }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <img 
@@ -161,11 +168,16 @@ const CoursesPage = () => {
               style={{ height: '40px', width: 'auto' }}
             />
           </Link>
-          <nav style={{ display: 'flex', gap: '32px' }}>
-            <Link to="/" style={{ color: '#666', textDecoration: 'none' }}>Home</Link>
-            <Link to="/story" style={{ color: '#666', textDecoration: 'none' }}>Story</Link>
-            <Link to="/courses" style={{ color: '#007bff', textDecoration: 'none', fontWeight: '600' }}>Courses</Link>
-            <Link to="/gallery" style={{ color: '#666', textDecoration: 'none' }}>Gallery</Link>
+          <nav style={{ 
+            display: 'flex', 
+            gap: '16px',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
+            <Link to="/" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Home</Link>
+            <Link to="/story" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Story</Link>
+            <Link to="/courses" style={{ color: '#007bff', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>Courses</Link>
+            <Link to="/gallery" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Gallery</Link>
           </nav>
         </div>
       </header>
@@ -173,25 +185,27 @@ const CoursesPage = () => {
       {/* Hero Section */}
       <section style={{
         backgroundColor: '#fff',
-        padding: '80px 0',
+        padding: '60px 0',
         textAlign: 'center'
       }}>
         <div style={{
           maxWidth: '800px',
           margin: '0 auto',
-          padding: '0 24px'
+          padding: '0 16px'
         }}>
           <h1 style={{
-            fontSize: '48px',
+            fontSize: '36px',
             fontWeight: '700',
             color: '#333',
             marginBottom: '24px',
-            lineHeight: '1.2'
+            lineHeight: '1.2',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word'
           }}>
             Master PinPal Technology
           </h1>
           <p style={{
-            fontSize: '20px',
+            fontSize: '18px',
             color: '#666',
             lineHeight: '1.6',
             marginBottom: '32px'
@@ -203,11 +217,13 @@ const CoursesPage = () => {
             alignItems: 'center',
             gap: '16px',
             backgroundColor: '#f8f9fa',
-            padding: '16px 24px',
-            borderRadius: '12px'
+            padding: '16px 20px',
+            borderRadius: '12px',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
           }}>
             <span style={{ fontSize: '24px' }}>📚</span>
-            <span style={{ color: '#666', fontSize: '16px' }}>
+            <span style={{ color: '#666', fontSize: '14px' }}>
               {courseData.length} comprehensive courses available
             </span>
           </div>
@@ -215,16 +231,16 @@ const CoursesPage = () => {
       </section>
 
       {/* Courses Grid */}
-      <section style={{ padding: '80px 0' }}>
+      <section style={{ padding: '60px 0' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 24px'
+          padding: '0 16px'
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: '32px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '24px',
             marginTop: '48px'
           }}>
             {courseData.map((course, index) => (
@@ -238,23 +254,25 @@ const CoursesPage = () => {
       <section style={{
         backgroundColor: '#007bff',
         color: '#fff',
-        padding: '80px 0',
+        padding: '60px 0',
         textAlign: 'center'
       }}>
         <div style={{
           maxWidth: '800px',
           margin: '0 auto',
-          padding: '0 24px'
+          padding: '0 16px'
         }}>
           <h2 style={{
-            fontSize: '36px',
+            fontSize: '28px',
             fontWeight: '700',
-            marginBottom: '24px'
+            marginBottom: '24px',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word'
           }}>
             Ready to Start Building?
           </h2>
           <p style={{
-            fontSize: '18px',
+            fontSize: '16px',
             marginBottom: '32px',
             opacity: '0.9'
           }}>
@@ -266,11 +284,11 @@ const CoursesPage = () => {
               display: 'inline-block',
               backgroundColor: '#fff',
               color: '#007bff',
-              padding: '16px 32px',
+              padding: '16px 24px',
               borderRadius: '8px',
               textDecoration: 'none',
               fontWeight: '600',
-              fontSize: '18px',
+              fontSize: '16px',
               transition: 'transform 0.3s ease'
             }}
             onMouseEnter={(e) => {
@@ -295,7 +313,7 @@ const CoursesPage = () => {
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 24px'
+          padding: '0 16px'
         }}>
           <img 
             src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"

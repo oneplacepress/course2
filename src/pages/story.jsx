@@ -18,6 +18,45 @@ const StoryPage = () => {
 
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
+      {/* Header */}
+      <header style={{
+        backgroundColor: '#fff',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        padding: '16px 0',
+        position: 'relative',
+        zIndex: 10
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <img 
+              src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
+              alt="PinPal Logo"
+              style={{ height: '40px', width: 'auto' }}
+            />
+          </Link>
+          <nav style={{ 
+            display: 'flex', 
+            gap: '16px',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
+            <Link to="/" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Home</Link>
+            <Link to="/story" style={{ color: '#007bff', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>Story</Link>
+            <Link to="/courses" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Courses</Link>
+            <Link to="/gallery" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Gallery</Link>
+          </nav>
+        </div>
+      </header>
+
       {/* Fullscreen Video Background */}
       <div style={{
         width: "100%",
@@ -36,12 +75,12 @@ const StoryPage = () => {
             left: 0,
             zIndex: 1
           }}
-          poster=""
+          poster="https://workmates.live/wp-content/uploads/2025/07/The-Dolla-Dash-unlisted.mp4#t=5"
           preload="metadata"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         >
-          <source src="https://workmates.live/wp-content/uploads/2025/07/take-on-me.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/The-Dolla-Dash-unlisted.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
@@ -68,23 +107,26 @@ const StoryPage = () => {
               width: "80px",
               height: "80px",
               borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
-              border: "none",
+              backgroundColor: "rgba(255, 255, 255, 0.15)",
+              border: "2px solid rgba(255, 255, 255, 0.3)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
               marginBottom: "2rem",
-              fontSize: "2rem",
+              fontSize: "2.5rem",
               transition: "all 0.3s ease",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+              backdropFilter: "blur(10px)",
+              color: "rgba(255, 255, 255, 0.9)"
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = "rgba(255, 255, 255, 1)";
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+              e.target.style.borderColor = "rgba(255, 255, 255, 0.5)";
               e.target.style.transform = "scale(1.1)";
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+              e.target.style.borderColor = "rgba(255, 255, 255, 0.3)";
               e.target.style.transform = "scale(1)";
             }}
           >
@@ -92,11 +134,12 @@ const StoryPage = () => {
           </button>
 
           <h1 style={{
-            fontSize: "3.5rem",
+            fontSize: "clamp(2rem, 5vw, 3.5rem)",
             fontWeight: "bold",
             marginBottom: "1rem",
             textAlign: "center",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            padding: "0 16px"
           }}>
             Our Story
           </h1>
@@ -108,7 +151,7 @@ const StoryPage = () => {
             marginBottom: "2rem",
             textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
           }}>
-            Discover the journey behind Dolla Dash and our mission to revolutionize mobile commerce.
+            Discover the journey behing PinPal. and mission to revolutionize quick commerce.
           </p>
           <div style={{
             display: "flex",
@@ -134,30 +177,28 @@ const StoryPage = () => {
             >
               Back to Home
             </Link>
-            <Link 
-              to="/courses"
+            <a
+              href="https://pinpal.io"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                backgroundColor: "transparent",
+                backgroundColor: "#007bff",
                 color: "#fff",
-                border: "2px solid #fff",
-                padding: "10px 22px",
+                border: "none",
+                padding: "12px 24px",
                 borderRadius: "8px",
                 fontSize: "1.1rem",
                 fontWeight: "600",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
                 textDecoration: "none",
-                transition: "all 0.3s ease"
+                display: "inline-block"
               }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "#fff";
-                e.target.style.color = "#000";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "transparent";
-                e.target.style.color = "#fff";
-              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
             >
-              View Courses
-            </Link>
+              Start Learning
+            </a>
           </div>
         </div>
       </div>

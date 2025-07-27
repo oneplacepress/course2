@@ -68,6 +68,43 @@ const PinPalGalleryPage = () => {
       color: "#333",
       fontFamily: "Arial, sans-serif"
     }}>
+      {/* Header */}
+      <header style={{
+        backgroundColor: '#fff',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        padding: '16px 0'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <img 
+              src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
+              alt="PinPal Logo"
+              style={{ height: '40px', width: 'auto' }}
+            />
+          </Link>
+          <nav style={{ 
+            display: 'flex', 
+            gap: '16px',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
+            <Link to="/" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Home</Link>
+            <Link to="/story" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Story</Link>
+            <Link to="/courses" style={{ color: '#666', textDecoration: 'none', fontSize: '14px' }}>Courses</Link>
+            <Link to="/gallery" style={{ color: '#007bff', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>Gallery</Link>
+          </nav>
+        </div>
+      </header>
+
       {/* Fullscreen Video Placeholder */}
       <div style={{
         width: "100%",
@@ -86,27 +123,30 @@ const PinPalGalleryPage = () => {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          color: "#fff"
+          color: "#fff",
+          padding: "20px"
         }}>
           <div style={{
-            fontSize: "4rem",
+            fontSize: "clamp(2rem, 8vw, 4rem)",
             marginBottom: "2rem"
           }}>
             🎥
           </div>
           <h1 style={{
-            fontSize: "3rem",
+            fontSize: "clamp(1.5rem, 6vw, 3rem)",
             fontWeight: "bold",
             marginBottom: "1rem",
-            textAlign: "center"
+            textAlign: "center",
+            padding: "0 16px"
           }}>
             Audio / Video Gallery
           </h1>
           <p style={{
-            fontSize: "1.2rem",
+            fontSize: "clamp(1rem, 3vw, 1.2rem)",
             textAlign: "center",
             maxWidth: "600px",
-            lineHeight: "1.6"
+            lineHeight: "1.6",
+            padding: "0 16px"
           }}>
             Video content coming soon
           </p>
@@ -114,29 +154,31 @@ const PinPalGalleryPage = () => {
       </div>
 
       {/* Content Section */}
-      <div style={{ padding: "60px 20px" }}>
+      <div style={{ padding: "60px 16px" }}>
         <div style={{
-          maxWidth: "1400px",
+          maxWidth: "1200px",
           margin: "0 auto"
         }}>
           <h2 style={{
-            fontSize: "2.5rem",
+            fontSize: "clamp(1.8rem, 5vw, 2.5rem)",
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: "2rem",
-            color: "#333"
+            color: "#333",
+            padding: "0 16px"
           }}>
             🎵 Audio / Video Gallery
           </h2>
           
           <p style={{
-            fontSize: "1.3rem",
+            fontSize: "clamp(1rem, 3vw, 1.3rem)",
             textAlign: "center",
             marginBottom: "3rem",
             color: "#666",
             lineHeight: "1.6",
             maxWidth: "800px",
-            margin: "0 auto 3rem auto"
+            margin: "0 auto 3rem auto",
+            padding: "0 16px"
           }}>
             🌟 Explore our collection of AI-generated audio content and video demonstrations showcasing PinPal.io's innovative technology.
           </p>
@@ -144,31 +186,37 @@ const PinPalGalleryPage = () => {
           {/* Audio Section */}
           <div style={{ marginBottom: "4rem" }}>
             <h3 style={{
-              fontSize: "2rem",
+              fontSize: "clamp(1.5rem, 4vw, 2rem)",
               fontWeight: "600",
               marginBottom: "2rem",
               color: "#007bff",
-              textAlign: "center"
+              textAlign: "center",
+              padding: "0 16px"
             }}>
               🎧 Audio Content
             </h3>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "1.5rem"
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "1.5rem",
+              padding: "0 8px"
             }}>
               {audioUrls.map((url, index) => (
                 <div key={index} style={{
                   backgroundColor: "#f8f9fa",
                   padding: "1.5rem",
                   borderRadius: "12px",
-                  border: "1px solid #e9ecef"
+                  border: "1px solid #e9ecef",
+                  width: "100%",
+                  boxSizing: "border-box"
                 }}>
                   <h4 style={{
                     fontSize: "1.1rem",
                     fontWeight: "600",
                     marginBottom: "1rem",
-                    color: "#333"
+                    color: "#333",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word"
                   }}>
                     {getFileName(url)}
                   </h4>
@@ -189,31 +237,37 @@ const PinPalGalleryPage = () => {
           {/* Video Section */}
           <div style={{ marginBottom: "4rem" }}>
             <h3 style={{
-              fontSize: "2rem",
+              fontSize: "clamp(1.5rem, 4vw, 2rem)",
               fontWeight: "600",
               marginBottom: "2rem",
               color: "#28a745",
-              textAlign: "center"
+              textAlign: "center",
+              padding: "0 16px"
             }}>
               🎬 Video Content
             </h3>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-              gap: "2rem"
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "2rem",
+              padding: "0 8px"
             }}>
               {videoUrls.map((url, index) => (
                 <div key={index} style={{
                   backgroundColor: "#f8f9fa",
                   padding: "1.5rem",
                   borderRadius: "12px",
-                  border: "1px solid #e9ecef"
+                  border: "1px solid #e9ecef",
+                  width: "100%",
+                  boxSizing: "border-box"
                 }}>
                   <h4 style={{
                     fontSize: "1.1rem",
                     fontWeight: "600",
                     marginBottom: "1rem",
-                    color: "#333"
+                    color: "#333",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word"
                   }}>
                     {getFileName(url)}
                   </h4>

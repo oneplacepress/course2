@@ -685,23 +685,34 @@ function PlasmicHomepage__RenderFunc(props) {
             <div className={classNames(projectcss.all, sty.freeBox__wPpxw)}>
               <div className={classNames(projectcss.all, sty.columns__w5Gb)}>
                 <div className={classNames(projectcss.all, sty.column__qoK2G)}>
-                  <PlasmicImg__
-                    alt={""}
-                    className={classNames(sty.img__wGzVi)}
-                    displayHeight={"256px"}
-                    displayMaxHeight={"none"}
-                    displayMaxWidth={"100%"}
-                    displayMinHeight={"0"}
-                    displayMinWidth={"0"}
-                    displayWidth={"256px"}
-                    loading={"lazy"}
-                    src={{
-                      src: image7L5Rg7RBfaoBx,
-                      fullWidth: 1112,
-                      fullHeight: 794,
-                      aspectRatio: undefined
-                    }}
-                  />
+                  <PlasmicLink__
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.a,
+                      sty.link__image7
+                    )}
+                    component={Link}
+                    href={"/easter-egg-5"}
+                    platform={"gatsby"}
+                  >
+                    <PlasmicImg__
+                      alt={""}
+                      className={classNames(sty.img__wGzVi)}
+                      displayHeight={"256px"}
+                      displayMaxHeight={"none"}
+                      displayMaxWidth={"100%"}
+                      displayMinHeight={"0"}
+                      displayMinWidth={"0"}
+                      displayWidth={"256px"}
+                      loading={"lazy"}
+                      src={{
+                        src: image7L5Rg7RBfaoBx,
+                        fullWidth: 1112,
+                        fullHeight: 794,
+                        aspectRatio: undefined
+                      }}
+                    />
+                  </PlasmicLink__>
                 </div>
                 <div className={classNames(projectcss.all, sty.column__r3Qmu)}>
                   <div
@@ -1823,9 +1834,8 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.link__gEko2
                     )}
                     component={Link}
-                    href={"https://twitter.com/"}
+                    href={"/easter-egg-4"}
                     platform={"gatsby"}
-                    target={"_blank"}
                   >
                     <PlasmicImg__
                       data-plasmic-name={"twitter"}
@@ -1854,9 +1864,8 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.link___7Phhv
                     )}
                     component={Link}
-                    href={"#"}
+                    href={"/easter-egg-1"}
                     platform={"gatsby"}
-                    target={"_blank"}
                   >
                     <PlasmicImg__
                       data-plasmic-name={"facebook"}
@@ -1885,9 +1894,8 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.link___2TkEg
                     )}
                     component={Link}
-                    href={"#"}
+                    href={"/easter-egg-2"}
                     platform={"gatsby"}
-                    target={"_blank"}
                   >
                     <PlasmicImg__
                       data-plasmic-name={"youtube"}
@@ -1916,7 +1924,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       sty.link___3ZAu1
                     )}
                     component={Link}
-                    href={"#"}
+                    href={"/easter-egg-3"}
                     platform={"gatsby"}
                   >
                     <div
