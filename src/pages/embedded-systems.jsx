@@ -65,21 +65,20 @@ const EmbeddedSystemsPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background */}
+      {/* Three.js Background - Behind Content */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: 1,
-        opacity: 0.5
+        zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={1500} factor={3} saturation={0} fade />
-          <ambientLight intensity={0.6} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.5} />
+          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
+          <ambientLight intensity={0.8} />
+          <pointLight position={[10, 10, 10]} intensity={1.2} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
           <FloatingChip />
           <FloatingCircuit />
         </Canvas>
@@ -88,7 +87,7 @@ const EmbeddedSystemsPage = () => {
       {/* Content Overlay */}
       <div style={{ 
         position: "relative", 
-        zIndex: 10, 
+        zIndex: 1, 
         padding: "20px",
         minHeight: "100vh"
       }}>
@@ -117,8 +116,8 @@ const EmbeddedSystemsPage = () => {
         
         {/* Main Content */}
         <div style={{
-          background: "rgba(255,255,255,0.98)",
-          backdropFilter: "blur(10px)",
+          background: "rgba(255,255,255,0.95)",
+          backdropFilter: "blur(15px)",
           borderRadius: "25px",
           padding: "50px",
           border: "1px solid rgba(0,0,0,0.1)",
@@ -172,12 +171,13 @@ const EmbeddedSystemsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🛡️ Security Protocols</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
@@ -186,12 +186,13 @@ const EmbeddedSystemsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#17a2b8", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>⚡ Power Management</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
@@ -200,12 +201,13 @@ const EmbeddedSystemsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#6c757d", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📡 Radio Communications</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>

@@ -17,11 +17,11 @@ const FloatingPin = () => {
     <Float speed={2} rotationIntensity={1} floatIntensity={2}>
       <mesh ref={meshRef} position={[-3, 0, 0]}>
         <cylinderGeometry args={[0.1, 0.1, 2]} />
-        <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
+        <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.5} />
       </mesh>
       <mesh position={[-3, 1, 0]}>
         <sphereGeometry args={[0.3]} />
-        <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
+        <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.4} />
       </mesh>
     </Float>
   );
@@ -42,7 +42,7 @@ const OrbitingQR = () => {
   return (
     <mesh ref={meshRef} position={[0, 1, 0]}>
       <boxGeometry args={[0.8, 0.8, 0.1]} />
-      <meshStandardMaterial color="#6c757d" emissive="#6c757d" emissiveIntensity={0.2} />
+      <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.4} />
     </mesh>
   );
 };
@@ -61,7 +61,7 @@ const PulsingSphere = () => {
     <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
       <mesh ref={meshRef} position={[3, 0, 0]}>
         <sphereGeometry args={[0.5]} />
-        <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.3} wireframe />
+        <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.5} wireframe />
       </mesh>
     </Float>
   );
@@ -77,21 +77,20 @@ const StoryPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background */}
+      {/* Three.js Background - Visible and Prominent */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: 1,
-        opacity: 0.6
+        zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <Stars radius={100} depth={50} count={1000} factor={2} saturation={0} fade />
-          <ambientLight intensity={0.6} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.5} />
+          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
+          <ambientLight intensity={0.8} />
+          <pointLight position={[10, 10, 10]} intensity={1.2} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
           <FloatingPin />
           <OrbitingQR />
           <PulsingSphere />
@@ -101,7 +100,7 @@ const StoryPage = () => {
       {/* Content Overlay */}
       <div style={{ 
         position: "relative", 
-        zIndex: 10, 
+        zIndex: 1, 
         padding: "20px",
         minHeight: "100vh"
       }}>
@@ -130,8 +129,8 @@ const StoryPage = () => {
         
         {/* Main Content */}
         <div style={{
-          background: "rgba(255,255,255,0.98)",
-          backdropFilter: "blur(10px)",
+          background: "rgba(255,255,255,0.95)",
+          backdropFilter: "blur(15px)",
           borderRadius: "25px",
           padding: "60px",
           border: "1px solid rgba(0,0,0,0.1)",
@@ -171,12 +170,13 @@ const StoryPage = () => {
             marginTop: "40px"
           }}>
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "40px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ 
                 color: "#007bff", 
@@ -196,12 +196,13 @@ const StoryPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "40px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ 
                 color: "#28a745", 
@@ -221,12 +222,13 @@ const StoryPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "40px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ 
                 color: "#17a2b8", 

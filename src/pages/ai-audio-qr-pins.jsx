@@ -17,11 +17,11 @@ const FloatingAudioPin = () => {
     <Float speed={2} rotationIntensity={1} floatIntensity={2}>
       <mesh ref={meshRef} position={[-2, 0, 0]}>
         <cylinderGeometry args={[0.1, 0.1, 2]} />
-        <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
+        <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.6} />
       </mesh>
       <mesh position={[-2, 1, 0]}>
         <sphereGeometry args={[0.3]} />
-        <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
+        <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.5} />
       </mesh>
     </Float>
   );
@@ -42,7 +42,7 @@ const FloatingQRCode = () => {
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
       <mesh ref={meshRef} position={[2, 0, 0]}>
         <boxGeometry args={[1.2, 1.2, 0.1]} />
-        <meshStandardMaterial color="#6c757d" emissive="#6c757d" emissiveIntensity={0.2} />
+        <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.5} />
       </mesh>
     </Float>
   );
@@ -63,7 +63,7 @@ const SoundWaves = () => {
     <Float speed={3} rotationIntensity={0.3} floatIntensity={0.5}>
       <mesh ref={meshRef} position={[0, 2, -1]}>
         <torusGeometry args={[0.8, 0.2, 8, 16]} />
-        <meshStandardMaterial color="#17a2b8" wireframe />
+        <meshStandardMaterial color="#17a2b8" wireframe emissive="#17a2b8" emissiveIntensity={0.6} />
       </mesh>
     </Float>
   );
@@ -79,21 +79,20 @@ const AIAudioQRPinsPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background */}
+      {/* Three.js Background - Behind Content */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: 1,
-        opacity: 0.5
+        zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={1500} factor={3} saturation={0} fade />
-          <ambientLight intensity={0.6} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.5} />
+          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
+          <ambientLight intensity={0.8} />
+          <pointLight position={[10, 10, 10]} intensity={1.2} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
           <FloatingAudioPin />
           <FloatingQRCode />
           <SoundWaves />
@@ -103,7 +102,7 @@ const AIAudioQRPinsPage = () => {
       {/* Content Overlay */}
       <div style={{ 
         position: "relative", 
-        zIndex: 10, 
+        zIndex: 1, 
         padding: "20px",
         minHeight: "100vh"
       }}>
@@ -132,8 +131,8 @@ const AIAudioQRPinsPage = () => {
         
         {/* Main Content */}
         <div style={{
-          background: "rgba(255,255,255,0.98)",
-          backdropFilter: "blur(10px)",
+          background: "rgba(255,255,255,0.95)",
+          backdropFilter: "blur(15px)",
           borderRadius: "25px",
           padding: "50px",
           border: "1px solid rgba(0,0,0,0.1)",
@@ -173,12 +172,13 @@ const AIAudioQRPinsPage = () => {
             marginTop: "40px"
           }}>
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🚀 Instant QR Generation</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
@@ -187,12 +187,13 @@ const AIAudioQRPinsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🎧 Immersive Audio Tours</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
@@ -201,12 +202,13 @@ const AIAudioQRPinsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#6c757d", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📡 LoRaWAN Networks</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
@@ -215,12 +217,13 @@ const AIAudioQRPinsPage = () => {
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
+              background: "rgba(255,255,255,0.9)",
               padding: "30px",
               borderRadius: "20px",
               border: "1px solid rgba(0,0,0,0.1)",
               boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              transition: "transform 0.3s ease",
+              backdropFilter: "blur(10px)"
             }}>
               <h2 style={{ color: "#17a2b8", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🗺️ Smart Routing</h2>
               <p style={{ color: "#555", lineHeight: "1.6" }}>
