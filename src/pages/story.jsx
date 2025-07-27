@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
+import { Stars, Float, Text } from "@react-three/drei";
 
 const FloatingPin = () => {
   const meshRef = useRef();
@@ -64,6 +64,137 @@ const PulsingSphere = () => {
         <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.5} wireframe />
       </mesh>
     </Float>
+  );
+};
+
+// New People Animation Components
+const AnimatedPerson = ({ position, color, delay = 0 }) => {
+  const groupRef = useRef();
+  const armRef = useRef();
+  const legRef = useRef();
+  
+  useFrame(({ clock }) => {
+    if (groupRef.current) {
+      const time = clock.getElapsedTime() + delay;
+      groupRef.current.position.y = Math.sin(time * 0.5) * 0.1;
+      groupRef.current.rotation.y = Math.sin(time * 0.3) * 0.2;
+    }
+    
+    if (armRef.current) {
+      armRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 2 + delay) * 0.3;
+    }
+    
+    if (legRef.current) {
+      legRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 1.5 + delay) * 0.2;
+    }
+  });
+
+  return (
+    <Float speed={0.5} rotationIntensity={0.1} floatIntensity={0.3}>
+      <group ref={groupRef} position={position}>
+        {/* Head */}
+        <mesh position={[0, 1.5, 0]}>
+          <sphereGeometry args={[0.15]} />
+          <meshStandardMaterial color={color} />
+        </mesh>
+        
+        {/* Body */}
+        <mesh position={[0, 0.8, 0]}>
+          <cylinderGeometry args={[0.2, 0.15, 0.8]} />
+          <meshStandardMaterial color={color} />
+        </mesh>
+        
+        {/* Arms */}
+        <group ref={armRef}>
+          <mesh position={[-0.25, 0.9, 0]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.6]} />
+            <meshStandardMaterial color={color} />
+          </mesh>
+          <mesh position={[0.25, 0.9, 0]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.6]} />
+            <meshStandardMaterial color={color} />
+          </mesh>
+        </group>
+        
+        {/* Legs */}
+        <group ref={legRef}>
+          <mesh position={[-0.1, 0, 0]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.7]} />
+            <meshStandardMaterial color={color} />
+          </mesh>
+          <mesh position={[0.1, 0, 0]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.7]} />
+            <meshStandardMaterial color={color} />
+          </mesh>
+        </group>
+      </group>
+    </Float>
+  );
+};
+
+const WalkingPerson = ({ startPosition, endPosition, color, speed = 1 }) => {
+  const groupRef = useRef();
+  
+  useFrame(({ clock }) => {
+    if (groupRef.current) {
+      const time = clock.getElapsedTime() * speed;
+      const progress = (Math.sin(time * 0.5) + 1) / 2;
+      
+      groupRef.current.position.x = startPosition[0] + (endPosition[0] - startPosition[0]) * progress;
+      groupRef.current.position.z = startPosition[2] + (endPosition[2] - startPosition[2]) * progress;
+      
+      // Look in walking direction
+      const direction = progress > 0.5 ? Math.PI : 0;
+      groupRef.current.rotation.y = direction;
+    }
+  });
+
+  return (
+    <group ref={groupRef} position={[startPosition[0], startPosition[1], startPosition[2]]}>
+      <AnimatedPerson position={[0, 0, 0]} color={color} delay={Math.random() * 2} />
+    </group>
+  );
+};
+
+const PeopleScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.6} />
+      <pointLight position={[5, 5, 5]} intensity={0.8} />
+      <pointLight position={[-5, 3, -5]} intensity={0.6} color="#007bff" />
+      
+      {/* Standing people */}
+      <AnimatedPerson position={[-2, 0, 1]} color="#007bff" delay={0} />
+      <AnimatedPerson position={[2, 0, -1]} color="#28a745" delay={1} />
+      <AnimatedPerson position={[0, 0, 2]} color="#17a2b8" delay={2} />
+      
+      {/* Walking people */}
+      <WalkingPerson 
+        startPosition={[-3, 0, -2]} 
+        endPosition={[3, 0, -2]} 
+        color="#dc3545" 
+        speed={0.8} 
+      />
+      <WalkingPerson 
+        startPosition={[3, 0, 0]} 
+        endPosition={[-3, 0, 0]} 
+        color="#ffc107" 
+        speed={1.2} 
+      />
+      
+      {/* Floating text */}
+      <Float speed={2} rotationIntensity={0.1} floatIntensity={0.5}>
+        <Text
+          position={[0, 3, 0]}
+          fontSize={0.5}
+          color="#007bff"
+          anchorX="center"
+          anchorY="middle"
+        >
+          Connecting People & Places
+        </Text>
+      </Float>
+    </>
   );
 };
 
@@ -161,6 +292,22 @@ const StoryPage = () => {
           }}>
             🌟 Discover how PinPal.io revolutionizes location-based experiences through cutting-edge technology and innovation.
           </p>
+
+          {/* People Animation Section */}
+          <div style={{
+            height: "400px",
+            width: "100%",
+            marginBottom: "50px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+            background: "linear-gradient(135deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1))"
+          }}>
+            <Canvas camera={{ position: [0, 2, 6], fov: 50 }}>
+              <PeopleScene />
+            </Canvas>
+          </div>
 
           {/* Story Cards */}
           <div style={{

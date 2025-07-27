@@ -127,7 +127,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 displayWidth={"auto"}
                 loading={"lazy"}
                 src={{
-                  src: image8G8EUIvaOdGpf,
+                  src: "https://workmates.live/wp-content/uploads/2025/04/pin.png",
                   fullWidth: 186,
                   fullHeight: 80,
                   aspectRatio: undefined
@@ -168,6 +168,19 @@ function PlasmicHomepage__RenderFunc(props) {
                 platform={"gatsby"}
               >
                 {"Story"}
+              </PlasmicLink__>
+              <PlasmicLink__
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  projectcss.__wab_text,
+                  sty.link2
+                )}
+                component={Link}
+                href={`/courses`}
+                platform={"gatsby"}
+              >
+                {"Courses"}
               </PlasmicLink__>
               <PlasmicLink__
                 className={classNames(
@@ -257,7 +270,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       displayWidth={"auto"}
                       loading={"lazy"}
                       src={{
-                        src: image2Upm3HF0OED,
+                        src: "https://workmates.live/wp-content/uploads/2023/08/cons.jpg",
                         fullWidth: 1332,
                         fullHeight: 2080,
                         aspectRatio: undefined
@@ -696,7 +709,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         sty.position
                       )}
                     >
-                      {"Sarah Johnson, CEO of Lux Real Estate"}
+                      {"Bruno Sudeikis, CEO of Lux Real Estate"}
                     </p>
                   </div>
                 </div>
@@ -1642,7 +1655,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     displayWidth={"300px"}
                     loading={"lazy"}
                     src={{
-                      src: image9R9Lj5HuVJ6N,
+                      src: "https://workmates.live/wp-content/uploads/2025/04/pin.png",
                       fullWidth: 374,
                       fullHeight: 156,
                       aspectRatio: undefined

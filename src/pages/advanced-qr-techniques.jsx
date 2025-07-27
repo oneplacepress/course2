@@ -18,10 +18,10 @@ const FloatingQRCube = () => {
   return (
     <Float speed={1.8} rotationIntensity={0.8} floatIntensity={1.2}>
       <group ref={meshRef} position={[-2, 0, 0]}>
-        {/* Main QR Cube */}
+        {/* Main QR Cube - Darker for visibility */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[1.5, 1.5, 0.2]} />
-          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#000" />
         </mesh>
         {/* QR Pattern Elements */}
         {[...Array(9)].map((_, i) => (
@@ -31,9 +31,14 @@ const FloatingQRCube = () => {
             0.12
           ]}>
             <boxGeometry args={[0.2, 0.2, 0.1]} />
-            <meshStandardMaterial color={i % 2 === 0 ? "#28a745" : "#dc3545"} />
+            <meshStandardMaterial color={i % 2 === 0 ? "#fff" : "#000"} />
           </mesh>
         ))}
+        {/* Border frame */}
+        <mesh position={[0, 0, -0.05]}>
+          <boxGeometry args={[1.8, 1.8, 0.1]} />
+          <meshStandardMaterial color="#333" />
+        </mesh>
       </group>
     </Float>
   );
@@ -53,10 +58,52 @@ const ScanningEffect = () => {
   return (
     <Float speed={2.5} rotationIntensity={0.4} floatIntensity={1}>
       <mesh ref={meshRef} position={[2, 1, -1]}>
-        <torusGeometry args={[1, 0.1, 8, 32]} />
-        <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.4} />
+        <torusGeometry args={[1, 0.15, 8, 32]} />
+        <meshStandardMaterial color="#333" />
       </mesh>
     </Float>
+  );
+};
+
+// New prominent QR animation scene
+const QRTechScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <pointLight position={[5, 5, 5]} intensity={1.2} />
+      <directionalLight position={[0, 10, 0]} intensity={0.8} />
+      
+      {/* Multiple QR codes */}
+      <FloatingQRCube />
+      <group position={[3, -1, 1]}>
+        <FloatingQRCube />
+      </group>
+      <group position={[-3, 1, -1]}>
+        <FloatingQRCube />
+      </group>
+      
+      {/* Scanning effects */}
+      <ScanningEffect />
+      <group position={[-2, -1, 1]}>
+        <ScanningEffect />
+      </group>
+      
+      {/* Data stream effect */}
+      <Float speed={3} rotationIntensity={0.1} floatIntensity={1}>
+        <group position={[0, 2, 0]}>
+          {[...Array(20)].map((_, i) => (
+            <mesh key={i} position={[
+              Math.sin(i * 0.3) * 2,
+              Math.cos(i * 0.5) * 1.5,
+              Math.sin(i * 0.7) * 1
+            ]}>
+              <boxGeometry args={[0.1, 0.1, 0.1]} />
+              <meshStandardMaterial color={i % 2 === 0 ? "#000" : "#444"} />
+            </mesh>
+          ))}
+        </group>
+      </Float>
+    </>
   );
 };
 
@@ -80,12 +127,26 @@ const AdvancedQRTechniquesPage = () => {
         zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
           <FloatingQRCube />
           <ScanningEffect />
+          {/* Dark particles for visibility */}
+          <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
+            <group>
+              {[...Array(50)].map((_, i) => (
+                <mesh key={i} position={[
+                  (Math.random() - 0.5) * 20,
+                  (Math.random() - 0.5) * 20,
+                  (Math.random() - 0.5) * 20
+                ]}>
+                  <sphereGeometry args={[0.05]} />
+                  <meshStandardMaterial color="#333" opacity={0.6} transparent />
+                </mesh>
+              ))}
+            </group>
+          </Float>
         </Canvas>
       </div>
 
@@ -153,6 +214,22 @@ const AdvancedQRTechniquesPage = () => {
           }}>
             🌟 Unlock the full potential of QR technology with advanced encoding techniques, dynamic content delivery, and innovative applications for modern businesses.
           </p>
+
+          {/* QR Technology Animation Section */}
+          <div style={{
+            height: "400px",
+            width: "100%",
+            marginBottom: "50px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))"
+          }}>
+            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+              <QRTechScene />
+            </Canvas>
+          </div>
 
           {/* Feature Cards */}
           <div style={{
