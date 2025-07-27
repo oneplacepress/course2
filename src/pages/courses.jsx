@@ -128,7 +128,7 @@ const CourseCard = ({ course }) => (
         e.currentTarget.style.opacity = '1';
       }}
     >
-      Start Course →
+      Have a Look →
     </Link>
   </div>
 );

@@ -7,106 +7,134 @@ const AdvancedQRTechniquesPage = () => {
       minHeight: "100vh",
       background: "white",
       color: "#333",
-      fontFamily: "Arial, sans-serif",
-      position: "relative",
-      overflow: "hidden"
+      fontFamily: "Arial, sans-serif"
     }}>
-      {/* Animated Background */}
-      <div style={{ 
-        position: "fixed", 
-        top: 0, 
-        left: 0, 
-        width: "100%", 
-        height: "100%", 
-        zIndex: -1,
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        opacity: 0.1
+      {/* Fullscreen Video Background */}
+      <div style={{
+        width: "100%",
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden"
       }}>
-        {/* Animated circles */}
-        <div style={{
-          position: "absolute",
-          top: "20%",
-          left: "10%",
-          width: "100px",
-          height: "100px",
-          borderRadius: "50%",
-          background: "rgba(0, 123, 255, 0.1)",
-          animation: "float 6s ease-in-out infinite"
-        }}></div>
-        <div style={{
-          position: "absolute",
-          top: "60%",
-          right: "15%",
-          width: "150px",
-          height: "150px",
-          borderRadius: "50%",
-          background: "rgba(40, 167, 69, 0.1)",
-          animation: "float 8s ease-in-out infinite reverse"
-        }}></div>
-        <div style={{
-          position: "absolute",
-          bottom: "20%",
-          left: "20%",
-          width: "80px",
-          height: "80px",
-          borderRadius: "50%",
-          background: "rgba(220, 53, 69, 0.1)",
-          animation: "float 7s ease-in-out infinite"
-        }}></div>
-      </div>
-
-      {/* Content Overlay */}
-      <div style={{ 
-        position: "relative", 
-        zIndex: 1, 
-        padding: "20px",
-        minHeight: "100vh"
-      }}>
-        <header style={{ marginBottom: "40px" }}>
-          <nav style={{ 
-            background: "rgba(255,255,255,0.95)", 
-            padding: "15px 25px", 
-            borderRadius: "15px", 
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-          }}>
-            <Link 
-              to="/" 
-              style={{ 
-                color: "#007bff",
-                textDecoration: "none",
-                fontSize: "1.1rem",
-                fontWeight: "600"
-              }}
-            >
-              🏠 Back to Home
-            </Link>
-          </nav>
-        </header>
+        <video
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 1
+          }}
+          poster=""
+          preload="metadata"
+          muted
+        >
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Prisoner-of-the-QR-Code.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
-        {/* Main Content */}
+        {/* Overlay Content */}
         <div style={{
-          background: "rgba(255,255,255,0.95)",
-          backdropFilter: "blur(15px)",
-          borderRadius: "25px",
-          padding: "50px",
-          border: "1px solid rgba(0,0,0,0.1)",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-          maxWidth: "1200px",
-          margin: "0 auto"
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          zIndex: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          color: "#fff",
+          padding: "20px"
         }}>
           <h1 style={{
             fontSize: "3.5rem",
             fontWeight: "bold",
-            background: "linear-gradient(45deg, #007bff, #28a745, #dc3545)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            marginBottom: "1rem",
             textAlign: "center",
-            marginBottom: "2rem"
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
+          }}>
+            Advanced QR Techniques
+          </h1>
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            maxWidth: "600px",
+            lineHeight: "1.6",
+            marginBottom: "2rem",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
+          }}>
+            Master advanced QR code implementations with cutting-edge techniques for modern applications.
+          </p>
+          <div style={{
+            display: "flex",
+            gap: "1rem",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}>
+            <button
+              style={{
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                padding: "12px 24px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease"
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
+            >
+              Start Learning
+            </button>
+            <Link 
+              to="/courses"
+              style={{
+                backgroundColor: "transparent",
+                color: "#fff",
+                border: "2px solid #fff",
+                padding: "10px 22px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                textDecoration: "none",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#fff";
+                e.target.style.color = "#000";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#fff";
+              }}
+            >
+              Back to Courses
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div style={{ padding: "60px 20px" }}>
+        <div style={{
+          maxWidth: "1200px",
+          margin: "0 auto"
+        }}>
+          <h2 style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: "2rem",
+            color: "#333"
           }}>
             📱 Advanced QR Techniques
-          </h1>
+          </h2>
           
           <p style={{
             fontSize: "1.3rem",
@@ -120,360 +148,118 @@ const AdvancedQRTechniquesPage = () => {
             🌟 Unlock the full potential of QR technology with advanced encoding techniques, dynamic content delivery, and innovative applications for modern businesses.
           </p>
 
-          {/* QR Technology Animation Section */}
-          <div style={{
-            height: "400px",
-            width: "100%",
-            marginBottom: "50px",
-            borderRadius: "20px",
-            overflow: "hidden",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative"
-          }}>
-            {/* Tech Grid Background */}
-            <div style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "350px",
-              height: "250px",
-              background: "#1a2a1a",
-              borderRadius: "10px",
-              border: "2px solid #00ff88"
-            }}>
-              {/* Grid lines */}
-              <div style={{
-                position: "absolute",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
-                background: `
-                  linear-gradient(90deg, #00ff88 1px, transparent 1px),
-                  linear-gradient(0deg, #00ff88 1px, transparent 1px)
-                `,
-                backgroundSize: "50px 50px",
-                opacity: 0.3
-              }}></div>
-              
-              {/* Data nodes */}
-              <div style={{
-                position: "absolute",
-                top: "20px",
-                left: "20px",
-                width: "8px",
-                height: "8px",
-                background: "#0066cc",
-                borderRadius: "50%",
-                animation: "pulse 2s ease-in-out infinite"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                top: "60px",
-                right: "30px",
-                width: "8px",
-                height: "8px",
-                background: "#0066cc",
-                borderRadius: "50%",
-                animation: "pulse 2s ease-in-out infinite 0.5s"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                bottom: "40px",
-                left: "50px",
-                width: "8px",
-                height: "8px",
-                background: "#0066cc",
-                borderRadius: "50%",
-                animation: "pulse 2s ease-in-out infinite 1s"
-              }}></div>
-              
-              {/* QR scan zones */}
-              <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "60px",
-                height: "60px",
-                border: "2px solid #ff6600",
-                borderRadius: "50%",
-                animation: "pulse 2s ease-in-out infinite"
-              }}></div>
-            </div>
-            
-            {/* Floating QR Cube */}
-            <div style={{
-              position: "absolute",
-              top: "30%",
-              left: "20%",
-              animation: "float 4s ease-in-out infinite"
-            }}>
-              <div style={{
-                width: "80px",
-                height: "80px",
-                background: "#000",
-                borderRadius: "8px",
-                position: "relative",
-                border: "2px solid #333"
-              }}>
-                {/* QR pattern */}
-                <div style={{
-                  position: "absolute",
-                  top: "10px",
-                  left: "10px",
-                  width: "60px",
-                  height: "60px",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
-                  gap: "2px"
-                }}>
-                  {[...Array(9)].map((_, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        width: "18px",
-                        height: "18px",
-                        background: i % 2 === 0 ? "#fff" : "#000",
-                        borderRadius: "2px"
-                      }}
-                    ></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            {/* Scanning Effect */}
-            <div style={{
-              position: "absolute",
-              top: "40%",
-              right: "25%",
-              width: "100px",
-              height: "100px",
-              border: "3px solid #333",
-              borderRadius: "50%",
-              animation: "rotate 6s linear infinite"
-            }}>
-              {/* Scanning line */}
-              <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "0",
-                width: "100%",
-                height: "2px",
-                background: "#ff0088",
-                transform: "translateY(-50%)",
-                animation: "scan 2s ease-in-out infinite"
-              }}></div>
-            </div>
-            
-            {/* Data Stream */}
-            <div style={{
-              position: "absolute",
-              bottom: "30%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              gap: "8px"
-            }}>
-              {[...Array(8)].map((_, i) => (
-                <div
-                  key={i}
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    background: "#ff0088",
-                    borderRadius: "50%",
-                    animation: `pulse ${1 + i * 0.1}s ease-in-out infinite`
-                  }}
-                ></div>
-              ))}
-            </div>
-            
-            {/* Additional QR Codes */}
-            <div style={{
-              position: "absolute",
-              top: "20%",
-              right: "15%",
-              width: "60px",
-              height: "60px",
-              background: "#000",
-              borderRadius: "6px",
-              animation: "float 5s ease-in-out infinite reverse"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: "8px",
-                left: "8px",
-                width: "44px",
-                height: "44px",
-                background: "#fff",
-                borderRadius: "4px"
-              }}></div>
-            </div>
-            
-            <div style={{
-              position: "absolute",
-              bottom: "20%",
-              left: "15%",
-              width: "50px",
-              height: "50px",
-              background: "#000",
-              borderRadius: "5px",
-              animation: "float 3s ease-in-out infinite"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: "6px",
-                left: "6px",
-                width: "38px",
-                height: "38px",
-                background: "#fff",
-                borderRadius: "3px"
-              }}></div>
-            </div>
-            
-            {/* Floating Text */}
-            <div style={{
-              position: "absolute",
-              top: "20px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              color: "#333",
-              fontSize: "1.3rem",
-              fontWeight: "600",
-              animation: "float 3s ease-in-out infinite"
-            }}>
-              Advanced QR Technology
-            </div>
-          </div>
-
-          {/* Feature Cards */}
+          {/* Course Content */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "20px",
-            marginTop: "40px",
-            padding: "0 10px"
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
+            marginTop: "3rem"
           }}>
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🎥 Video QR Codes</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Create dynamic QR codes that instantly deliver video content for job applications, company introductions, and product demonstrations.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#007bff" }}>
+                🔧 Dynamic QR Generation
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Learn to create QR codes that update content dynamically based on user interactions, time, location, and other parameters.
               </p>
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>💼 Professional Applications</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Implement QR solutions for recruitment, networking events, business cards, and professional portfolio presentations.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#28a745" }}>
+                🎨 Custom QR Design
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Master the art of creating branded QR codes with custom colors, logos, and styling while maintaining scan reliability.
               </p>
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#dc3545", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🔐 Secure QR Systems</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Master advanced security protocols including encryption, authentication, and access control for sensitive QR applications.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#dc3545" }}>
+                📊 Analytics Integration
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Implement tracking and analytics to monitor QR code performance, user engagement, and conversion metrics.
               </p>
             </div>
 
             <div style={{
-              background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#17a2b8", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📊 Analytics & Tracking</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Implement comprehensive analytics to track QR code performance, user engagement, and conversion metrics.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#17a2b8" }}>
+                🔐 Security Features
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Explore advanced security measures including encrypted QR codes, authentication, and fraud prevention techniques.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#6f42c1" }}>
+                🌐 Multi-Platform Support
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Build QR solutions that work seamlessly across different devices, operating systems, and scanning applications.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#fd7e14" }}>
+                🚀 Performance Optimization
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Optimize QR code generation and scanning performance for high-traffic applications and real-time use cases.
               </p>
             </div>
           </div>
 
-          {/* Call to Action */}
-          <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <a
-              href="https://pinpal.io"
+          {/* Back to Courses Button */}
+          <div style={{ textAlign: "center", marginTop: "4rem" }}>
+            <Link 
+              to="/courses"
               style={{
                 display: "inline-block",
-                padding: "18px 40px",
-                background: "linear-gradient(45deg, #007bff, #dc3545)",
-                color: "white",
+                backgroundColor: "#007bff",
+                color: "#fff",
+                padding: "15px 30px",
+                borderRadius: "8px",
                 textDecoration: "none",
-                borderRadius: "50px",
-                fontSize: "1.2rem",
                 fontWeight: "600",
-                boxShadow: "0 8px 25px rgba(0,123,255,0.3)",
-                transition: "all 0.3s ease",
-                border: "none"
-              }}
-              onMouseOver={(e) => {
-                e.target.style.transform = "scale(1.05)";
-                e.target.style.boxShadow = "0 12px 30px rgba(0,123,255,0.4)";
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = "scale(1)";
-                e.target.style.boxShadow = "0 8px 25px rgba(0,123,255,0.3)";
+                fontSize: "1.1rem"
               }}
             >
-              📱 Master Advanced QR Techniques
-            </a>
+              ← Back to Courses
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        
-        @keyframes scan {
-          0% { transform: translateY(-50%) scaleX(0); }
-          50% { transform: translateY(-50%) scaleX(1); }
-          100% { transform: translateY(-50%) scaleX(0); }
-        }
-      `}</style>
     </div>
   );
 };

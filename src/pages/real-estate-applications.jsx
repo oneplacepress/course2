@@ -7,106 +7,134 @@ const RealEstateApplicationsPage = () => {
       minHeight: "100vh",
       background: "white",
       color: "#333",
-      fontFamily: "Arial, sans-serif",
-      position: "relative",
-      overflow: "hidden"
+      fontFamily: "Arial, sans-serif"
     }}>
-      {/* Animated Background */}
-      <div style={{ 
-        position: "fixed", 
-        top: 0, 
-        left: 0, 
-        width: "100%", 
-        height: "100%", 
-        zIndex: -1,
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        opacity: 0.1
+      {/* Fullscreen Video Background */}
+      <div style={{
+        width: "100%",
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden"
       }}>
-        {/* Animated circles */}
-        <div style={{
-          position: "absolute",
-          top: "20%",
-          left: "10%",
-          width: "100px",
-          height: "100px",
-          borderRadius: "50%",
-          background: "rgba(0, 123, 255, 0.1)",
-          animation: "float 6s ease-in-out infinite"
-        }}></div>
-        <div style={{
-          position: "absolute",
-          top: "60%",
-          right: "15%",
-          width: "150px",
-          height: "150px",
-          borderRadius: "50%",
-          background: "rgba(220, 53, 69, 0.1)",
-          animation: "float 8s ease-in-out infinite reverse"
-        }}></div>
-        <div style={{
-          position: "absolute",
-          bottom: "20%",
-          left: "20%",
-          width: "80px",
-          height: "80px",
-          borderRadius: "50%",
-          background: "rgba(255, 193, 7, 0.1)",
-          animation: "float 7s ease-in-out infinite"
-        }}></div>
-      </div>
-
-      {/* Content Overlay */}
-      <div style={{ 
-        position: "relative", 
-        zIndex: 1, 
-        padding: "20px",
-        minHeight: "100vh"
-      }}>
-        <header style={{ marginBottom: "40px" }}>
-          <nav style={{ 
-            background: "rgba(255,255,255,0.95)", 
-            padding: "15px 25px", 
-            borderRadius: "15px", 
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-          }}>
-            <Link 
-              to="/" 
-              style={{ 
-                color: "#007bff",
-                textDecoration: "none",
-                fontSize: "1.1rem",
-                fontWeight: "600"
-              }}
-            >
-              🏠 Back to Home
-            </Link>
-          </nav>
-        </header>
+        <video
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 1
+          }}
+          poster=""
+          preload="metadata"
+          muted
+        >
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Finding-a-location-for-your-Dolla-Depot.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
-        {/* Main Content */}
+        {/* Overlay Content */}
         <div style={{
-          background: "rgba(255,255,255,0.95)",
-          backdropFilter: "blur(15px)",
-          borderRadius: "25px",
-          padding: "50px",
-          border: "1px solid rgba(0,0,0,0.1)",
-          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-          maxWidth: "1200px",
-          margin: "0 auto"
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          zIndex: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          color: "#fff",
+          padding: "20px"
         }}>
           <h1 style={{
             fontSize: "3.5rem",
             fontWeight: "bold",
-            background: "linear-gradient(45deg, #007bff, #dc3545, #ffc107)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            marginBottom: "1rem",
             textAlign: "center",
-            marginBottom: "2rem"
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
+          }}>
+            Real Estate Applications
+          </h1>
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            maxWidth: "600px",
+            lineHeight: "1.6",
+            marginBottom: "2rem",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
+          }}>
+            Build comprehensive real estate platforms with property listings, virtual tours, and analytics.
+          </p>
+          <div style={{
+            display: "flex",
+            gap: "1rem",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}>
+            <button
+              style={{
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                border: "none",
+                padding: "12px 24px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease"
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#c82333"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#dc3545"}
+            >
+              Start Learning
+            </button>
+            <Link 
+              to="/courses"
+              style={{
+                backgroundColor: "transparent",
+                color: "#fff",
+                border: "2px solid #fff",
+                padding: "10px 22px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                textDecoration: "none",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#fff";
+                e.target.style.color = "#000";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#fff";
+              }}
+            >
+              Back to Courses
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div style={{ padding: "60px 20px" }}>
+        <div style={{
+          maxWidth: "1200px",
+          margin: "0 auto"
+        }}>
+          <h2 style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: "2rem",
+            color: "#333"
           }}>
             🏠 Real Estate Applications
-          </h1>
+          </h2>
           
           <p style={{
             fontSize: "1.3rem",
@@ -117,356 +145,121 @@ const RealEstateApplicationsPage = () => {
             maxWidth: "800px",
             margin: "0 auto 3rem auto"
           }}>
-            🌟 Transform property showcases with intelligent audio tours that bring listings to life through AI-powered storytelling.
+            🌟 Create comprehensive real estate platforms that revolutionize property discovery, virtual tours, and market analysis for modern real estate professionals.
           </p>
 
-          {/* Real Estate Animation Section */}
-          <div style={{
-            height: "400px",
-            width: "100%",
-            marginBottom: "50px",
-            borderRadius: "20px",
-            overflow: "hidden",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-            background: "linear-gradient(135deg, rgba(52,58,64,0.8), rgba(73,80,87,0.9))",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative"
-          }}>
-            {/* Neighborhood Map */}
-            <div style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "350px",
-              height: "250px",
-              background: "#2a4a2a",
-              borderRadius: "10px",
-              border: "2px solid #555"
-            }}>
-              {/* Streets */}
-              <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "0",
-                width: "100%",
-                height: "6px",
-                background: "#555",
-                transform: "translateY(-50%)"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                top: "0",
-                left: "50%",
-                width: "6px",
-                height: "100%",
-                background: "#555",
-                transform: "translateX(-50%)"
-              }}></div>
-              
-              {/* Property lots */}
-              <div style={{
-                position: "absolute",
-                top: "20px",
-                left: "20px",
-                width: "60px",
-                height: "80px",
-                background: "#3a5a3a",
-                borderRadius: "5px"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                top: "20px",
-                right: "20px",
-                width: "70px",
-                height: "70px",
-                background: "#3a5a3a",
-                borderRadius: "5px"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                bottom: "20px",
-                left: "30px",
-                width: "50px",
-                height: "90px",
-                background: "#3a5a3a",
-                borderRadius: "5px"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                bottom: "20px",
-                right: "30px",
-                width: "80px",
-                height: "60px",
-                background: "#3a5a3a",
-                borderRadius: "5px"
-              }}></div>
-              
-              {/* Property markers */}
-              <div style={{
-                position: "absolute",
-                top: "15px",
-                left: "50px",
-                width: "0",
-                height: "0",
-                borderLeft: "8px solid transparent",
-                borderRight: "8px solid transparent",
-                borderBottom: "20px solid #ff6600",
-                animation: "pulse 2s ease-in-out infinite"
-              }}></div>
-              <div style={{
-                position: "absolute",
-                top: "15px",
-                right: "55px",
-                width: "0",
-                height: "0",
-                borderLeft: "8px solid transparent",
-                borderRight: "8px solid transparent",
-                borderBottom: "20px solid #ff6600",
-                animation: "pulse 2s ease-in-out infinite 0.5s"
-              }}></div>
-            </div>
-            
-            {/* Floating House */}
-            <div style={{
-              position: "absolute",
-              top: "30%",
-              left: "20%",
-              animation: "float 4s ease-in-out infinite"
-            }}>
-              <div style={{
-                width: "60px",
-                height: "40px",
-                background: "#007bff",
-                borderRadius: "5px 5px 0 0"
-              }}></div>
-              <div style={{
-                width: "0",
-                height: "0",
-                borderLeft: "30px solid transparent",
-                borderRight: "30px solid transparent",
-                borderBottom: "25px solid #dc3545",
-                marginTop: "-5px"
-              }}></div>
-            </div>
-            
-            {/* Floating Key */}
-            <div style={{
-              position: "absolute",
-              top: "40%",
-              right: "25%",
-              animation: "rotate 3s linear infinite"
-            }}>
-              <div style={{
-                width: "40px",
-                height: "40px",
-                border: "4px solid #ffc107",
-                borderRadius: "50%",
-                position: "relative"
-              }}>
-                <div style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  width: "30px",
-                  height: "4px",
-                  background: "#28a745",
-                  transform: "translate(-50%, -50%)"
-                }}></div>
-              </div>
-            </div>
-            
-            {/* QR Code */}
-            <div style={{
-              position: "absolute",
-              bottom: "30%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "80px",
-              height: "80px",
-              background: "#000",
-              borderRadius: "8px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              animation: "bounce 2s ease-in-out infinite"
-            }}>
-              <div style={{
-                width: "60px",
-                height: "60px",
-                background: "#fff",
-                borderRadius: "4px",
-                position: "relative"
-              }}>
-                {/* QR code pattern */}
-                <div style={{
-                  position: "absolute",
-                  top: "8px",
-                  left: "8px",
-                  width: "12px",
-                  height: "12px",
-                  background: "#000"
-                }}></div>
-                <div style={{
-                  position: "absolute",
-                  top: "8px",
-                  right: "8px",
-                  width: "12px",
-                  height: "12px",
-                  background: "#000"
-                }}></div>
-                <div style={{
-                  position: "absolute",
-                  bottom: "8px",
-                  left: "8px",
-                  width: "12px",
-                  height: "12px",
-                  background: "#000"
-                }}></div>
-              </div>
-            </div>
-            
-            {/* Floating Text */}
-            <div style={{
-              position: "absolute",
-              top: "20px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              color: "white",
-              fontSize: "1.3rem",
-              fontWeight: "600",
-              animation: "float 3s ease-in-out infinite"
-            }}>
-              Smart Real Estate Tours
-            </div>
-          </div>
-
-          {/* Feature Cards */}
+          {/* Course Content */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "20px",
-            marginTop: "40px",
-            padding: "0 10px"
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
+            marginTop: "3rem"
           }}>
             <div style={{
-              background: "rgba(255,255,255,0.9)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease",
-              backdropFilter: "blur(10px)"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🏘️ Virtual Property Tours</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Create immersive audio experiences for property viewings, highlighting key features and neighborhood amenities with AI-generated narration.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#dc3545" }}>
+                🏘️ Property Listings
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Build comprehensive property listing systems with advanced search, filtering, and recommendation engines.
               </p>
             </div>
 
             <div style={{
-              background: "rgba(255,255,255,0.9)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease",
-              backdropFilter: "blur(10px)"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#dc3545", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📊 Market Analytics</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Integrate real-time market data and neighborhood statistics into your audio tours for informed decision-making.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#007bff" }}>
+                🥽 Virtual Tours
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Create immersive 360-degree virtual tours and augmented reality experiences for property showcases.
               </p>
             </div>
 
             <div style={{
-              background: "rgba(255,255,255,0.9)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease",
-              backdropFilter: "blur(10px)"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#ffc107", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🔑 Smart Open Houses</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Enable self-guided tours with QR-activated audio guides that provide detailed information about each room and feature.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#28a745" }}>
+                📊 Market Analytics
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Implement real-time market analysis, price tracking, and predictive modeling for real estate investments.
               </p>
             </div>
 
             <div style={{
-              background: "rgba(255,255,255,0.9)",
-              padding: "30px",
-              borderRadius: "20px",
-              border: "1px solid rgba(0,0,0,0.1)",
-              boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-              transition: "transform 0.3s ease",
-              backdropFilter: "blur(10px)"
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
             }}>
-              <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📱 Mobile Integration</h2>
-              <p style={{ color: "#555", lineHeight: "1.6" }}>
-                Seamlessly integrate with mobile apps and listing platforms for enhanced buyer engagement and lead generation.
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#17a2b8" }}>
+                📱 Mobile Applications
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Develop mobile-first real estate apps with location-based search, notifications, and offline capabilities.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#6f42c1" }}>
+                🤖 AI Integration
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Integrate AI for property valuation, lead scoring, and personalized recommendations for buyers and sellers.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#fd7e14" }}>
+                🚀 Performance Optimization
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Optimize real estate platforms for high traffic, fast loading times, and seamless user experiences.
               </p>
             </div>
           </div>
 
-          {/* Call to Action */}
-          <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <a
-              href="https://pinpal.io"
+          {/* Back to Courses Button */}
+          <div style={{ textAlign: "center", marginTop: "4rem" }}>
+            <Link 
+              to="/courses"
               style={{
                 display: "inline-block",
-                padding: "18px 40px",
-                background: "linear-gradient(45deg, #007bff, #dc3545)",
-                color: "white",
+                backgroundColor: "#dc3545",
+                color: "#fff",
+                padding: "15px 30px",
+                borderRadius: "8px",
                 textDecoration: "none",
-                borderRadius: "50px",
-                fontSize: "1.2rem",
                 fontWeight: "600",
-                boxShadow: "0 8px 25px rgba(0,123,255,0.3)",
-                transition: "all 0.3s ease",
-                border: "none"
-              }}
-              onMouseOver={(e) => {
-                e.target.style.transform = "scale(1.05)";
-                e.target.style.boxShadow = "0 12px 30px rgba(0,123,255,0.4)";
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = "scale(1)";
-                e.target.style.boxShadow = "0 8px 25px rgba(0,123,255,0.3)";
+                fontSize: "1.1rem"
               }}
             >
-              🏠 Explore Real Estate Solutions
-            </a>
+              ← Back to Courses
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        
-        @keyframes bounce {
-          0%, 100% { transform: translateX(-50%) translateY(0px); }
-          50% { transform: translateX(-50%) translateY(-10px); }
-        }
-      `}</style>
     </div>
   );
 };

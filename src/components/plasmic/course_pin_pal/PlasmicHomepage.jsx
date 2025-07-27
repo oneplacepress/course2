@@ -154,21 +154,6 @@ function PlasmicHomepage__RenderFunc(props) {
               className={classNames(projectcss.all, sty.navmenu, mobileMenuOpen ? sty.mobileOpen : "")}
             >
               <PlasmicLink__
-                data-plasmic-name={"link3"}
-                data-plasmic-override={overrides.link3}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.a,
-                  projectcss.__wab_text,
-                  sty.link3
-                )}
-                component={Link}
-                href={`/#pricing`}
-                platform={"gatsby"}
-              >
-                {"Pricing"}
-              </PlasmicLink__>
-              <PlasmicLink__
                 data-plasmic-name={"link2"}
                 data-plasmic-override={overrides.link2}
                 className={classNames(
@@ -182,6 +167,21 @@ function PlasmicHomepage__RenderFunc(props) {
                 platform={"gatsby"}
               >
                 {"Story"}
+              </PlasmicLink__>
+              <PlasmicLink__
+                data-plasmic-name={"link3"}
+                data-plasmic-override={overrides.link3}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  projectcss.__wab_text,
+                  sty.link3
+                )}
+                component={Link}
+                href={`/#pricing`}
+                platform={"gatsby"}
+              >
+                {"Pricing"}
               </PlasmicLink__>
               <PlasmicLink__
                 className={classNames(
@@ -208,7 +208,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 platform={"gatsby"}
                 style={{ whiteSpace: "nowrap" }}
               >
-                {"PinPal AI Audio & Video"}
+                {"Audio / Video"}
               </PlasmicLink__>
               <PlasmicLink__
                 className={classNames(

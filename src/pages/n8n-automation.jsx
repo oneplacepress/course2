@@ -1,193 +1,267 @@
 import React from "react";
 import { Link } from "gatsby";
 
-const N8nAutomationPage = () => {
+const N8NAutomationPage = () => {
   return (
     <div style={{
       minHeight: "100vh",
       background: "white",
       color: "#333",
-      fontFamily: "Arial, sans-serif",
-      padding: "20px"
+      fontFamily: "Arial, sans-serif"
     }}>
-      <header style={{ marginBottom: "40px" }}>
-        <nav style={{ 
-          background: "rgba(255,255,255,0.95)", 
-          padding: "15px 25px", 
-          borderRadius: "15px", 
-          border: "1px solid rgba(0,0,0,0.1)",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-        }}>
-          <Link 
-            to="/" 
-            style={{ 
-              color: "#007bff",
-              textDecoration: "none",
-              fontSize: "1.1rem",
-              fontWeight: "600"
-            }}
-          >
-            🏠 Back to Home
-          </Link>
-        </nav>
-      </header>
-      
-      {/* Main Content */}
+      {/* Fullscreen Video Background */}
       <div style={{
-        background: "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(15px)",
-        borderRadius: "25px",
-        padding: "50px",
-        border: "1px solid rgba(0,0,0,0.1)",
-        boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-        maxWidth: "1200px",
-        margin: "0 auto"
+        width: "100%",
+        height: "100vh",
+        position: "relative",
+        overflow: "hidden"
       }}>
-        <h1 style={{
-          fontSize: "3.5rem",
-          fontWeight: "bold",
-          background: "linear-gradient(45deg, #007bff, #28a745, #dc3545)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textAlign: "center",
-          marginBottom: "2rem"
-        }}>
-          ⚙️ N8N Automation
-        </h1>
+        <video
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 1
+          }}
+          poster=""
+          preload="metadata"
+          muted
+        >
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Engaging-with-local-drivers-for-your-Dolla-Depot.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
-        <p style={{
-          fontSize: "1.3rem",
-          textAlign: "center",
-          marginBottom: "3rem",
-          color: "#666",
-          lineHeight: "1.6",
-          maxWidth: "800px",
-          margin: "0 auto 3rem auto"
-        }}>
-          🌟 Master advanced workflow automation with N8N to create powerful, scalable integrations that transform how your applications communicate and process data.
-        </p>
-
-        {/* Placeholder for 3D Animation */}
+        {/* Overlay Content */}
         <div style={{
-          height: "400px",
-          width: "100%",
-          marginBottom: "50px",
-          borderRadius: "20px",
-          overflow: "hidden",
-          border: "1px solid rgba(0,0,0,0.1)",
-          boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-          background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-          position: "relative",
-          zIndex: 10,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          zIndex: 2,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
-          fontSize: "1.5rem"
+          flexDirection: "column",
+          color: "#fff",
+          padding: "20px"
         }}>
-          🎮 Interactive N8N Automation Visualization
+          <h1 style={{
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+            textAlign: "center",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)"
+          }}>
+            N8N Automation
+          </h1>
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            maxWidth: "600px",
+            lineHeight: "1.6",
+            marginBottom: "2rem",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
+          }}>
+            Automate workflows and integrate systems using the powerful N8N automation platform.
+          </p>
+          <div style={{
+            display: "flex",
+            gap: "1rem",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}>
+            <button
+              style={{
+                backgroundColor: "#6c757d",
+                color: "#fff",
+                border: "none",
+                padding: "12px 24px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease"
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#545b62"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#6c757d"}
+            >
+              Start Learning
+            </button>
+            <Link 
+              to="/courses"
+              style={{
+                backgroundColor: "transparent",
+                color: "#fff",
+                border: "2px solid #fff",
+                padding: "10px 22px",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "600",
+                textDecoration: "none",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#fff";
+                e.target.style.color = "#000";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#fff";
+              }}
+            >
+              Back to Courses
+            </Link>
+          </div>
         </div>
+      </div>
 
-        {/* Feature Cards */}
+      {/* Content Section */}
+      <div style={{ padding: "60px 20px" }}>
         <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "20px",
-          marginTop: "40px",
-          padding: "0 10px"
+          maxWidth: "1200px",
+          margin: "0 auto"
         }}>
-          <div style={{
-            background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",
-            padding: "30px",
-            borderRadius: "20px",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-            transition: "transform 0.3s ease"
+          <h2 style={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: "2rem",
+            color: "#333"
           }}>
-            <h2 style={{ color: "#007bff", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>⚡ Workflow Design</h2>
-            <p style={{ color: "#555", lineHeight: "1.6" }}>
-              Create sophisticated automation workflows using n8n's visual interface to orchestrate complex business processes and integrations.
-            </p>
+            ⚙️ N8N Automation
+          </h2>
+          
+          <p style={{
+            fontSize: "1.3rem",
+            textAlign: "center",
+            marginBottom: "3rem",
+            color: "#666",
+            lineHeight: "1.6",
+            maxWidth: "800px",
+            margin: "0 auto 3rem auto"
+          }}>
+            🌟 Master the N8N automation platform to create powerful workflows that connect applications, automate tasks, and streamline business processes.
+          </p>
+
+          {/* Course Content */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
+            marginTop: "3rem"
+          }}>
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#6c757d" }}>
+                🔗 Workflow Design
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Learn to design and build complex automation workflows using N8N's visual workflow editor and node-based architecture.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#007bff" }}>
+                🔌 API Integration
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Connect to hundreds of services and APIs to automate data transfer, notifications, and system interactions.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#28a745" }}>
+                📊 Data Processing
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Transform, filter, and process data between different systems using N8N's powerful data manipulation nodes.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#dc3545" }}>
+                ⏰ Scheduling & Triggers
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Set up automated triggers based on time, events, webhooks, and external conditions to run workflows automatically.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#17a2b8" }}>
+                🛠️ Custom Nodes
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Create custom nodes and functions to extend N8N's capabilities for your specific business needs and integrations.
+              </p>
+            </div>
+
+            <div style={{
+              backgroundColor: "#f8f9fa",
+              padding: "2rem",
+              borderRadius: "12px",
+              border: "1px solid #e9ecef"
+            }}>
+              <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "1rem", color: "#fd7e14" }}>
+                🚀 Deployment & Scaling
+              </h3>
+              <p style={{ color: "#666", lineHeight: "1.6" }}>
+                Deploy N8N workflows to production environments and scale automation systems for enterprise-level operations.
+              </p>
+            </div>
           </div>
 
-          <div style={{
-            background: "rgba(255,255,255,0.9)",
-            padding: "30px",
-            borderRadius: "20px",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-            transition: "transform 0.3s ease",
-            backdropFilter: "blur(10px)"
-          }}>
-            <h2 style={{ color: "#28a745", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🔗 API Integrations</h2>
-            <p style={{ color: "#555", lineHeight: "1.6" }}>
-              Master seamless integrations with 200+ services including AI platforms, databases, and communication tools for complete automation.
-            </p>
+          {/* Back to Courses Button */}
+          <div style={{ textAlign: "center", marginTop: "4rem" }}>
+            <Link 
+              to="/courses"
+              style={{
+                display: "inline-block",
+                backgroundColor: "#6c757d",
+                color: "#fff",
+                padding: "15px 30px",
+                borderRadius: "8px",
+                textDecoration: "none",
+                fontWeight: "600",
+                fontSize: "1.1rem"
+              }}
+            >
+              ← Back to Courses
+            </Link>
           </div>
-
-          <div style={{
-            background: "rgba(255,255,255,0.9)",
-            padding: "30px",
-            borderRadius: "20px",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-            transition: "transform 0.3s ease",
-            backdropFilter: "blur(10px)"
-          }}>
-            <h2 style={{ color: "#17a2b8", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>🎯 Trigger Systems</h2>
-            <p style={{ color: "#555", lineHeight: "1.6" }}>
-              Implement intelligent trigger systems that respond to QR scans, location changes, and user interactions in real-time.
-            </p>
-          </div>
-
-          <div style={{
-            background: "rgba(255,255,255,0.9)",
-            padding: "30px",
-            borderRadius: "20px",
-            border: "1px solid rgba(0,0,0,0.1)",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-            transition: "transform 0.3s ease",
-            backdropFilter: "blur(10px)"
-          }}>
-            <h2 style={{ color: "#ffc107", marginBottom: "1rem", fontSize: "1.4rem", fontWeight: "600" }}>📊 Data Processing</h2>
-            <p style={{ color: "#555", lineHeight: "1.6" }}>
-              Transform and process data flows with advanced logic, conditional branching, and custom JavaScript functions.
-            </p>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-          <a
-            href="https://pinpal.io"
-            style={{
-              display: "inline-block",
-              padding: "18px 40px",
-              background: "linear-gradient(45deg, #007bff, #28a745)",
-              color: "white",
-              textDecoration: "none",
-              borderRadius: "50px",
-              fontSize: "1.2rem",
-              fontWeight: "600",
-              boxShadow: "0 8px 25px rgba(0,123,255,0.3)",
-              transition: "all 0.3s ease",
-              border: "none"
-            }}
-            onMouseOver={(e) => {
-              e.target.style.transform = "scale(1.05)";
-              e.target.style.boxShadow = "0 12px 30px rgba(0,123,255,0.4)";
-            }}
-            onMouseOut={(e) => {
-              e.target.style.transform = "scale(1)";
-              e.target.style.boxShadow = "0 8px 25px rgba(0,123,255,0.3)";
-            }}
-          >
-            🔧 Automate with n8n
-          </a>
         </div>
       </div>
     </div>
   );
 };
 
-export default N8nAutomationPage; 
+export default N8NAutomationPage; 
