@@ -80,7 +80,7 @@ const TourismApplicationsPage = () => {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         >
-          <source src="https://workmates.live/wp-content/uploads/2025/07/Engaging-with-local-drivers-for-your-Dolla-Depot.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/The-Dolla-Dash-BBQ-Party-on-Wheels-coming-soon-in-2025.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         

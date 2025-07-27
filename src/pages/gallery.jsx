@@ -105,20 +105,40 @@ const PinPalGalleryPage = () => {
         </div>
       </header>
 
-      {/* Fullscreen Video Placeholder */}
+      {/* Fullscreen Video Background */}
       <div style={{
         width: "100%",
         height: "100vh",
-        backgroundColor: "#000",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative"
+        position: "relative",
+        overflow: "hidden"
       }}>
+        <video
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 1
+          }}
+          poster=""
+          preload="metadata"
+          muted
+        >
+          <source src="https://workmates.live/wp-content/uploads/2023/09/coffee-shop-evening-short-1080.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Overlay Content */}
         <div style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "#1a1a1a",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          zIndex: 2,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -137,6 +157,7 @@ const PinPalGalleryPage = () => {
             fontWeight: "bold",
             marginBottom: "1rem",
             textAlign: "center",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             padding: "0 16px"
           }}>
             Audio / Video Gallery
@@ -146,9 +167,10 @@ const PinPalGalleryPage = () => {
             textAlign: "center",
             maxWidth: "600px",
             lineHeight: "1.6",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
             padding: "0 16px"
           }}>
-            Video content coming soon
+            Explore our collection of AI-generated audio content and video demonstrations
           </p>
         </div>
       </div>

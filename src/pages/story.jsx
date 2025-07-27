@@ -75,7 +75,7 @@ const StoryPage = () => {
             left: 0,
             zIndex: 1
           }}
-          poster="https://workmates.live/wp-content/uploads/2025/07/The-Dolla-Dash-unlisted.mp4#t=5"
+          poster="https://workmates.live/wp-content/uploads/2025/07/chicken_story.jpg"
           preload="metadata"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
