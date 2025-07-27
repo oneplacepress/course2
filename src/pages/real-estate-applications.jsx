@@ -28,7 +28,7 @@ const RealEstateApplicationsPage = () => {
           }}
           poster=""
           preload="metadata"
-          muted
+          controls
         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/Finding-a-location-for-your-Dolla-Depot.mp4" type="video/mp4" />
           Your browser does not support the video tag.

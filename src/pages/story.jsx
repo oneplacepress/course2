@@ -28,7 +28,7 @@ const StoryPage = () => {
           }}
           poster=""
           preload="metadata"
-          muted
+          controls
         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/The-Dolla-Dash-unlisted.mp4" type="video/mp4" />
           Your browser does not support the video tag.
