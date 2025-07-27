@@ -88,7 +88,7 @@ const LocationBasedServicesPage = () => {
               e.target.style.transform = "scale(1)";
             }}
           >
-            {isPlaying ? "⏸️" : "▶️"}
+            {isPlaying ? "⏸" : "▶"}
           </button>
 
           <h1 style={{

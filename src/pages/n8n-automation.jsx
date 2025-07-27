@@ -41,7 +41,7 @@ const N8NAutomationPage = () => {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         >
-          <source src="https://workmates.live/wp-content/uploads/2025/07/Engaging-with-local-drivers-for-your-Dolla-Depot.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Choosing-a-suite-of-services-for-your-Dolla-Depot.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
@@ -88,7 +88,7 @@ const N8NAutomationPage = () => {
               e.target.style.transform = "scale(1)";
             }}
           >
-            {isPlaying ? "⏸️" : "▶️"}
+            {isPlaying ? "⏸" : "▶"}
           </button>
 
           <h1 style={{
