@@ -1,237 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float, Text } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        📍 Loading Location Services Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
-
-const FloatingGlobe = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.4;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.8) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={1}>
-      <mesh ref={meshRef} position={[-2, 0, 0]}>
-        <sphereGeometry args={[1.2, 16, 16]} />
-        <meshStandardMaterial color="#333" wireframe />
-      </mesh>
-    </Float>
-  );
-};
-
-const FloatingPins = () => {
-  const groupRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = clock.getElapsedTime() * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1.2}>
-      <group ref={groupRef} position={[2, 0, 0]}>
-        {[...Array(6)].map((_, i) => {
-          const angle = (i * Math.PI * 2) / 6;
-          const radius = 2;
-          return (
-            <group key={i}>
-              {/* Pin Body */}
-              <mesh position={[Math.cos(angle) * radius, Math.sin(clock.getElapsedTime() + i) * 0.2, Math.sin(angle) * radius]}>
-                <cylinderGeometry args={[0.05, 0.05, 0.8]} />
-                <meshStandardMaterial color="#444" />
-              </mesh>
-              {/* Pin Head */}
-              <mesh position={[Math.cos(angle) * radius, 0.5 + Math.sin(clock.getElapsedTime() + i) * 0.2, Math.sin(angle) * radius]}>
-                <sphereGeometry args={[0.15]} />
-                <meshStandardMaterial color="#000" />
-              </mesh>
-            </group>
-          );
-        })}
-      </group>
-    </Float>
-  );
-};
-
-// Location Services Scene with enhanced map background
-const LocationServicesScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.8} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} />
-      <directionalLight position={[0, 10, 0]} intensity={0.8} />
-      
-      {/* Enhanced City Map Background */}
-      <group position={[0, -2, -3]}>
-        {/* Base city map */}
-        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 12]} />
-          <meshStandardMaterial color="#2a4a2a" />
-        </mesh>
-        
-        {/* Street network */}
-        {/* Main roads */}
-        <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 0.4]} />
-          <meshStandardMaterial color="#555" />
-        </mesh>
-        <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-          <planeGeometry args={[12, 0.4]} />
-          <meshStandardMaterial color="#555" />
-        </mesh>
-        
-        {/* Secondary roads */}
-        {[-3, 3].map(offset => (
-          <mesh key={offset} position={[offset, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[15, 0.2]} />
-            <meshStandardMaterial color="#666" />
-          </mesh>
-        ))}
-        {[-2, 2].map(offset => (
-          <mesh key={offset} position={[0, -0.95, offset]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-            <planeGeometry args={[12, 0.2]} />
-            <meshStandardMaterial color="#666" />
-          </mesh>
-        ))}
-        
-        {/* City blocks */}
-        {[...Array(16)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          const size = 0.5 + Math.random() * 0.8;
-          return (
-            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <boxGeometry args={[size, size, 0.1]} />
-              <meshStandardMaterial color="#3a5a3a" />
-            </mesh>
-          );
-        })}
-        
-        {/* GPS tracking zones */}
-        {[...Array(8)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.85, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.6]} />
-              <meshStandardMaterial color="#4a7a4a" emissive="#007bff" emissiveIntensity={0.3} transparent opacity={0.7} />
-            </mesh>
-          );
-        })}
-        
-        {/* Location markers */}
-        {[...Array(10)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.7, z]}>
-              <coneGeometry args={[0.1, 0.4]} />
-              <meshStandardMaterial color="#ff6600" emissive="#ff6600" emissiveIntensity={0.5} />
-            </mesh>
-          );
-        })}
-      </group>
-      
-      {/* GPS Satellites */}
-      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1}>
-        <group position={[0, 0, 0]}>
-          {/* Central GPS receiver */}
-          <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[0.8, 0.8, 0.3, 16]} />
-            <meshStandardMaterial color="#222" emissive="#007bff" emissiveIntensity={0.4} />
-          </mesh>
-          
-          {/* Signal waves */}
-          {[...Array(4)].map((_, i) => (
-            <mesh key={i} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[1.5 + i * 0.5, 0.05, 8, 32]} />
-              <meshStandardMaterial color="#333" emissive="#00ff88" emissiveIntensity={0.3} transparent opacity={0.6} />
-            </mesh>
-          ))}
-        </group>
-      </Float>
-      
-      {/* Floating location pins */}
-      {[...Array(6)].map((_, i) => {
-        const angle = (i * Math.PI * 2) / 6;
-        const radius = 3;
-        return (
-          <Float key={i} speed={1.2 + i * 0.1} rotationIntensity={0.4} floatIntensity={0.8}>
-            <group position={[Math.cos(angle) * radius, Math.sin(angle * 1.2) * 1, Math.sin(angle) * radius]}>
-              {/* Pin base */}
-              <mesh position={[0, 0, 0]}>
-                <sphereGeometry args={[0.3]} />
-                <meshStandardMaterial color="#444" emissive="#ff6600" emissiveIntensity={0.5} />
-              </mesh>
-              {/* Pin top */}
-              <mesh position={[0, 0.4, 0]}>
-                <coneGeometry args={[0.2, 0.4]} />
-                <meshStandardMaterial color="#333" emissive="#ff6600" emissiveIntensity={0.6} />
-              </mesh>
-            </group>
-          </Float>
-        );
-      })}
-      
-      {/* Data connections between pins */}
-      {[...Array(5)].map((_, i) => (
-        <Float key={i} speed={2} rotationIntensity={0.1} floatIntensity={0.5}>
-          <mesh position={[Math.sin(i * 2) * 2, Math.cos(i * 1.5) * 0.8, Math.cos(i * 2) * 2]} rotation={[0, i * 0.8, 0]}>
-            <cylinderGeometry args={[0.02, 0.02, 3]} />
-            <meshStandardMaterial color="#555" emissive="#00ccff" emissiveIntensity={0.4} transparent opacity={0.8} />
-          </mesh>
-        </Float>
-      ))}
-      
-      {/* Floating title */}
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Text
-          position={[0, 3.5, 0]}
-          fontSize={0.7}
-          color="#fff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Location Intelligence
-        </Text>
-      </Float>
-    </>
-  );
-};
 
 const LocationBasedServicesPage = () => {
   return (
@@ -243,39 +11,48 @@ const LocationBasedServicesPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background - Behind Content */}
+      {/* Animated Background */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: -1
+        zIndex: -1,
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        opacity: 0.1
       }}>
-        <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={0.8} />
-            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
-            <FloatingGlobe />
-            <FloatingPins />
-            {/* Dark particles for visibility */}
-            <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
-              <group>
-                {[...Array(30)].map((_, i) => (
-                  <mesh key={i} position={[
-                    (Math.random() - 0.5) * 15,
-                    (Math.random() - 0.5) * 15,
-                    (Math.random() - 0.5) * 15
-                  ]}>
-                    <sphereGeometry args={[0.03]} />
-                    <meshStandardMaterial color="#333" opacity={0.7} transparent />
-                  </mesh>
-                ))}
-              </group>
-            </Float>
-          </Canvas>
-        </ClientOnly>
+        {/* Animated circles */}
+        <div style={{
+          position: "absolute",
+          top: "20%",
+          left: "10%",
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          background: "rgba(0, 123, 255, 0.1)",
+          animation: "float 6s ease-in-out infinite"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          top: "60%",
+          right: "15%",
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          background: "rgba(40, 167, 69, 0.1)",
+          animation: "float 8s ease-in-out infinite reverse"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "20%",
+          width: "80px",
+          height: "80px",
+          borderRadius: "50%",
+          background: "rgba(220, 53, 69, 0.1)",
+          animation: "float 7s ease-in-out infinite"
+        }}></div>
       </div>
 
       {/* Content Overlay */}
@@ -353,14 +130,265 @@ const LocationBasedServicesPage = () => {
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
             background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
-            position: "relative",
-            zIndex: 10
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative"
           }}>
-            <ClientOnly>
-              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                <LocationServicesScene />
-              </Canvas>
-            </ClientOnly>
+            {/* City Map */}
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "350px",
+              height: "250px",
+              background: "#2a4a2a",
+              borderRadius: "10px",
+              border: "2px solid #555"
+            }}>
+              {/* Main roads */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "6px",
+                background: "#555",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "50%",
+                width: "6px",
+                height: "100%",
+                background: "#555",
+                transform: "translateX(-50%)"
+              }}></div>
+              
+              {/* Secondary roads */}
+              <div style={{
+                position: "absolute",
+                top: "25%",
+                left: "0",
+                width: "100%",
+                height: "3px",
+                background: "#666",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "75%",
+                left: "0",
+                width: "100%",
+                height: "3px",
+                background: "#666",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "25%",
+                width: "3px",
+                height: "100%",
+                background: "#666",
+                transform: "translateX(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "75%",
+                width: "3px",
+                height: "100%",
+                background: "#666",
+                transform: "translateX(-50%)"
+              }}></div>
+              
+              {/* City blocks */}
+              <div style={{
+                position: "absolute",
+                top: "15px",
+                left: "15px",
+                width: "60px",
+                height: "80px",
+                background: "#3a5a3a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "15px",
+                right: "15px",
+                width: "70px",
+                height: "70px",
+                background: "#3a5a3a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "15px",
+                left: "15px",
+                width: "50px",
+                height: "90px",
+                background: "#3a5a3a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "15px",
+                right: "15px",
+                width: "80px",
+                height: "60px",
+                background: "#3a5a3a",
+                borderRadius: "5px"
+              }}></div>
+              
+              {/* GPS tracking zones */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "80px",
+                height: "80px",
+                border: "3px solid #007bff",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+              
+              {/* Location markers */}
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderBottom: "20px solid #ff6600",
+                animation: "pulse 2s ease-in-out infinite 0.5s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderBottom: "20px solid #ff6600",
+                animation: "pulse 2s ease-in-out infinite 1s"
+              }}></div>
+            </div>
+            
+            {/* Floating Globe */}
+            <div style={{
+              position: "absolute",
+              top: "30%",
+              left: "20%",
+              width: "80px",
+              height: "80px",
+              border: "3px solid #333",
+              borderRadius: "50%",
+              animation: "rotate 8s linear infinite"
+            }}>
+              {/* Globe grid lines */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                background: "#333",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "50%",
+                width: "2px",
+                height: "100%",
+                background: "#333",
+                transform: "translateX(-50%)"
+              }}></div>
+            </div>
+            
+            {/* Floating Pins */}
+            <div style={{
+              position: "absolute",
+              top: "40%",
+              right: "25%",
+              animation: "float 4s ease-in-out infinite"
+            }}>
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    top: `${i * 20}px`,
+                    left: `${i * 10}px`,
+                    width: "20px",
+                    height: "20px",
+                    background: "#ff6600",
+                    borderRadius: "50%",
+                    animation: `pulse ${1 + i * 0.2}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* GPS Signal Waves */}
+            <div style={{
+              position: "absolute",
+              bottom: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              animation: "expand 3s ease-in-out infinite"
+            }}>
+              <div style={{
+                width: "60px",
+                height: "60px",
+                border: "2px solid #00ff88",
+                borderRadius: "50%",
+                animation: "expand 3s ease-in-out infinite"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "-10px",
+                left: "-10px",
+                width: "80px",
+                height: "80px",
+                border: "2px solid #00ff88",
+                borderRadius: "50%",
+                animation: "expand 3s ease-in-out infinite 0.5s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "-20px",
+                left: "-20px",
+                width: "100px",
+                height: "100px",
+                border: "2px solid #00ff88",
+                borderRadius: "50%",
+                animation: "expand 3s ease-in-out infinite 1s"
+              }}></div>
+            </div>
+            
+            {/* Floating Text */}
+            <div style={{
+              position: "absolute",
+              top: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "#007bff",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              Location Intelligence
+            </div>
           </div>
 
           {/* Feature Cards */}
@@ -459,6 +487,29 @@ const LocationBasedServicesPage = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        
+        @keyframes expand {
+          0% { transform: scale(0.8); opacity: 1; }
+          100% { transform: scale(1.5); opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,243 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        🔧 Loading Embedded Systems Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
-
-const FloatingChip = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = clock.getElapsedTime() * 0.4;
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.6;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.5) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1}>
-      <group ref={meshRef} position={[-2, 0, 0]}>
-        {/* Main Chip Body */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[1.2, 0.2, 1.2]} />
-          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
-        </mesh>
-        {/* Chip Pins */}
-        {[...Array(8)].map((_, i) => (
-          <mesh key={i} position={[0.7 * Math.cos(i * Math.PI / 4), 0.15, 0.7 * Math.sin(i * Math.PI / 4)]}>
-            <cylinderGeometry args={[0.05, 0.05, 0.3]} />
-            <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
-          </mesh>
-        ))}
-      </group>
-    </Float>
-  );
-};
-
-const FloatingCircuit = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.z = clock.getElapsedTime() * 0.3;
-      const scale = 1 + Math.sin(clock.getElapsedTime() * 2) * 0.2;
-      meshRef.current.scale.setScalar(scale);
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1.2}>
-      <mesh ref={meshRef} position={[2, 1, -1]}>
-        <torusGeometry args={[1, 0.3, 8, 16]} />
-        <meshStandardMaterial color="#17a2b8" wireframe />
-      </mesh>
-    </Float>
-  );
-};
-
-const EmbeddedSystemsScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={1} />
-      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-      <directionalLight position={[0, 10, 0]} intensity={0.5} />
-      
-      {/* Circuit Board Map Background */}
-      <group position={[0, -2, -3]}>
-        {/* Base circuit board */}
-        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 12]} />
-          <meshStandardMaterial color="#0a1a0a" />
-        </mesh>
-        
-        {/* Circuit traces/pathways */}
-        {/* Main circuit lines */}
-        {[...Array(12)].map((_, i) => (
-          <mesh key={i} position={[-6 + i * 1, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[0.05, 12]} />
-            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.4} />
-          </mesh>
-        ))}
-        {[...Array(10)].map((_, i) => (
-          <mesh key={i} position={[0, -0.95, -5 + i * 1]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[15, 0.05]} />
-            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.4} />
-          </mesh>
-        ))}
-        
-        {/* Component zones */}
-        {[...Array(16)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          const size = 0.3 + Math.random() * 0.5;
-          return (
-            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <boxGeometry args={[size, size, 0.1]} />
-              <meshStandardMaterial color="#1a3a1a" />
-            </mesh>
-          );
-        })}
-        
-        {/* Microchip placement zones */}
-        {[...Array(8)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.85, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.6]} />
-              <meshStandardMaterial color="#2a4a2a" emissive="#0066cc" emissiveIntensity={0.2} transparent opacity={0.7} />
-            </mesh>
-          );
-        })}
-        
-        {/* Connection points/pads */}
-        {[...Array(24)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.8, z]}>
-              <cylinderGeometry args={[0.08, 0.08, 0.2]} />
-              <meshStandardMaterial color="#666" emissive="#ffaa00" emissiveIntensity={0.3} />
-            </mesh>
-          );
-        })}
-        
-        {/* Power rails */}
-        <mesh position={[6, -0.9, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[0.2, 12]} />
-          <meshStandardMaterial color="#ff3333" emissive="#ff3333" emissiveIntensity={0.3} />
-        </mesh>
-        <mesh position={[-6, -0.9, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[0.2, 12]} />
-          <meshStandardMaterial color="#3333ff" emissive="#3333ff" emissiveIntensity={0.3} />
-        </mesh>
-      </group>
-      
-      {/* Microchip Elements */}
-      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1}>
-        <group position={[-2, 0, 0]}>
-          {/* Main Chip Body */}
-          <mesh position={[0, 0, 0]}>
-            <boxGeometry args={[1.2, 0.2, 1.2]} />
-            <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
-          </mesh>
-          {/* Chip Pins */}
-          {[...Array(8)].map((_, i) => (
-            <mesh key={i} position={[0.7 * Math.cos(i * Math.PI / 4), 0.15, 0.7 * Math.sin(i * Math.PI / 4)]}>
-              <cylinderGeometry args={[0.05, 0.05, 0.3]} />
-              <meshStandardMaterial color="#444" emissive="#28a745" emissiveIntensity={0.2} />
-            </mesh>
-          ))}
-        </group>
-      </Float>
-      
-      {/* Circuit Board */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1.2}>
-        <mesh position={[2, 1, -1]}>
-          <torusGeometry args={[1, 0.3, 8, 16]} />
-          <meshStandardMaterial color="#444" wireframe />
-        </mesh>
-      </Float>
-      
-      {/* Embedded sensors */}
-      {[...Array(6)].map((_, i) => {
-        const angle = (i * Math.PI * 2) / 6;
-        const radius = 3;
-        return (
-          <Float key={i} speed={1.8 + i * 0.1} rotationIntensity={0.4} floatIntensity={0.8}>
-            <group position={[Math.cos(angle) * radius, Math.sin(angle) * 1.2, Math.sin(angle) * radius]}>
-              {/* Sensor body */}
-              <mesh position={[0, 0, 0]}>
-                <cylinderGeometry args={[0.2, 0.2, 0.4]} />
-                <meshStandardMaterial color="#333" emissive="#ff6600" emissiveIntensity={0.4} />
-              </mesh>
-              {/* Sensor pins */}
-              {[...Array(4)].map((_, j) => (
-                <mesh key={j} position={[0.15 * Math.cos(j * Math.PI / 2), -0.3, 0.15 * Math.sin(j * Math.PI / 2)]}>
-                  <cylinderGeometry args={[0.02, 0.02, 0.2]} />
-                  <meshStandardMaterial color="#555" emissive="#ffaa00" emissiveIntensity={0.3} />
-                </mesh>
-              ))}
-            </group>
-          </Float>
-        );
-      })}
-      
-      {/* Data flow connections */}
-      {[...Array(8)].map((_, i) => (
-        <Float key={i} speed={1.5} rotationIntensity={0.1} floatIntensity={0.5}>
-          <mesh position={[Math.sin(i * 1.8) * 2.5, Math.cos(i * 1.3) * 0.8, Math.cos(i * 1.8) * 2.5]} rotation={[0, i * 0.6, 0]}>
-            <cylinderGeometry args={[0.02, 0.02, 2]} />
-            <meshStandardMaterial color="#555" emissive="#00ff88" emissiveIntensity={0.4} transparent opacity={0.8} />
-          </mesh>
-        </Float>
-      ))}
-      
-      {/* Floating Text */}
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Text
-          position={[0, 3, 0]}
-          fontSize={0.7}
-          color="#fff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Embedded Hardware Systems
-        </Text>
-      </Float>
-    </>
-  );
-};
 
 const EmbeddedSystemsPage = () => {
   return (
@@ -249,25 +11,48 @@ const EmbeddedSystemsPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background - Behind Content */}
+      {/* Animated Background */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: -1
+        zIndex: -1,
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        opacity: 0.1
       }}>
-        <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-            <ambientLight intensity={0.8} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
-            <FloatingChip />
-            <FloatingCircuit />
-          </Canvas>
-        </ClientOnly>
+        {/* Animated circles */}
+        <div style={{
+          position: "absolute",
+          top: "20%",
+          left: "10%",
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          background: "rgba(0, 123, 255, 0.1)",
+          animation: "float 6s ease-in-out infinite"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          top: "60%",
+          right: "15%",
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          background: "rgba(40, 167, 69, 0.1)",
+          animation: "float 8s ease-in-out infinite reverse"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "20%",
+          width: "80px",
+          height: "80px",
+          borderRadius: "50%",
+          background: "rgba(23, 162, 184, 0.1)",
+          animation: "float 7s ease-in-out infinite"
+        }}></div>
       </div>
 
       {/* Content Overlay */}
@@ -345,14 +130,251 @@ const EmbeddedSystemsPage = () => {
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
             background: "linear-gradient(135deg, rgba(33,37,41,0.8), rgba(52,58,64,0.9))",
-            position: "relative",
-            zIndex: 10
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative"
           }}>
-            <ClientOnly>
-              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                <EmbeddedSystemsScene />
-              </Canvas>
-            </ClientOnly>
+            {/* Circuit Board */}
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "350px",
+              height: "250px",
+              background: "#0a1a0a",
+              borderRadius: "10px",
+              border: "2px solid #00ff88"
+            }}>
+              {/* Circuit traces */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                background: "#00ff88",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "50%",
+                width: "2px",
+                height: "100%",
+                background: "#00ff88",
+                transform: "translateX(-50%)"
+              }}></div>
+              
+              {/* Additional circuit lines */}
+              <div style={{
+                position: "absolute",
+                top: "25%",
+                left: "0",
+                width: "100%",
+                height: "1px",
+                background: "#00ff88",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "75%",
+                left: "0",
+                width: "100%",
+                height: "1px",
+                background: "#00ff88",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "25%",
+                width: "1px",
+                height: "100%",
+                background: "#00ff88",
+                transform: "translateX(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "75%",
+                width: "1px",
+                height: "100%",
+                background: "#00ff88",
+                transform: "translateX(-50%)"
+              }}></div>
+              
+              {/* Component zones */}
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                width: "40px",
+                height: "40px",
+                background: "#1a3a1a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                width: "35px",
+                height: "35px",
+                background: "#1a3a1a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "20px",
+                width: "45px",
+                height: "30px",
+                background: "#1a3a1a",
+                borderRadius: "5px"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "20px",
+                right: "20px",
+                width: "50px",
+                height: "25px",
+                background: "#1a3a1a",
+                borderRadius: "5px"
+              }}></div>
+              
+              {/* Power rails */}
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "4px",
+                background: "#ff3333"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                width: "100%",
+                height: "4px",
+                background: "#3333ff"
+              }}></div>
+              
+              {/* Connection points */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "12px",
+                height: "12px",
+                background: "#ffaa00",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+            </div>
+            
+            {/* Floating Microchip */}
+            <div style={{
+              position: "absolute",
+              top: "30%",
+              left: "20%",
+              animation: "float 4s ease-in-out infinite"
+            }}>
+              <div style={{
+                width: "60px",
+                height: "10px",
+                background: "#007bff",
+                borderRadius: "5px",
+                position: "relative"
+              }}>
+                {/* Chip pins */}
+                {[...Array(8)].map((_, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      position: "absolute",
+                      top: "15px",
+                      left: `${(i * 8) + 2}px`,
+                      width: "4px",
+                      height: "15px",
+                      background: "#28a745",
+                      borderRadius: "2px"
+                    }}
+                  ></div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Floating Circuit */}
+            <div style={{
+              position: "absolute",
+              top: "40%",
+              right: "25%",
+              width: "80px",
+              height: "80px",
+              border: "3px solid #17a2b8",
+              borderRadius: "50%",
+              animation: "rotate 8s linear infinite"
+            }}>
+              {/* Circuit pattern */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                background: "#17a2b8",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "50%",
+                width: "2px",
+                height: "100%",
+                background: "#17a2b8",
+                transform: "translateX(-50%)"
+              }}></div>
+            </div>
+            
+            {/* Embedded Sensors */}
+            <div style={{
+              position: "absolute",
+              bottom: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: "20px"
+            }}>
+              {[...Array(3)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "20px",
+                    height: "30px",
+                    background: "#ff6600",
+                    borderRadius: "10px",
+                    animation: `pulse ${1.5 + i * 0.2}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Floating Text */}
+            <div style={{
+              position: "absolute",
+              top: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              Embedded Hardware Systems
+            </div>
           </div>
 
           {/* Feature Cards */}
@@ -454,6 +476,24 @@ const EmbeddedSystemsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 };

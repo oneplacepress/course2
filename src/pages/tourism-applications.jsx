@@ -1,262 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        🗺️ Loading Tourism Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
-
-const FloatingPlane = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      const time = clock.getElapsedTime();
-      meshRef.current.position.x = Math.sin(time * 0.5) * 3;
-      meshRef.current.position.y = Math.cos(time * 0.3) * 1;
-      meshRef.current.rotation.z = Math.sin(time * 0.7) * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={1.8} rotationIntensity={0.8} floatIntensity={1.2}>
-      <group ref={meshRef} position={[0, 0, 0]}>
-        {/* Plane Body */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.1, 0.1, 2]} />
-          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.6} />
-        </mesh>
-        {/* Wings */}
-        <mesh position={[0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <boxGeometry args={[3, 0.1, 0.5]} />
-          <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.5} />
-        </mesh>
-      </group>
-    </Float>
-  );
-};
-
-const FloatingCompass = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.6;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.2) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={2.2} rotationIntensity={0.6} floatIntensity={1.5}>
-      <group ref={meshRef} position={[2, 1, -2]}>
-        {/* Compass Body */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.8, 0.8, 0.2]} />
-          <meshStandardMaterial color="#6c757d" emissive="#6c757d" emissiveIntensity={0.4} />
-        </mesh>
-        {/* Compass Needle */}
-        <mesh position={[0, 0.15, 0]}>
-          <coneGeometry args={[0.1, 0.6, 4]} />
-          <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.6} />
-        </mesh>
-      </group>
-    </Float>
-  );
-};
-
-const TourismScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={1} />
-      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-      <directionalLight position={[0, 10, 0]} intensity={0.5} />
-      
-      {/* Tourism Destination Map Background */}
-      <group position={[0, -2, -3]}>
-        {/* Base destination map */}
-        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 12]} />
-          <meshStandardMaterial color="#2a4a3a" />
-        </mesh>
-        
-        {/* Tourist pathways */}
-        {/* Main tourist route */}
-        <mesh position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 0.3]} />
-          <meshStandardMaterial color="#8b4513" />
-        </mesh>
-        {/* Walking trails */}
-        {[-3, 0, 3].map(offset => (
-          <mesh key={offset} position={[offset, -0.95, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-            <planeGeometry args={[12, 0.2]} />
-            <meshStandardMaterial color="#a0522d" />
-          </mesh>
-        ))}
-        
-        {/* Tourist attractions */}
-        {[...Array(12)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          const size = 0.5 + Math.random() * 0.8;
-          return (
-            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[size]} />
-              <meshStandardMaterial color="#4a7a4a" />
-            </mesh>
-          );
-        })}
-        
-        {/* Points of interest zones */}
-        {[...Array(8)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.85, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.8]} />
-              <meshStandardMaterial color="#5a8a5a" emissive="#ff6600" emissiveIntensity={0.2} transparent opacity={0.7} />
-            </mesh>
-          );
-        })}
-        
-        {/* Tourism landmarks */}
-        {[...Array(10)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.7, z]}>
-              <coneGeometry args={[0.15, 0.5]} />
-              <meshStandardMaterial color="#ff6600" emissive="#ff6600" emissiveIntensity={0.5} />
-            </mesh>
-          );
-        })}
-        
-        {/* Natural features */}
-        {[...Array(16)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.88, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.2 + Math.random() * 0.3]} />
-              <meshStandardMaterial color="#0a5a0a" />
-            </mesh>
-          );
-        })}
-        
-        {/* Tourist information points */}
-        {[...Array(6)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.8, z]}>
-              <cylinderGeometry args={[0.1, 0.1, 0.4]} />
-              <meshStandardMaterial color="#444" emissive="#007bff" emissiveIntensity={0.4} />
-            </mesh>
-          );
-        })}
-      </group>
-      
-      {/* Airplane */}
-      <Float speed={1.8} rotationIntensity={0.8} floatIntensity={1.2}>
-        <group position={[0, 0, 0]}>
-          {/* Plane Body */}
-          <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[0.1, 0.1, 2]} />
-            <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.6} />
-          </mesh>
-          {/* Wings */}
-          <mesh position={[0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-            <boxGeometry args={[3, 0.1, 0.5]} />
-            <meshStandardMaterial color="#444" emissive="#28a745" emissiveIntensity={0.5} />
-          </mesh>
-        </group>
-      </Float>
-      
-      {/* Compass */}
-      <Float speed={1.5} rotationIntensity={0.6} floatIntensity={0.8}>
-        <mesh position={[2, -1, 0]}>
-          <torusGeometry args={[0.8, 0.2, 8, 16]} />
-          <meshStandardMaterial color="#444" />
-          <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[0.05, 0.05, 0.5]} />
-            <meshStandardMaterial color="#666" />
-          </mesh>
-        </mesh>
-      </Float>
-      
-      {/* Travel guidebooks */}
-      {[...Array(4)].map((_, i) => {
-        const angle = (i * Math.PI * 2) / 4;
-        const radius = 3;
-        return (
-          <Float key={i} speed={1.3 + i * 0.1} rotationIntensity={0.4} floatIntensity={0.8}>
-            <group position={[Math.cos(angle) * radius, Math.sin(angle) * 1, Math.sin(angle) * radius]}>
-              {/* Guidebook */}
-              <mesh position={[0, 0, 0]}>
-                <boxGeometry args={[0.3, 0.5, 0.05]} />
-                <meshStandardMaterial color="#444" emissive="#ff6600" emissiveIntensity={0.3} />
-              </mesh>
-              {/* Pages */}
-              <mesh position={[0, 0, 0.03]}>
-                <boxGeometry args={[0.28, 0.48, 0.02]} />
-                <meshStandardMaterial color="#fff" />
-              </mesh>
-            </group>
-          </Float>
-        );
-      })}
-      
-      {/* Tourist flow connections */}
-      {[...Array(6)].map((_, i) => (
-        <Float key={i} speed={1.8} rotationIntensity={0.1} floatIntensity={0.5}>
-          <mesh position={[Math.sin(i * 2.2) * 2.5, Math.cos(i * 1.7) * 0.8, Math.cos(i * 2.2) * 2.5]} rotation={[0, i * 0.9, 0]}>
-            <cylinderGeometry args={[0.02, 0.02, 2.8]} />
-            <meshStandardMaterial color="#555" emissive="#007bff" emissiveIntensity={0.4} transparent opacity={0.8} />
-          </mesh>
-        </Float>
-      ))}
-      
-      {/* Floating Text */}
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Text
-          position={[0, 3, 0]}
-          fontSize={0.7}
-          color="#fff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          Smart Tourism Experiences
-        </Text>
-      </Float>
-    </>
-  );
-};
 
 const TourismApplicationsPage = () => {
   return (
@@ -268,25 +11,48 @@ const TourismApplicationsPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background - Behind Content */}
+      {/* Animated Background */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: -1
+        zIndex: -1,
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        opacity: 0.1
       }}>
-        <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-            <ambientLight intensity={0.8} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
-            <FloatingPlane />
-            <FloatingCompass />
-          </Canvas>
-        </ClientOnly>
+        {/* Animated circles */}
+        <div style={{
+          position: "absolute",
+          top: "20%",
+          left: "10%",
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          background: "rgba(0, 123, 255, 0.1)",
+          animation: "float 6s ease-in-out infinite"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          top: "60%",
+          right: "15%",
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          background: "rgba(40, 167, 69, 0.1)",
+          animation: "float 8s ease-in-out infinite reverse"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "20%",
+          width: "80px",
+          height: "80px",
+          borderRadius: "50%",
+          background: "rgba(220, 53, 69, 0.1)",
+          animation: "float 7s ease-in-out infinite"
+        }}></div>
       </div>
 
       {/* Content Overlay */}
@@ -364,14 +130,256 @@ const TourismApplicationsPage = () => {
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
             background: "linear-gradient(135deg, rgba(40,167,69,0.8), rgba(25,135,84,0.9))",
-            position: "relative",
-            zIndex: 10
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative"
           }}>
-            <ClientOnly>
-              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                <TourismScene />
-              </Canvas>
-            </ClientOnly>
+            {/* Tourism Destination Map */}
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "350px",
+              height: "250px",
+              background: "#2a4a3a",
+              borderRadius: "10px",
+              border: "2px solid #8b4513"
+            }}>
+              {/* Tourist pathways */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "6px",
+                background: "#8b4513",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "50%",
+                width: "6px",
+                height: "100%",
+                background: "#a0522d",
+                transform: "translateX(-50%)"
+              }}></div>
+              
+              {/* Additional trails */}
+              <div style={{
+                position: "absolute",
+                top: "25%",
+                left: "0",
+                width: "100%",
+                height: "3px",
+                background: "#a0522d",
+                transform: "translateY(-50%)"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "75%",
+                left: "0",
+                width: "100%",
+                height: "3px",
+                background: "#a0522d",
+                transform: "translateY(-50%)"
+              }}></div>
+              
+              {/* Tourist attractions */}
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                width: "40px",
+                height: "40px",
+                background: "#4a7a4a",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+                width: "35px",
+                height: "35px",
+                background: "#4a7a4a",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite 0.5s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "20px",
+                width: "45px",
+                height: "45px",
+                background: "#4a7a4a",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite 1s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "20px",
+                right: "20px",
+                width: "50px",
+                height: "50px",
+                background: "#4a7a4a",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite 1.5s"
+              }}></div>
+              
+              {/* Points of interest */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "60px",
+                height: "60px",
+                border: "3px solid #ff6600",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+              
+              {/* Tourism landmarks */}
+              <div style={{
+                position: "absolute",
+                top: "30px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderBottom: "20px solid #ff6600",
+                animation: "pulse 2s ease-in-out infinite 0.3s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "30px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderBottom: "20px solid #ff6600",
+                animation: "pulse 2s ease-in-out infinite 0.7s"
+              }}></div>
+            </div>
+            
+            {/* Floating Airplane */}
+            <div style={{
+              position: "absolute",
+              top: "30%",
+              left: "20%",
+              animation: "float 4s ease-in-out infinite"
+            }}>
+              <div style={{
+                width: "80px",
+                height: "20px",
+                background: "#007bff",
+                borderRadius: "10px",
+                position: "relative"
+              }}>
+                {/* Wings */}
+                <div style={{
+                  position: "absolute",
+                  top: "-10px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "60px",
+                  height: "40px",
+                  background: "#28a745",
+                  borderRadius: "20px"
+                }}></div>
+              </div>
+            </div>
+            
+            {/* Floating Compass */}
+            <div style={{
+              position: "absolute",
+              top: "40%",
+              right: "25%",
+              width: "60px",
+              height: "60px",
+              border: "3px solid #6c757d",
+              borderRadius: "50%",
+              animation: "rotate 8s linear infinite"
+            }}>
+              {/* Compass needle */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "4px solid transparent",
+                borderRight: "4px solid transparent",
+                borderBottom: "30px solid #dc3545"
+              }}></div>
+            </div>
+            
+            {/* Travel Guidebooks */}
+            <div style={{
+              position: "absolute",
+              bottom: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: "15px"
+            }}>
+              {[...Array(3)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "25px",
+                    height: "35px",
+                    background: "#ff6600",
+                    borderRadius: "3px",
+                    animation: `float ${2 + i * 0.5}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Natural features */}
+            <div style={{
+              position: "absolute",
+              top: "15%",
+              left: "15%",
+              display: "flex",
+              gap: "8px"
+            }}>
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    background: "#0a5a0a",
+                    borderRadius: "50%",
+                    animation: `pulse ${1.5 + i * 0.2}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Floating Text */}
+            <div style={{
+              position: "absolute",
+              top: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              Smart Tourism Experiences
+            </div>
           </div>
 
           {/* Feature Cards */}
@@ -474,6 +482,24 @@ const TourismApplicationsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 };

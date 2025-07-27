@@ -1,171 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Text } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        🖼️ Loading Gallery Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
 
 const getFileName = (url) => {
   const fileName = url.split('/').pop();
   return fileName.replace(/\.[^/.]+$/, "").replace(/_/g, " ").replace(/pinpal audio |pinpal /g, "");
-};
-
-// Three.js Animation Components for Gallery
-const FloatingAudioWave = ({ position, color, delay = 0 }) => {
-  const groupRef = useRef();
-  
-  useFrame(({ clock }) => {
-    if (groupRef.current) {
-      const time = clock.getElapsedTime() + delay;
-      groupRef.current.position.y = Math.sin(time * 2) * 0.5;
-      groupRef.current.rotation.z = Math.sin(time * 0.5) * 0.1;
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-      <group ref={groupRef} position={position}>
-        {/* Audio wave bars */}
-        {[...Array(7)].map((_, i) => (
-          <mesh key={i} position={[(i - 3) * 0.3, Math.sin(i) * 0.2, 0]}>
-            <boxGeometry args={[0.15, 1 + Math.sin(i) * 0.5, 0.15]} />
-            <meshStandardMaterial color={color} />
-          </mesh>
-        ))}
-      </group>
-    </Float>
-  );
-};
-
-const RotatingVideoFrame = ({ position, color }) => {
-  const meshRef = useRef();
-  
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.8;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.5) * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} position={position}>
-        <boxGeometry args={[1.8, 1.2, 0.1]} />
-        <meshStandardMaterial color={color} />
-        {/* Screen inside */}
-        <mesh position={[0, 0, 0.06]}>
-          <boxGeometry args={[1.4, 0.8, 0.05]} />
-          <meshStandardMaterial color="#000" emissive="#333" emissiveIntensity={0.8} />
-        </mesh>
-        {/* Play button */}
-        <mesh position={[0, 0, 0.12]}>
-          <coneGeometry args={[0.15, 0.3, 3]} />
-          <meshStandardMaterial color="#fff" />
-        </mesh>
-      </mesh>
-    </Float>
-  );
-};
-
-const PulsingMicrophone = ({ position }) => {
-  const meshRef = useRef();
-  
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      const scale = 1 + Math.sin(clock.getElapsedTime() * 3) * 0.2;
-      meshRef.current.scale.setScalar(scale);
-    }
-  });
-
-  return (
-    <Float speed={1.8} rotationIntensity={0.2} floatIntensity={0.6}>
-      <group ref={meshRef} position={position}>
-        {/* Mic body */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.3, 0.25, 1.2]} />
-          <meshStandardMaterial color="#444" />
-        </mesh>
-        {/* Mic head */}
-        <mesh position={[0, 0.8, 0]}>
-          <sphereGeometry args={[0.35]} />
-          <meshStandardMaterial color="#333" />
-        </mesh>
-        {/* Sound waves */}
-        {[1, 2, 3].map((i) => (
-          <mesh key={i} position={[0, 0.8, 0]}>
-            <torusGeometry args={[0.5 * i, 0.05, 8, 16]} />
-            <meshStandardMaterial 
-              color="#007bff" 
-              transparent 
-              opacity={0.7 / i}
-              emissive="#007bff"
-              emissiveIntensity={0.3}
-            />
-          </mesh>
-        ))}
-      </group>
-    </Float>
-  );
-};
-
-const MediaGalleryScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={1} />
-      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-      <directionalLight position={[0, 10, 0]} intensity={0.5} />
-      
-      {/* Audio elements */}
-      <FloatingAudioWave position={[-3, 0, 1]} color="#007bff" delay={0} />
-      <FloatingAudioWave position={[3, 1, -1]} color="#28a745" delay={1} />
-      <PulsingMicrophone position={[0, -1, 2]} />
-      
-      {/* Video elements */}
-      <RotatingVideoFrame position={[-1, 2, 0]} color="#dc3545" />
-      <RotatingVideoFrame position={[2, -1, -2]} color="#17a2b8" />
-      
-      {/* Floating text */}
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Text
-          position={[0, 3, 0]}
-          fontSize={0.8}
-          color="#333"
-          anchorX="center"
-          anchorY="middle"
-        >
-          AI Audio & Video
-        </Text>
-      </Float>
-    </>
-  );
 };
 
 const PinPalGalleryPage = () => {
@@ -287,7 +125,7 @@ const PinPalGalleryPage = () => {
           🌟 Explore our collection of AI-generated audio content and video demonstrations showcasing PinPal.io's innovative technology.
         </p>
 
-        {/* Three.js Media Animation Section */}
+        {/* Media Animation Section */}
         <div style={{
           height: "400px",
           width: "100%",
@@ -297,14 +135,135 @@ const PinPalGalleryPage = () => {
           border: "1px solid rgba(0,0,0,0.1)",
           boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
           background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
-          position: "relative",
-          zIndex: 10
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative"
         }}>
-          <ClientOnly>
-            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-              <MediaGalleryScene />
-            </Canvas>
-          </ClientOnly>
+          {/* Audio Wave Animation */}
+          <div style={{
+            position: "absolute",
+            top: "30%",
+            left: "20%",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            animation: "float 4s ease-in-out infinite"
+          }}>
+            {[...Array(7)].map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: "6px",
+                  height: `${30 + Math.sin(i) * 15}px`,
+                  background: "linear-gradient(to top, #007bff, #0056b3)",
+                  borderRadius: "3px",
+                  animation: `wave ${1 + i * 0.1}s ease-in-out infinite`
+                }}
+              ></div>
+            ))}
+          </div>
+          
+          {/* Video Frame */}
+          <div style={{
+            position: "absolute",
+            top: "40%",
+            right: "25%",
+            width: "120px",
+            height: "80px",
+            background: "#dc3545",
+            borderRadius: "8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            animation: "rotate 6s linear infinite"
+          }}>
+            <div style={{
+              width: "100px",
+              height: "60px",
+              background: "#000",
+              borderRadius: "4px",
+              position: "relative"
+            }}>
+              {/* Play button */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "0",
+                height: "0",
+                borderLeft: "15px solid #fff",
+                borderTop: "10px solid transparent",
+                borderBottom: "10px solid transparent"
+              }}></div>
+            </div>
+          </div>
+          
+          {/* Microphone */}
+          <div style={{
+            position: "absolute",
+            bottom: "30%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            animation: "pulse 2s ease-in-out infinite"
+          }}>
+            <div style={{
+              width: "20px",
+              height: "60px",
+              background: "#444",
+              borderRadius: "10px",
+              position: "relative"
+            }}>
+              <div style={{
+                position: "absolute",
+                top: "-10px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "40px",
+                height: "40px",
+                background: "#333",
+                borderRadius: "50%"
+              }}></div>
+            </div>
+            {/* Sound waves */}
+            <div style={{
+              position: "absolute",
+              top: "-20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "60px",
+              height: "60px",
+              border: "2px solid #007bff",
+              borderRadius: "50%",
+              animation: "expand 2s ease-in-out infinite"
+            }}></div>
+            <div style={{
+              position: "absolute",
+              top: "-30px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "80px",
+              height: "80px",
+              border: "2px solid #007bff",
+              borderRadius: "50%",
+              animation: "expand 2s ease-in-out infinite 0.5s"
+            }}></div>
+          </div>
+          
+          {/* Floating Text */}
+          <div style={{
+            position: "absolute",
+            top: "20px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "#333",
+            fontSize: "1.3rem",
+            fontWeight: "600",
+            animation: "float 3s ease-in-out infinite"
+          }}>
+            AI Audio & Video
+          </div>
         </div>
 
         {/* Audio Section */}
@@ -483,6 +442,34 @@ const PinPalGalleryPage = () => {
           </a>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes wave {
+          0%, 100% { transform: scaleY(1); }
+          50% { transform: scaleY(1.5); }
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: translateX(-50%) scale(1); }
+          50% { transform: translateX(-50%) scale(1.1); }
+        }
+        
+        @keyframes expand {
+          0% { transform: translateX(-50%) scale(0.8); opacity: 1; }
+          100% { transform: translateX(-50%) scale(1.5); opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 };

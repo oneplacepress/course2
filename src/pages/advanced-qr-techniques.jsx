@@ -1,187 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        📱 Loading QR Techniques Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
-
-const FloatingQRCube = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.7) * 0.3;
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.6;
-      meshRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.5) * 0.2;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime() * 1.2) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={1.8} rotationIntensity={0.8} floatIntensity={1.2}>
-      <group ref={meshRef} position={[-2, 0, 0]}>
-        {/* Main QR Cube - Darker for visibility */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[1.5, 1.5, 0.2]} />
-          <meshStandardMaterial color="#000" />
-        </mesh>
-        {/* QR Pattern Elements */}
-        {[...Array(9)].map((_, i) => (
-          <mesh key={i} position={[
-            (i % 3 - 1) * 0.4, 
-            (Math.floor(i / 3) - 1) * 0.4, 
-            0.12
-          ]}>
-            <boxGeometry args={[0.2, 0.2, 0.1]} />
-            <meshStandardMaterial color={i % 2 === 0 ? "#fff" : "#000"} />
-          </mesh>
-        ))}
-        {/* Border frame */}
-        <mesh position={[0, 0, -0.05]}>
-          <boxGeometry args={[1.8, 1.8, 0.1]} />
-          <meshStandardMaterial color="#333" />
-        </mesh>
-      </group>
-    </Float>
-  );
-};
-
-const ScanningEffect = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      const scale = 1 + Math.sin(clock.getElapsedTime() * 3) * 0.3;
-      meshRef.current.scale.setScalar(scale);
-      meshRef.current.rotation.z = clock.getElapsedTime() * 0.4;
-    }
-  });
-
-  return (
-    <Float speed={2.5} rotationIntensity={0.4} floatIntensity={1}>
-      <mesh ref={meshRef} position={[2, 1, -1]}>
-        <torusGeometry args={[1, 0.15, 8, 32]} />
-        <meshStandardMaterial color="#333" />
-      </mesh>
-    </Float>
-  );
-};
-
-// New prominent QR animation scene
-const QRTechScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.8} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} />
-      <directionalLight position={[0, 10, 0]} intensity={0.8} />
-      
-      {/* Tech Map Background */}
-      <group position={[0, -2, -3]}>
-        {/* Base map */}
-        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 12]} />
-          <meshStandardMaterial color="#1a2a1a" />
-        </mesh>
-        
-        {/* Tech grid pattern */}
-        {[...Array(10)].map((_, i) => (
-          <mesh key={i} position={[-7 + i * 1.5, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[0.1, 12]} />
-            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.2} />
-          </mesh>
-        ))}
-        {[...Array(8)].map((_, i) => (
-          <mesh key={i} position={[0, -0.95, -6 + i * 1.5]} rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[15, 0.1]} />
-            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.2} />
-          </mesh>
-        ))}
-        
-        {/* Data nodes across the map */}
-        {[...Array(12)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.8, z]}>
-              <cylinderGeometry args={[0.1, 0.1, 0.3]} />
-              <meshStandardMaterial color="#444" emissive="#0066cc" emissiveIntensity={0.4} />
-            </mesh>
-          );
-        })}
-        
-        {/* QR scan zones */}
-        {[...Array(6)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.8]} />
-              <meshStandardMaterial color="#333" emissive="#ff6600" emissiveIntensity={0.2} transparent opacity={0.6} />
-            </mesh>
-          );
-        })}
-      </group>
-      
-      {/* Multiple QR codes */}
-      <FloatingQRCube />
-      <group position={[3, -1, 1]}>
-        <FloatingQRCube />
-      </group>
-      <group position={[-3, 1, -1]}>
-        <FloatingQRCube />
-      </group>
-      
-      {/* Scanning effects */}
-      <ScanningEffect />
-      <group position={[-2, -1, 1]}>
-        <ScanningEffect />
-      </group>
-      
-      {/* Data stream effect */}
-      <Float speed={3} rotationIntensity={0.1} floatIntensity={1}>
-        <group position={[0, 2, 0]}>
-          {[...Array(20)].map((_, i) => (
-            <mesh key={i} position={[
-              Math.sin(i * 0.3) * 2,
-              Math.cos(i * 0.5) * 1.5,
-              Math.sin(i * 0.7) * 1
-            ]}>
-              <boxGeometry args={[0.1, 0.1, 0.1]} />
-              <meshStandardMaterial color="#222" emissive="#ff0088" emissiveIntensity={0.6} />
-            </mesh>
-          ))}
-        </group>
-      </Float>
-    </>
-  );
-};
 
 const AdvancedQRTechniquesPage = () => {
   return (
@@ -193,39 +11,48 @@ const AdvancedQRTechniquesPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background - Behind Content */}
+      {/* Animated Background */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: -1
+        zIndex: -1,
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        opacity: 0.1
       }}>
-        <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={0.8} />
-            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
-            <FloatingQRCube />
-            <ScanningEffect />
-            {/* Dark particles for visibility */}
-            <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
-              <group>
-                {[...Array(50)].map((_, i) => (
-                  <mesh key={i} position={[
-                    (Math.random() - 0.5) * 20,
-                    (Math.random() - 0.5) * 20,
-                    (Math.random() - 0.5) * 20
-                  ]}>
-                    <sphereGeometry args={[0.05]} />
-                    <meshStandardMaterial color="#333" opacity={0.6} transparent />
-                  </mesh>
-                ))}
-              </group>
-            </Float>
-          </Canvas>
-        </ClientOnly>
+        {/* Animated circles */}
+        <div style={{
+          position: "absolute",
+          top: "20%",
+          left: "10%",
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          background: "rgba(0, 123, 255, 0.1)",
+          animation: "float 6s ease-in-out infinite"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          top: "60%",
+          right: "15%",
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          background: "rgba(40, 167, 69, 0.1)",
+          animation: "float 8s ease-in-out infinite reverse"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "20%",
+          width: "80px",
+          height: "80px",
+          borderRadius: "50%",
+          background: "rgba(220, 53, 69, 0.1)",
+          animation: "float 7s ease-in-out infinite"
+        }}></div>
       </div>
 
       {/* Content Overlay */}
@@ -303,14 +130,228 @@ const AdvancedQRTechniquesPage = () => {
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
             background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
-            position: "relative",
-            zIndex: 10
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative"
           }}>
-            <ClientOnly>
-              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                <QRTechScene />
-              </Canvas>
-            </ClientOnly>
+            {/* Tech Grid Background */}
+            <div style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "350px",
+              height: "250px",
+              background: "#1a2a1a",
+              borderRadius: "10px",
+              border: "2px solid #00ff88"
+            }}>
+              {/* Grid lines */}
+              <div style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100%",
+                background: `
+                  linear-gradient(90deg, #00ff88 1px, transparent 1px),
+                  linear-gradient(0deg, #00ff88 1px, transparent 1px)
+                `,
+                backgroundSize: "50px 50px",
+                opacity: 0.3
+              }}></div>
+              
+              {/* Data nodes */}
+              <div style={{
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                width: "8px",
+                height: "8px",
+                background: "#0066cc",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                top: "60px",
+                right: "30px",
+                width: "8px",
+                height: "8px",
+                background: "#0066cc",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite 0.5s"
+              }}></div>
+              <div style={{
+                position: "absolute",
+                bottom: "40px",
+                left: "50px",
+                width: "8px",
+                height: "8px",
+                background: "#0066cc",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite 1s"
+              }}></div>
+              
+              {/* QR scan zones */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "60px",
+                height: "60px",
+                border: "2px solid #ff6600",
+                borderRadius: "50%",
+                animation: "pulse 2s ease-in-out infinite"
+              }}></div>
+            </div>
+            
+            {/* Floating QR Cube */}
+            <div style={{
+              position: "absolute",
+              top: "30%",
+              left: "20%",
+              animation: "float 4s ease-in-out infinite"
+            }}>
+              <div style={{
+                width: "80px",
+                height: "80px",
+                background: "#000",
+                borderRadius: "8px",
+                position: "relative",
+                border: "2px solid #333"
+              }}>
+                {/* QR pattern */}
+                <div style={{
+                  position: "absolute",
+                  top: "10px",
+                  left: "10px",
+                  width: "60px",
+                  height: "60px",
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: "2px"
+                }}>
+                  {[...Array(9)].map((_, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        width: "18px",
+                        height: "18px",
+                        background: i % 2 === 0 ? "#fff" : "#000",
+                        borderRadius: "2px"
+                      }}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Scanning Effect */}
+            <div style={{
+              position: "absolute",
+              top: "40%",
+              right: "25%",
+              width: "100px",
+              height: "100px",
+              border: "3px solid #333",
+              borderRadius: "50%",
+              animation: "rotate 6s linear infinite"
+            }}>
+              {/* Scanning line */}
+              <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                background: "#ff0088",
+                transform: "translateY(-50%)",
+                animation: "scan 2s ease-in-out infinite"
+              }}></div>
+            </div>
+            
+            {/* Data Stream */}
+            <div style={{
+              position: "absolute",
+              bottom: "30%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: "8px"
+            }}>
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "6px",
+                    height: "6px",
+                    background: "#ff0088",
+                    borderRadius: "50%",
+                    animation: `pulse ${1 + i * 0.1}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* Additional QR Codes */}
+            <div style={{
+              position: "absolute",
+              top: "20%",
+              right: "15%",
+              width: "60px",
+              height: "60px",
+              background: "#000",
+              borderRadius: "6px",
+              animation: "float 5s ease-in-out infinite reverse"
+            }}>
+              <div style={{
+                position: "absolute",
+                top: "8px",
+                left: "8px",
+                width: "44px",
+                height: "44px",
+                background: "#fff",
+                borderRadius: "4px"
+              }}></div>
+            </div>
+            
+            <div style={{
+              position: "absolute",
+              bottom: "20%",
+              left: "15%",
+              width: "50px",
+              height: "50px",
+              background: "#000",
+              borderRadius: "5px",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              <div style={{
+                position: "absolute",
+                top: "6px",
+                left: "6px",
+                width: "38px",
+                height: "38px",
+                background: "#fff",
+                borderRadius: "3px"
+              }}></div>
+            </div>
+            
+            {/* Floating Text */}
+            <div style={{
+              position: "absolute",
+              top: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "#333",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              Advanced QR Technology
+            </div>
           </div>
 
           {/* Feature Cards */}
@@ -409,6 +450,30 @@ const AdvancedQRTechniquesPage = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        
+        @keyframes scan {
+          0% { transform: translateY(-50%) scaleX(0); }
+          50% { transform: translateY(-50%) scaleX(1); }
+          100% { transform: translateY(-50%) scaleX(0); }
+        }
+      `}</style>
     </div>
   );
 };

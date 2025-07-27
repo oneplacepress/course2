@@ -1,258 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float, Text } from "@react-three/drei";
-
-// Client-side only wrapper
-const ClientOnly = ({ children }) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return (
-      <div style={{
-        height: "400px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,30,30,0.9))",
-        color: "white",
-        fontSize: "1.5rem",
-        borderRadius: "20px"
-      }}>
-        🎵 Loading Audio Visualization...
-      </div>
-    );
-  }
-
-  return children;
-};
-
-const FloatingAudioPin = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.8;
-      meshRef.current.position.y = Math.sin(clock.getElapsedTime()) * 0.3;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <mesh ref={meshRef} position={[-2, 0, 0]}>
-        <cylinderGeometry args={[0.1, 0.1, 2]} />
-        <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.6} />
-      </mesh>
-      <mesh position={[-2, 1, 0]}>
-        <sphereGeometry args={[0.3]} />
-        <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.5} />
-      </mesh>
-    </Float>
-  );
-};
-
-const FloatingQRCode = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.5) * 0.2;
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.3;
-      meshRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.7) * 0.1;
-    }
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} position={[2, 0, 0]}>
-        <boxGeometry args={[1.2, 1.2, 0.1]} />
-        <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.5} />
-      </mesh>
-    </Float>
-  );
-};
-
-const SoundWaves = () => {
-  const meshRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.z = clock.getElapsedTime() * 0.5;
-      const scale = 1 + Math.sin(clock.getElapsedTime() * 3) * 0.2;
-      meshRef.current.scale.setScalar(scale);
-    }
-  });
-
-  return (
-    <Float speed={3} rotationIntensity={0.3} floatIntensity={0.5}>
-      <mesh ref={meshRef} position={[0, 2, -1]}>
-        <torusGeometry args={[0.8, 0.2, 8, 16]} />
-        <meshStandardMaterial color="#17a2b8" wireframe emissive="#17a2b8" emissiveIntensity={0.6} />
-      </mesh>
-    </Float>
-  );
-};
-
-const MediaAudioScene = () => {
-  return (
-    <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={1} />
-      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-      <directionalLight position={[0, 10, 0]} intensity={0.5} />
-      
-      {/* Audio Technology Map Background */}
-      <group position={[0, -2, -3]}>
-        {/* Base media map */}
-        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[15, 12]} />
-          <meshStandardMaterial color="#1a1a2a" />
-        </mesh>
-        
-        {/* Audio wave pattern roads */}
-        {[...Array(8)].map((_, i) => {
-          const amplitude = 0.3;
-          const frequency = 0.5;
-          const points = [];
-          for (let x = -7; x <= 7; x += 0.2) {
-            const y = amplitude * Math.sin(frequency * x + i * Math.PI / 4);
-            points.push([x, y + i * 1.5 - 3]);
-          }
-          return (
-            <mesh key={i} position={[0, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[0.1, 12]} />
-              <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
-            </mesh>
-          );
-        })}
-        
-        {/* Audio studio blocks */}
-        {[...Array(12)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          const height = 0.1 + Math.random() * 0.2;
-          return (
-            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <cylinderGeometry args={[0.4, 0.4, height]} />
-              <meshStandardMaterial color="#2a2a4a" />
-            </mesh>
-          );
-        })}
-        
-        {/* QR scanning zones */}
-        {[...Array(6)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 10;
-          const z = (Math.random() - 0.5) * 8;
-          return (
-            <mesh key={i} position={[x, -0.85, z]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[0.7]} />
-              <meshStandardMaterial color="#4a4a7a" emissive="#ff6600" emissiveIntensity={0.2} transparent opacity={0.6} />
-            </mesh>
-          );
-        })}
-        
-        {/* Audio towers */}
-        {[...Array(8)].map((_, i) => {
-          const x = (Math.random() - 0.5) * 12;
-          const z = (Math.random() - 0.5) * 10;
-          return (
-            <mesh key={i} position={[x, -0.6, z]}>
-              <cylinderGeometry args={[0.05, 0.05, 0.8]} />
-              <meshStandardMaterial color="#666" emissive="#00ff88" emissiveIntensity={0.4} />
-            </mesh>
-          );
-        })}
-      </group>
-      
-      {/* Audio Wave Visualization */}
-      <Float speed={1.8} rotationIntensity={0.4} floatIntensity={1.2}>
-        <group position={[0, 0, 0]}>
-          {/* Central audio processor */}
-          <mesh position={[0, 0, 0]}>
-            <cylinderGeometry args={[1, 1, 0.4, 16]} />
-            <meshStandardMaterial color="#222" emissive="#007bff" emissiveIntensity={0.4} />
-          </mesh>
-          
-          {/* Audio rings */}
-          {[...Array(6)].map((_, i) => (
-            <mesh key={i} position={[0, 0, 0]} rotation={[Math.PI / 2, 0, i * Math.PI / 6]}>
-              <torusGeometry args={[1.5 + i * 0.3, 0.08, 8, 32]} />
-              <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
-            </mesh>
-          ))}
-        </group>
-      </Float>
-      
-      {/* Floating microphones */}
-      {[...Array(4)].map((_, i) => {
-        const angle = (i * Math.PI * 2) / 4;
-        const radius = 2.5;
-        return (
-          <Float key={i} speed={1.2 + i * 0.1} rotationIntensity={0.3} floatIntensity={0.8}>
-            <group position={[Math.cos(angle) * radius, Math.sin(angle) * 0.8, Math.sin(angle) * radius]}>
-              {/* Microphone body */}
-              <mesh position={[0, 0, 0]}>
-                <cylinderGeometry args={[0.15, 0.15, 0.6]} />
-                <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
-              </mesh>
-              {/* Microphone head */}
-              <mesh position={[0, 0.4, 0]}>
-                <sphereGeometry args={[0.2]} />
-                <meshStandardMaterial color="#444" emissive="#00ff88" emissiveIntensity={0.4} />
-              </mesh>
-            </group>
-          </Float>
-        );
-      })}
-      
-      {/* Audio data particles */}
-      <Float speed={2.5} rotationIntensity={0.2} floatIntensity={1.5}>
-        <group position={[0, 1, 0]}>
-          {[...Array(25)].map((_, i) => (
-            <mesh key={i} position={[
-              Math.sin(i * 0.4) * 3,
-              Math.cos(i * 0.6) * 2,
-              Math.sin(i * 0.8) * 2
-            ]}>
-              <sphereGeometry args={[0.08]} />
-              <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
-            </mesh>
-          ))}
-        </group>
-      </Float>
-      
-      {/* QR Code Elements */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <mesh position={[2, 0, -1]}>
-          <boxGeometry args={[1.5, 1.5, 0.1]} />
-          <meshStandardMaterial color="#000" />
-          <mesh position={[0, 0, 0.06]}>
-            <boxGeometry args={[1.2, 1.2, 0.05]} />
-            <meshStandardMaterial color="#fff" />
-          </mesh>
-        </mesh>
-      </Float>
-      
-      {/* Floating Text */}
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Text
-          position={[0, 3, 0]}
-          fontSize={0.8}
-          color="#fff"
-          anchorX="center"
-          anchorY="middle"
-        >
-          AI Audio QR Experience
-        </Text>
-      </Float>
-    </>
-  );
-};
 
 const AIAudioQRPinsPage = () => {
   return (
@@ -264,26 +11,48 @@ const AIAudioQRPinsPage = () => {
       position: "relative",
       overflow: "hidden"
     }}>
-      {/* Three.js Background - Behind Content */}
+      {/* Animated Background */}
       <div style={{ 
         position: "fixed", 
         top: 0, 
         left: 0, 
         width: "100%", 
         height: "100%", 
-        zIndex: -1
+        zIndex: -1,
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        opacity: 0.1
       }}>
-        <ClientOnly>
-          <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-            <ambientLight intensity={0.8} />
-            <pointLight position={[10, 10, 10]} intensity={1.2} />
-            <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
-            <FloatingAudioPin />
-            <FloatingQRCode />
-            <SoundWaves />
-          </Canvas>
-        </ClientOnly>
+        {/* Animated circles */}
+        <div style={{
+          position: "absolute",
+          top: "20%",
+          left: "10%",
+          width: "100px",
+          height: "100px",
+          borderRadius: "50%",
+          background: "rgba(0, 123, 255, 0.1)",
+          animation: "float 6s ease-in-out infinite"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          top: "60%",
+          right: "15%",
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          background: "rgba(40, 167, 69, 0.1)",
+          animation: "float 8s ease-in-out infinite reverse"
+        }}></div>
+        <div style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "20%",
+          width: "80px",
+          height: "80px",
+          borderRadius: "50%",
+          background: "rgba(23, 162, 184, 0.1)",
+          animation: "float 7s ease-in-out infinite"
+        }}></div>
       </div>
 
       {/* Content Overlay */}
@@ -360,53 +129,96 @@ const AIAudioQRPinsPage = () => {
             overflow: "hidden",
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-            background: "linear-gradient(135deg, rgba(28,40,51,0.8), rgba(52,73,94,0.9))"
+            background: "linear-gradient(135deg, rgba(28,40,51,0.8), rgba(52,73,94,0.9))",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative"
           }}>
-            <ClientOnly>
-              <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                <ambientLight intensity={0.6} />
-                <pointLight position={[5, 5, 5]} intensity={1} />
-                <pointLight position={[-5, 3, -5]} intensity={0.8} color="#007bff" />
-                <directionalLight position={[0, 10, 0]} intensity={0.5} />
-                
-                {/* AI Audio Wave Elements */}
-                <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-                  <group position={[-3, 0, 1]}>
-                    {[...Array(7)].map((_, i) => (
-                      <mesh key={i} position={[(i - 3) * 0.3, Math.sin(i) * 0.2, 0]}>
-                        <boxGeometry args={[0.15, 1 + Math.sin(i) * 0.5, 0.15]} />
-                        <meshStandardMaterial color="#333" emissive="#007bff" emissiveIntensity={0.3} />
-                      </mesh>
-                    ))}
-                  </group>
-                </Float>
-                
-                {/* QR Code Elements */}
-                <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-                  <mesh position={[2, 0, -1]}>
-                    <boxGeometry args={[1.5, 1.5, 0.1]} />
-                    <meshStandardMaterial color="#000" />
-                    <mesh position={[0, 0, 0.06]}>
-                      <boxGeometry args={[1.2, 1.2, 0.05]} />
-                      <meshStandardMaterial color="#fff" />
-                    </mesh>
-                  </mesh>
-                </Float>
-                
-                {/* Floating Text */}
-                <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
-                  <Text
-                    position={[0, 3, 0]}
-                    fontSize={0.8}
-                    color="#fff"
-                    anchorX="center"
-                    anchorY="middle"
-                  >
-                    AI Audio QR Experience
-                  </Text>
-                </Float>
-              </Canvas>
-            </ClientOnly>
+            {/* Audio Wave Animation */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginBottom: "20px"
+            }}>
+              {[...Array(7)].map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "8px",
+                    height: `${40 + Math.sin(i) * 20}px`,
+                    background: "linear-gradient(to top, #007bff, #00ff88)",
+                    borderRadius: "4px",
+                    animation: `wave ${1 + i * 0.1}s ease-in-out infinite`
+                  }}
+                ></div>
+              ))}
+            </div>
+            
+            {/* QR Code Icon */}
+            <div style={{
+              position: "absolute",
+              right: "50px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "120px",
+              height: "120px",
+              background: "#000",
+              borderRadius: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              animation: "pulse 2s ease-in-out infinite"
+            }}>
+              <div style={{
+                width: "80px",
+                height: "80px",
+                background: "#fff",
+                borderRadius: "5px",
+                position: "relative"
+              }}>
+                {/* QR code pattern */}
+                <div style={{
+                  position: "absolute",
+                  top: "10px",
+                  left: "10px",
+                  width: "20px",
+                  height: "20px",
+                  background: "#000"
+                }}></div>
+                <div style={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "10px",
+                  width: "20px",
+                  height: "20px",
+                  background: "#000"
+                }}></div>
+                <div style={{
+                  position: "absolute",
+                  bottom: "10px",
+                  left: "10px",
+                  width: "20px",
+                  height: "20px",
+                  background: "#000"
+                }}></div>
+              </div>
+            </div>
+            
+            {/* Floating Text */}
+            <div style={{
+              position: "absolute",
+              top: "30px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              color: "white",
+              fontSize: "1.5rem",
+              fontWeight: "600",
+              animation: "float 3s ease-in-out infinite"
+            }}>
+              AI Audio QR Experience
+            </div>
           </div>
 
           {/* Feature Cards */}
@@ -509,6 +321,24 @@ const AIAudioQRPinsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes wave {
+          0%, 100% { transform: scaleY(1); }
+          50% { transform: scaleY(1.5); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { transform: translateY(-50%) scale(1); }
+          50% { transform: translateY(-50%) scale(1.05); }
+        }
+      `}</style>
     </div>
   );
 };
