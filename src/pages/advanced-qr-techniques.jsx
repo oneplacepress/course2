@@ -73,6 +73,53 @@ const QRTechScene = () => {
       <pointLight position={[5, 5, 5]} intensity={1.2} />
       <directionalLight position={[0, 10, 0]} intensity={0.8} />
       
+      {/* Tech Map Background */}
+      <group position={[0, -2, -3]}>
+        {/* Base map */}
+        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[15, 12]} />
+          <meshStandardMaterial color="#1a2a1a" />
+        </mesh>
+        
+        {/* Tech grid pattern */}
+        {[...Array(10)].map((_, i) => (
+          <mesh key={i} position={[-7 + i * 1.5, -0.95, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[0.1, 12]} />
+            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.2} />
+          </mesh>
+        ))}
+        {[...Array(8)].map((_, i) => (
+          <mesh key={i} position={[0, -0.95, -6 + i * 1.5]} rotation={[-Math.PI / 2, 0, 0]}>
+            <planeGeometry args={[15, 0.1]} />
+            <meshStandardMaterial color="#00ff88" emissive="#00ff88" emissiveIntensity={0.2} />
+          </mesh>
+        ))}
+        
+        {/* Data nodes across the map */}
+        {[...Array(12)].map((_, i) => {
+          const x = (Math.random() - 0.5) * 12;
+          const z = (Math.random() - 0.5) * 10;
+          return (
+            <mesh key={i} position={[x, -0.8, z]}>
+              <cylinderGeometry args={[0.1, 0.1, 0.3]} />
+              <meshStandardMaterial color="#444" emissive="#0066cc" emissiveIntensity={0.4} />
+            </mesh>
+          );
+        })}
+        
+        {/* QR scan zones */}
+        {[...Array(6)].map((_, i) => {
+          const x = (Math.random() - 0.5) * 10;
+          const z = (Math.random() - 0.5) * 8;
+          return (
+            <mesh key={i} position={[x, -0.9, z]} rotation={[-Math.PI / 2, 0, 0]}>
+              <circleGeometry args={[0.8]} />
+              <meshStandardMaterial color="#333" emissive="#ff6600" emissiveIntensity={0.2} transparent opacity={0.6} />
+            </mesh>
+          );
+        })}
+      </group>
+      
       {/* Multiple QR codes */}
       <FloatingQRCube />
       <group position={[3, -1, 1]}>
@@ -98,7 +145,7 @@ const QRTechScene = () => {
               Math.sin(i * 0.7) * 1
             ]}>
               <boxGeometry args={[0.1, 0.1, 0.1]} />
-              <meshStandardMaterial color={i % 2 === 0 ? "#000" : "#444"} />
+              <meshStandardMaterial color="#222" emissive="#ff0088" emissiveIntensity={0.6} />
             </mesh>
           ))}
         </group>
@@ -224,7 +271,9 @@ const AdvancedQRTechniquesPage = () => {
             overflow: "hidden",
             border: "1px solid rgba(0,0,0,0.1)",
             boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))"
+            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
+            position: "relative",
+            zIndex: 10
           }}>
             <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
               <QRTechScene />
@@ -234,9 +283,10 @@ const AdvancedQRTechniquesPage = () => {
           {/* Feature Cards */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "25px",
-            marginTop: "40px"
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "20px",
+            marginTop: "40px",
+            padding: "0 10px"
           }}>
             <div style={{
               background: "linear-gradient(135deg, #f8f9fa, #e9ecef)",

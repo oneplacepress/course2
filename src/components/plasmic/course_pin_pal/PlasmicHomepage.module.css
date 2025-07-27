@@ -41,9 +41,10 @@
 @media (min-width: 0px) and (max-width: 768px) {
   .navBar {
     align-self: auto;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 12px 14px;
+    padding: 15px 20px;
+    flex-wrap: nowrap;
   }
 }
 .logoWrap {
@@ -56,6 +57,12 @@
   height: auto;
   padding: 8px;
 }
+@media (min-width: 0px) and (max-width: 768px) {
+  .logoWrap {
+    flex-shrink: 0;
+    padding: 4px;
+  }
+}
 .logo {
   position: relative;
   object-fit: cover;
@@ -63,6 +70,12 @@
 }
 .logo > picture > img {
   object-fit: cover;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .logo {
+    max-width: 60px;
+    max-height: 60px;
+  }
 }
 .navmenu {
   display: flex;
@@ -82,20 +95,78 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .navmenu {
-    margin-left: 1px;
-    padding-right: 0px;
-    width: 100%;
-    align-self: flex-start;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 80px 20px 20px 20px;
+    margin-left: 0;
     max-width: none;
-    height: 100%;
-    flex-wrap: nowrap;
-    align-content: stretch;
-    min-height: 0;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 9999;
+  }
+  .navmenu.mobile-open {
+    right: 0;
+  }
+}
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 10000;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .mobileMenuButton {
+    display: flex;
+  }
+}
+.mobileMenuButton span {
+  width: 100%;
+  height: 3px;
+  background: #2c343c;
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+.mobileMenuButton.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.mobileMenuButton.open span:nth-child(2) {
+  opacity: 0;
+}
+.mobileMenuButton.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+.mobileOverlay {
+  display: none;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .mobileOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  .mobileOverlay.open {
+    opacity: 1;
+    visibility: visible;
+    display: block;
   }
 }
 .link3 {
@@ -112,11 +183,10 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .link3 {
-    font-size: 10px;
-    left: auto;
-    top: auto;
-    padding-right: 8px;
-    position: relative;
+    font-size: 18px;
+    padding: 15px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
   }
 }
 .link2 {
@@ -133,11 +203,10 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .link2 {
-    font-size: 10px;
-    left: auto;
-    top: auto;
-    padding-right: 5px;
-    position: relative;
+    font-size: 18px;
+    padding: 15px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
     align-self: auto;
   }
 }
@@ -286,15 +355,16 @@
 .bannerImage {
   display: flex;
   position: relative;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: auto;
   max-width: 100%;
   align-self: flex-start;
   max-height: none;
-  padding: 0;
+  padding: 20px;
+  background: transparent;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .bannerImage {
@@ -303,11 +373,13 @@
 }
 .img__ytz5M {
   position: relative;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  box-shadow: 4px 8px 24px 0px #00000080;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 600px;
+  max-height: 600px;
+  background: transparent;
+  box-shadow: none;
 }
 .img__ytz5M > picture > img {
   object-fit: cover;

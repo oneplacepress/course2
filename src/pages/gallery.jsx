@@ -267,7 +267,9 @@ const PinPalGalleryPage = () => {
           overflow: "hidden",
           border: "1px solid rgba(0,0,0,0.1)",
           boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
-          background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))"
+          background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))",
+          position: "relative",
+          zIndex: 10
         }}>
           <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
             <MediaGalleryScene />
@@ -287,7 +289,7 @@ const PinPalGalleryPage = () => {
         
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
           gap: "25px",
           marginBottom: "60px"
         }}>

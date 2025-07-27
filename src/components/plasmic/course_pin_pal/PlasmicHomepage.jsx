@@ -79,6 +79,9 @@ function PlasmicHomepage__RenderFunc(props) {
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantsv4O16AM20Li6()
   });
+  
+  // Mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   return (
     <React.Fragment>
       <style>{`
@@ -134,10 +137,21 @@ function PlasmicHomepage__RenderFunc(props) {
                 }}
               />
             </div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className={classNames(sty.mobileMenuButton, mobileMenuOpen ? sty.open : "")}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            
             <div
               data-plasmic-name={"navmenu"}
               data-plasmic-override={overrides.navmenu}
-              className={classNames(projectcss.all, sty.navmenu)}
+              className={classNames(projectcss.all, sty.navmenu, mobileMenuOpen ? sty.mobileOpen : "")}
             >
               <PlasmicLink__
                 data-plasmic-name={"link3"}
@@ -236,6 +250,13 @@ function PlasmicHomepage__RenderFunc(props) {
               />
             </div>
           </header>
+          
+          {/* Mobile Overlay */}
+          <div 
+            className={classNames(sty.mobileOverlay, mobileMenuOpen ? sty.open : "")}
+            onClick={() => setMobileMenuOpen(false)}
+          ></div>
+          
           <section
             data-plasmic-name={"section1"}
             data-plasmic-override={overrides.section1}
@@ -611,6 +632,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           </div>
                         }
                         roundedFull={true}
+                        link={"https://pinpal.io"}
                       />
                     </div>
                     <div
