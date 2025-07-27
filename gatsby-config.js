@@ -30,7 +30,6 @@ module.exports = {
     background_color: "#ffffff",
     theme_color: "#007bff",
     display: "minimal-ui",
-    icon: "https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png",
   },
 }
 ]
