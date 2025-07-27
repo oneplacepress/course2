@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
+import { Stars, Float, Text } from "@react-three/drei";
 
 const FloatingGlobe = () => {
   const meshRef = useRef();
@@ -17,7 +17,7 @@ const FloatingGlobe = () => {
     <Float speed={1.5} rotationIntensity={0.3} floatIntensity={1}>
       <mesh ref={meshRef} position={[-2, 0, 0]}>
         <sphereGeometry args={[1.2, 16, 16]} />
-        <meshStandardMaterial color="#007bff" wireframe emissive="#007bff" emissiveIntensity={0.2} />
+        <meshStandardMaterial color="#333" wireframe />
       </mesh>
     </Float>
   );
@@ -43,18 +43,101 @@ const FloatingPins = () => {
               {/* Pin Body */}
               <mesh position={[Math.cos(angle) * radius, Math.sin(clock.getElapsedTime() + i) * 0.2, Math.sin(angle) * radius]}>
                 <cylinderGeometry args={[0.05, 0.05, 0.8]} />
-                <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.3} />
+                <meshStandardMaterial color="#444" />
               </mesh>
               {/* Pin Head */}
               <mesh position={[Math.cos(angle) * radius, 0.5 + Math.sin(clock.getElapsedTime() + i) * 0.2, Math.sin(angle) * radius]}>
                 <sphereGeometry args={[0.15]} />
-                <meshStandardMaterial color="#dc3545" emissive="#dc3545" emissiveIntensity={0.2} />
+                <meshStandardMaterial color="#000" />
               </mesh>
             </group>
           );
         })}
       </group>
     </Float>
+  );
+};
+
+// Location Services Animation Scene
+const LocationServicesScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <pointLight position={[5, 5, 5]} intensity={1.2} />
+      <directionalLight position={[0, 10, 0]} intensity={0.8} />
+      
+      {/* Central Globe/Map */}
+      <Float speed={1} rotationIntensity={0.3} floatIntensity={0.5}>
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[1.5, 20, 20]} />
+          <meshStandardMaterial color="#333" wireframe />
+        </mesh>
+      </Float>
+      
+      {/* GPS Satellites */}
+      {[...Array(4)].map((_, i) => {
+        const angle = (i * Math.PI * 2) / 4;
+        const radius = 4;
+        return (
+          <Float key={`satellite-${i}`} speed={1.5 + i * 0.2} rotationIntensity={0.2} floatIntensity={0.8}>
+            <mesh position={[Math.cos(angle) * radius, Math.sin(angle) * radius, Math.cos(angle + 1) * radius]}>
+              <boxGeometry args={[0.3, 0.1, 0.4]} />
+              <meshStandardMaterial color="#000" />
+            </mesh>
+            {/* Solar panels */}
+            <mesh position={[Math.cos(angle) * radius, Math.sin(angle) * radius, Math.cos(angle + 1) * radius + 0.3]}>
+              <boxGeometry args={[0.6, 0.05, 0.2]} />
+              <meshStandardMaterial color="#333" />
+            </mesh>
+          </Float>
+        );
+      })}
+      
+      {/* Location Pins */}
+      {[...Array(8)].map((_, i) => {
+        const angle = (i * Math.PI * 2) / 8;
+        const radius = 2.2;
+        return (
+          <Float key={`pin-${i}`} speed={2 + i * 0.1} rotationIntensity={0.1} floatIntensity={0.6}>
+            <group position={[Math.cos(angle) * radius, Math.sin(angle * 2) * 0.5, Math.sin(angle) * radius]}>
+              {/* Pin body */}
+              <mesh position={[0, 0, 0]}>
+                <cylinderGeometry args={[0.05, 0.05, 0.6]} />
+                <meshStandardMaterial color="#444" />
+              </mesh>
+              {/* Pin head */}
+              <mesh position={[0, 0.4, 0]}>
+                <sphereGeometry args={[0.12]} />
+                <meshStandardMaterial color="#000" />
+              </mesh>
+            </group>
+          </Float>
+        );
+      })}
+      
+      {/* Connection lines between pins */}
+      {[...Array(6)].map((_, i) => (
+        <Float key={`connection-${i}`} speed={0.5} rotationIntensity={0.05} floatIntensity={0.2}>
+          <mesh position={[Math.sin(i) * 1.5, Math.cos(i) * 0.3, Math.cos(i) * 1.5]} rotation={[0, i * 0.5, 0]}>
+            <cylinderGeometry args={[0.02, 0.02, 3]} />
+            <meshStandardMaterial color="#666" transparent opacity={0.6} />
+          </mesh>
+        </Float>
+      ))}
+      
+      {/* Floating text */}
+      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
+        <Text
+          position={[0, 3, 0]}
+          fontSize={0.8}
+          color="#333"
+          anchorX="center"
+          anchorY="middle"
+        >
+          Location Intelligence
+        </Text>
+      </Float>
+    </>
   );
 };
 
@@ -78,12 +161,26 @@ const LocationBasedServicesPage = () => {
         zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
           <FloatingGlobe />
           <FloatingPins />
+          {/* Dark particles for visibility */}
+          <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
+            <group>
+              {[...Array(30)].map((_, i) => (
+                <mesh key={i} position={[
+                  (Math.random() - 0.5) * 15,
+                  (Math.random() - 0.5) * 15,
+                  (Math.random() - 0.5) * 15
+                ]}>
+                  <sphereGeometry args={[0.03]} />
+                  <meshStandardMaterial color="#333" opacity={0.7} transparent />
+                </mesh>
+              ))}
+            </group>
+          </Float>
         </Canvas>
       </div>
 
@@ -151,6 +248,22 @@ const LocationBasedServicesPage = () => {
           }}>
             🌟 Master the art of location intelligence with advanced mapping, geofencing, and proximity services that power next-generation location experiences.
           </p>
+
+          {/* Location Services Animation Section */}
+          <div style={{
+            height: "400px",
+            width: "100%",
+            marginBottom: "50px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))"
+          }}>
+            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+              <LocationServicesScene />
+            </Canvas>
+          </div>
 
           {/* Feature Cards */}
           <div style={{

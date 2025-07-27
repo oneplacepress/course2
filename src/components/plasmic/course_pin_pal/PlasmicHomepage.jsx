@@ -127,9 +127,9 @@ function PlasmicHomepage__RenderFunc(props) {
                 displayWidth={"auto"}
                 loading={"lazy"}
                 src={{
-                  src: "https://workmates.live/wp-content/uploads/2025/04/pin.png",
-                  fullWidth: 186,
-                  fullHeight: 80,
+                  src: "https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png",
+                  fullWidth: 320,
+                  fullHeight: 320,
                   aspectRatio: undefined
                 }}
               />
@@ -270,9 +270,9 @@ function PlasmicHomepage__RenderFunc(props) {
                       displayWidth={"auto"}
                       loading={"lazy"}
                       src={{
-                        src: "https://workmates.live/wp-content/uploads/2023/08/cons.jpg",
-                        fullWidth: 1332,
-                        fullHeight: 2080,
+                        src: "https://workmates.live/wp-content/uploads/2025/07/blue-arrow-down.png",
+                        fullWidth: 1080,
+                        fullHeight: 1080,
                         aspectRatio: undefined
                       }}
                     />
@@ -1655,9 +1655,9 @@ function PlasmicHomepage__RenderFunc(props) {
                     displayWidth={"300px"}
                     loading={"lazy"}
                     src={{
-                      src: "https://workmates.live/wp-content/uploads/2025/04/pin.png",
-                      fullWidth: 374,
-                      fullHeight: 156,
+                      src: "https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png",
+                      fullWidth: 320,
+                      fullHeight: 320,
                       aspectRatio: undefined
                     }}
                   />

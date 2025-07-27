@@ -20,6 +20,18 @@ module.exports = {
 },
 {
   resolve: "gatsby-plugin-react-helmet",
+},
+{
+  resolve: "gatsby-plugin-manifest",
+  options: {
+    name: "PinPal - Course Platform",
+    short_name: "PinPal",
+    start_url: "/",
+    background_color: "#ffffff",
+    theme_color: "#007bff",
+    display: "minimal-ui",
+    icon: "https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png",
+  },
 }
 ]
 }

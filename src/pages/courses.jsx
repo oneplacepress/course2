@@ -156,7 +156,7 @@ const CoursesPage = () => {
         }}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <img 
-              src="https://workmates.live/wp-content/uploads/2025/04/pin.png"
+              src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
               alt="PinPal Logo"
               style={{ height: '40px', width: 'auto' }}
             />
@@ -298,7 +298,7 @@ const CoursesPage = () => {
           padding: '0 24px'
         }}>
           <img 
-            src="https://workmates.live/wp-content/uploads/2025/04/pin.png"
+            src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
             alt="PinPal Logo"
             style={{ height: '60px', width: 'auto', marginBottom: '24px' }}
           />

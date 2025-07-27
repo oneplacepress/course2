@@ -163,6 +163,73 @@ const PeopleScene = () => {
       <pointLight position={[5, 5, 5]} intensity={0.8} />
       <pointLight position={[-5, 3, -5]} intensity={0.6} color="#007bff" />
       
+      {/* Aerial Map Base */}
+      <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[12, 8]} />
+        <meshStandardMaterial color="#2d5a27" />
+      </mesh>
+      
+      {/* Roads/Paths */}
+      <mesh position={[0, -1.45, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[12, 0.3]} />
+        <meshStandardMaterial color="#666" />
+      </mesh>
+      <mesh position={[0, -1.45, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+        <planeGeometry args={[8, 0.3]} />
+        <meshStandardMaterial color="#666" />
+      </mesh>
+      
+      {/* City blocks/areas */}
+      {[
+        { pos: [-2, -1.4, 1], size: [1.5, 1.5], color: "#4a6741" },
+        { pos: [2, -1.4, -1], size: [1.8, 1.2], color: "#3d5a36" },
+        { pos: [-1, -1.4, -2], size: [1.2, 1.2], color: "#5a7851" },
+        { pos: [1.5, -1.4, 1.5], size: [1, 1.6], color: "#4d6b44" },
+        { pos: [-3, -1.4, -1], size: [0.8, 0.8], color: "#6b8762" },
+        { pos: [3, -1.4, 0.5], size: [0.9, 1.1], color: "#577a4e" }
+      ].map((block, i) => (
+        <mesh key={i} position={block.pos} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={block.size} />
+          <meshStandardMaterial color={block.color} />
+        </mesh>
+      ))}
+      
+      {/* Small buildings/landmarks */}
+      {[
+        { pos: [-2, -0.8, 1], size: [0.3, 0.3, 0.6], color: "#8b4513" },
+        { pos: [2, -0.9, -1], size: [0.4, 0.4, 0.4], color: "#654321" },
+        { pos: [-1, -0.7, -2], size: [0.2, 0.2, 0.8], color: "#a0522d" },
+        { pos: [1.5, -0.8, 1.5], size: [0.3, 0.25, 0.5], color: "#8b4513" }
+      ].map((building, i) => (
+        <mesh key={`building-${i}`} position={building.pos}>
+          <boxGeometry args={building.size} />
+          <meshStandardMaterial color={building.color} />
+        </mesh>
+      ))}
+      
+      {/* Park areas with trees */}
+      {[
+        { pos: [-1.5, -1.3, 0.5], color: "#228b22" },
+        { pos: [0.8, -1.3, -1.2], color: "#32cd32" },
+        { pos: [-0.5, -1.3, 2], color: "#228b22" }
+      ].map((park, i) => (
+        <group key={`park-${i}`}>
+          <mesh position={park.pos} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.4]} />
+            <meshStandardMaterial color={park.color} />
+          </mesh>
+          {/* Tree */}
+          <mesh position={[park.pos[0], -0.5, park.pos[2]]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.8]} />
+            <meshStandardMaterial color="#8b4513" />
+          </mesh>
+          <mesh position={[park.pos[0], -0.2, park.pos[2]]}>
+            <sphereGeometry args={[0.2]} />
+            <meshStandardMaterial color="#228b22" />
+          </mesh>
+        </group>
+      ))}
+      
       {/* Standing people */}
       <AnimatedPerson position={[-2, 0, 1]} color="#007bff" delay={0} />
       <AnimatedPerson position={[2, 0, -1]} color="#28a745" delay={1} />

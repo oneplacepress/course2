@@ -35,7 +35,7 @@
   border-bottom-color: #eceef1;
   border-bottom-style: solid;
   min-width: 0;
-  padding: 20px 56px 15px;
+  padding: 40px 56px 35px;
   border-width: 1px;
 }
 @media (min-width: 0px) and (max-width: 768px) {
@@ -43,7 +43,7 @@
     align-self: auto;
     justify-content: center;
     align-items: center;
-    padding: 6px 14px;
+    padding: 12px 14px;
   }
 }
 .logoWrap {
@@ -289,12 +289,12 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100vh;
   max-width: 100%;
   align-self: flex-start;
   max-height: none;
-  padding: 8px;
+  padding: 0;
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .bannerImage {
@@ -304,6 +304,8 @@
 .img__ytz5M {
   position: relative;
   object-fit: cover;
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   box-shadow: 4px 8px 24px 0px #00000080;
 }

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "gatsby";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Stars, Float } from "@react-three/drei";
+import { Stars, Float, Text } from "@react-three/drei";
 
 const FloatingGear = () => {
   const meshRef = useRef();
@@ -19,13 +19,13 @@ const FloatingGear = () => {
         {/* Main Gear */}
         <mesh position={[0, 0, 0]}>
           <cylinderGeometry args={[1.2, 1.2, 0.3, 12]} />
-          <meshStandardMaterial color="#007bff" emissive="#007bff" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#333" />
         </mesh>
         {/* Gear Teeth */}
         {[...Array(12)].map((_, i) => (
           <mesh key={i} position={[1.4 * Math.cos(i * Math.PI / 6), 0, 1.4 * Math.sin(i * Math.PI / 6)]}>
             <boxGeometry args={[0.2, 0.3, 0.4]} />
-            <meshStandardMaterial color="#28a745" emissive="#28a745" emissiveIntensity={0.2} />
+            <meshStandardMaterial color="#444" />
           </mesh>
         ))}
       </group>
@@ -49,25 +49,113 @@ const FloatingNodes = () => {
         {/* Central Node */}
         <mesh position={[0, 0, 0]}>
           <sphereGeometry args={[0.4]} />
-          <meshStandardMaterial color="#17a2b8" emissive="#17a2b8" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#333" />
         </mesh>
         {/* Connected Nodes */}
         {[...Array(4)].map((_, i) => (
           <group key={i}>
             <mesh position={[Math.cos(i * Math.PI / 2) * 1.5, 0, Math.sin(i * Math.PI / 2) * 1.5]}>
               <sphereGeometry args={[0.2]} />
-              <meshStandardMaterial color="#ffc107" emissive="#ffc107" emissiveIntensity={0.2} />
+              <meshStandardMaterial color="#555" />
             </mesh>
             {/* Connection Lines */}
             <mesh position={[Math.cos(i * Math.PI / 2) * 0.75, 0, Math.sin(i * Math.PI / 2) * 0.75]} 
                   rotation={[0, i * Math.PI / 2, 0]}>
               <cylinderGeometry args={[0.02, 0.02, 1.1]} />
-              <meshStandardMaterial color="#6c757d" />
+              <meshStandardMaterial color="#444" />
             </mesh>
           </group>
         ))}
       </group>
     </Float>
+  );
+};
+
+// N8N Automation Scene
+const AutomationScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <pointLight position={[5, 5, 5]} intensity={1.2} />
+      <directionalLight position={[0, 10, 0]} intensity={0.8} />
+      
+      {/* Central workflow engine */}
+      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={0.5}>
+        <mesh position={[0, 0, 0]}>
+          <cylinderGeometry args={[1, 1, 0.5, 8]} />
+          <meshStandardMaterial color="#000" />
+        </mesh>
+        {/* Engine core */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[0.6]} />
+          <meshStandardMaterial color="#333" />
+        </mesh>
+      </Float>
+      
+      {/* Workflow nodes in a network */}
+      {[...Array(8)].map((_, i) => {
+        const angle = (i * Math.PI * 2) / 8;
+        const radius = 3;
+        return (
+          <Float key={`node-${i}`} speed={1.8 + i * 0.1} rotationIntensity={0.2} floatIntensity={0.8}>
+            <group position={[Math.cos(angle) * radius, Math.sin(angle * 1.5) * 0.5, Math.sin(angle) * radius]}>
+              {/* Node body */}
+              <mesh position={[0, 0, 0]}>
+                <boxGeometry args={[0.6, 0.4, 0.1]} />
+                <meshStandardMaterial color="#444" />
+              </mesh>
+              {/* Node input/output ports */}
+              <mesh position={[-0.35, 0, 0.1]}>
+                <sphereGeometry args={[0.08]} />
+                <meshStandardMaterial color="#000" />
+              </mesh>
+              <mesh position={[0.35, 0, 0.1]}>
+                <sphereGeometry args={[0.08]} />
+                <meshStandardMaterial color="#000" />
+              </mesh>
+            </group>
+          </Float>
+        );
+      })}
+      
+      {/* Data flow connections */}
+      {[...Array(6)].map((_, i) => (
+        <Float key={`flow-${i}`} speed={2 + i * 0.2} rotationIntensity={0.1} floatIntensity={1}>
+          <mesh position={[Math.sin(i * 2) * 2, Math.cos(i * 1.5) * 0.8, Math.cos(i * 2) * 2]} rotation={[0, i * 0.8, 0]}>
+            <cylinderGeometry args={[0.03, 0.03, 2.5]} />
+            <meshStandardMaterial color="#666" transparent opacity={0.8} />
+          </mesh>
+          {/* Data packets */}
+          <mesh position={[Math.sin(i * 2 + Date.now() * 0.001) * 1.5, Math.cos(i * 1.5) * 0.8, Math.cos(i * 2 + Date.now() * 0.001) * 1.5]}>
+            <sphereGeometry args={[0.1]} />
+            <meshStandardMaterial color="#000" />
+          </mesh>
+        </Float>
+      ))}
+      
+      {/* Automation gears */}
+      {[...Array(3)].map((_, i) => (
+        <Float key={`gear-${i}`} speed={0.8 + i * 0.3} rotationIntensity={2} floatIntensity={0.3}>
+          <mesh position={[Math.cos(i * 2.1) * 4.5, Math.sin(i * 1.8) * 2, Math.sin(i * 2.1) * 4.5]}>
+            <cylinderGeometry args={[0.8, 0.8, 0.2, 8]} />
+            <meshStandardMaterial color="#333" />
+          </mesh>
+        </Float>
+      ))}
+      
+      {/* Floating text */}
+      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
+        <Text
+          position={[0, 3.5, 0]}
+          fontSize={0.8}
+          color="#333"
+          anchorX="center"
+          anchorY="middle"
+        >
+          Visual Automation
+        </Text>
+      </Float>
+    </>
   );
 };
 
@@ -91,12 +179,26 @@ const N8nAutomationPage = () => {
         zIndex: -1
       }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade />
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.2} />
-          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.8} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <spotLight position={[-10, -10, -10]} angle={0.3} intensity={0.6} />
           <FloatingGear />
           <FloatingNodes />
+          {/* Dark particles for visibility */}
+          <Float speed={1} rotationIntensity={0.1} floatIntensity={0.5}>
+            <group>
+              {[...Array(40)].map((_, i) => (
+                <mesh key={i} position={[
+                  (Math.random() - 0.5) * 18,
+                  (Math.random() - 0.5) * 18,
+                  (Math.random() - 0.5) * 18
+                ]}>
+                  <sphereGeometry args={[0.04]} />
+                  <meshStandardMaterial color="#333" opacity={0.6} transparent />
+                </mesh>
+              ))}
+            </group>
+          </Float>
         </Canvas>
       </div>
 
@@ -164,6 +266,22 @@ const N8nAutomationPage = () => {
           }}>
             🌟 Harness the power of visual automation workflows to create intelligent, responsive systems that make PinPal.io technology seamlessly autonomous.
           </p>
+
+          {/* N8N Automation Animation Section */}
+          <div style={{
+            height: "400px",
+            width: "100%",
+            marginBottom: "50px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+            background: "linear-gradient(135deg, rgba(240,240,240,0.8), rgba(250,250,250,0.9))"
+          }}>
+            <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
+              <AutomationScene />
+            </Canvas>
+          </div>
 
           {/* Feature Cards */}
           <div style={{
