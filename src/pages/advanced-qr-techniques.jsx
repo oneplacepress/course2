@@ -1,14 +1,23 @@
-import React from "react";
-import { Link } from "gatsby";
+import React, { useState, useRef } from 'react';
+import { Link } from 'gatsby';
 
 const AdvancedQRTechniquesPage = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "white",
-      color: "#333",
-      fontFamily: "Arial, sans-serif"
-    }}>
+    <div style={{ minHeight: "100vh", position: "relative" }}>
       {/* Fullscreen Video Background */}
       <div style={{
         width: "100%",
@@ -17,6 +26,7 @@ const AdvancedQRTechniquesPage = () => {
         overflow: "hidden"
       }}>
         <video
+          ref={videoRef}
           style={{
             width: "100%",
             height: "100%",
@@ -28,7 +38,8 @@ const AdvancedQRTechniquesPage = () => {
           }}
           poster=""
           preload="metadata"
-          controls
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/Prisoner-of-the-QR-Code.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -50,6 +61,36 @@ const AdvancedQRTechniquesPage = () => {
           color: "#fff",
           padding: "20px"
         }}>
+          {/* Custom Play/Pause Button */}
+          <button
+            onClick={togglePlayPause}
+            style={{
+              width: "80px",
+              height: "80px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              marginBottom: "2rem",
+              fontSize: "2rem",
+              transition: "all 0.3s ease",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 1)";
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            {isPlaying ? "⏸️" : "▶️"}
+          </button>
+
           <h1 style={{
             fontSize: "3.5rem",
             fontWeight: "bold",

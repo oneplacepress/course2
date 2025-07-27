@@ -1,14 +1,23 @@
-import React from "react";
-import { Link } from "gatsby";
+import React, { useState, useRef } from 'react';
+import { Link } from 'gatsby';
 
 const LocationBasedServicesPage = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "white",
-      color: "#333",
-      fontFamily: "Arial, sans-serif"
-    }}>
+    <div style={{ minHeight: "100vh", position: "relative" }}>
       {/* Fullscreen Video Background */}
       <div style={{
         width: "100%",
@@ -17,6 +26,7 @@ const LocationBasedServicesPage = () => {
         overflow: "hidden"
       }}>
         <video
+          ref={videoRef}
           style={{
             width: "100%",
             height: "100%",
@@ -28,7 +38,8 @@ const LocationBasedServicesPage = () => {
           }}
           poster=""
           preload="metadata"
-          controls
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/Onboard-partners-for-your-Dolla-Depot.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -50,6 +61,36 @@ const LocationBasedServicesPage = () => {
           color: "#fff",
           padding: "20px"
         }}>
+          {/* Custom Play/Pause Button */}
+          <button
+            onClick={togglePlayPause}
+            style={{
+              width: "80px",
+              height: "80px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              marginBottom: "2rem",
+              fontSize: "2rem",
+              transition: "all 0.3s ease",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 1)";
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            {isPlaying ? "⏸️" : "▶️"}
+          </button>
+
           <h1 style={{
             fontSize: "3.5rem",
             fontWeight: "bold",
@@ -67,7 +108,7 @@ const LocationBasedServicesPage = () => {
             marginBottom: "2rem",
             textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
           }}>
-            Build powerful location-aware applications using GPS, geofencing, and mapping technologies.
+            Discover how to leverage location data to create personalized and context-aware services.
           </p>
           <div style={{
             display: "flex",
@@ -77,7 +118,7 @@ const LocationBasedServicesPage = () => {
           }}>
             <button
               style={{
-                backgroundColor: "#28a745",
+                backgroundColor: "#007bff",
                 color: "#fff",
                 border: "none",
                 padding: "12px 24px",
@@ -87,8 +128,8 @@ const LocationBasedServicesPage = () => {
                 cursor: "pointer",
                 transition: "background-color 0.3s ease"
               }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = "#1e7e34"}
-              onMouseLeave={(e) => e.target.style.backgroundColor = "#28a745"}
+              onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
+              onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
             >
               Start Learning
             </button>
