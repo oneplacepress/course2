@@ -151,7 +151,7 @@ const StoryPage = () => {
             marginBottom: "2rem",
             textShadow: "1px 1px 2px rgba(0,0,0,0.8)"
           }}>
-            Discover the journey behing PinPal. and mission to revolutionize quick commerce.
+            Discover the journey behind PinPal and our mission to create location-based systems that benefit all people.
           </p>
           <div style={{
             display: "flex",
@@ -197,7 +197,7 @@ const StoryPage = () => {
               onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
               onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
             >
-              Start Learning
+              Try it Out
             </a>
           </div>
         </div>

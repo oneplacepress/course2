@@ -632,7 +632,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           </div>
                         }
                         roundedFull={true}
-                        link={"https://pinpal.io"}
+                        link={"/courses"}
                       />
                     </div>
                     <div
@@ -1670,10 +1670,13 @@ function PlasmicHomepage__RenderFunc(props) {
           >
             <div className={classNames(projectcss.all, sty.columns__guh1X)}>
               <div className={classNames(projectcss.all, sty.column___9Mh5G)}>
-                <div
+                <PlasmicLink__
                   data-plasmic-name={"footerLogo"}
                   data-plasmic-override={overrides.footerLogo}
                   className={classNames(projectcss.all, sty.footerLogo)}
+                  component={Link}
+                  href={"/"}
+                  platform={"gatsby"}
                 >
                   <PlasmicImg__
                     data-plasmic-name={"logo2"}
@@ -1694,7 +1697,7 @@ function PlasmicHomepage__RenderFunc(props) {
                       aspectRatio: undefined
                     }}
                   />
-                </div>
+                </PlasmicLink__>
               </div>
               <div className={classNames(projectcss.all, sty.column__aEuxu)}>
                 <h3

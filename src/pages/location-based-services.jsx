@@ -179,7 +179,7 @@ const LocationBasedServicesPage = () => {
               onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
               onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
             >
-              Start Learning
+              Try it Out
             </a>
             <Link 
               to="/courses"

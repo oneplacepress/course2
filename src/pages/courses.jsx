@@ -315,11 +315,13 @@ const CoursesPage = () => {
           margin: '0 auto',
           padding: '0 16px'
         }}>
-          <img 
-            src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
-            alt="PinPal Logo"
-            style={{ height: '60px', width: 'auto', marginBottom: '24px' }}
-          />
+          <Link to="/">
+            <img 
+              src="https://workmates.live/wp-content/uploads/2025/07/blue-arrow-up-320.png"
+              alt="PinPal Logo"
+              style={{ height: '60px', width: 'auto', marginBottom: '24px' }}
+            />
+          </Link>
           <p style={{ color: '#ccc', fontSize: '14px' }}>
             © 2025 PinPal. All rights reserved.
           </p>
