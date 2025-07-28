@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "gatsby";
 
 const getFileName = (url) => {
@@ -8,6 +8,8 @@ const getFileName = (url) => {
 
 const PinPalGalleryPage = () => {
   const [playingAudio, setPlayingAudio] = useState({});
+  const [playingVideos, setPlayingVideos] = useState({});
+  const videoRefs = useRef({});
 
   const audioUrls = [
     "https://dfgnflfqxk4ps.cloudfront.net/LA/pinpal_audio_back_again.mp3",
@@ -59,6 +61,18 @@ const PinPalGalleryPage = () => {
 
   const handleAudioPause = (url) => {
     setPlayingAudio(prev => ({ ...prev, [url]: false }));
+  };
+
+  const toggleVideoPlayPause = (url) => {
+    const videoRef = videoRefs.current[url];
+    if (videoRef) {
+      if (playingVideos[url]) {
+        videoRef.pause();
+      } else {
+        videoRef.play();
+      }
+      setPlayingVideos(prev => ({ ...prev, [url]: !prev[url] }));
+    }
   };
 
   return (
@@ -242,16 +256,61 @@ const PinPalGalleryPage = () => {
                   }}>
                     {getFileName(url)}
                   </h4>
-                  <video
-                    controls
-                    style={{
-                      width: "100%",
-                      borderRadius: "8px"
-                    }}
-                  >
-                    <source src={url} type="video/mp4" />
-                    Your browser does not support the video element.
-                  </video>
+                  <div style={{
+                    position: "relative",
+                    width: "100%",
+                    borderRadius: "8px",
+                    overflow: "hidden"
+                  }}>
+                    <video
+                      ref={el => videoRefs.current[url] = el}
+                      style={{
+                        width: "100%",
+                        borderRadius: "8px"
+                      }}
+                      onPlay={() => setPlayingVideos(prev => ({ ...prev, [url]: true }))}
+                      onPause={() => setPlayingVideos(prev => ({ ...prev, [url]: false }))}
+                    >
+                      <source src={url} type="video/mp4" />
+                      Your browser does not support the video element.
+                    </video>
+                    {/* Custom Play/Pause Button Overlay */}
+                    <button
+                      onClick={() => toggleVideoPlayPause(url)}
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "60px",
+                        height: "60px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.15)",
+                        border: "2px solid rgba(255, 255, 255, 0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        fontSize: "2rem",
+                        transition: "all 0.3s ease",
+                        backdropFilter: "blur(10px)",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        zIndex: 10
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+                        e.target.style.borderColor = "rgba(255, 255, 255, 0.5)";
+                        e.target.style.transform = "translate(-50%, -50%) scale(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+                        e.target.style.borderColor = "rgba(255, 255, 255, 0.3)";
+                        e.target.style.transform = "translate(-50%, -50%) scale(1)";
+                      }}
+                    >
+                      {playingVideos[url] ? "⏸" : "▶"}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

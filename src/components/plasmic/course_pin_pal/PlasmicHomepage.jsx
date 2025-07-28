@@ -82,6 +82,21 @@ function PlasmicHomepage__RenderFunc(props) {
   
   // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  
+  // Video state for homepage video
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
+  const videoRef = React.useRef(null);
+
+  const toggleVideoPlayPause = () => {
+    if (videoRef.current) {
+      if (isVideoPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsVideoPlaying(!isVideoPlaying);
+    }
+  };
   return (
     <React.Fragment>
       <style>{`
@@ -169,21 +184,6 @@ function PlasmicHomepage__RenderFunc(props) {
                 {"Story"}
               </PlasmicLink__>
               <PlasmicLink__
-                data-plasmic-name={"link3"}
-                data-plasmic-override={overrides.link3}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.a,
-                  projectcss.__wab_text,
-                  sty.link3
-                )}
-                component={Link}
-                href={`/#pricing`}
-                platform={"gatsby"}
-              >
-                {"Pricing"}
-              </PlasmicLink__>
-              <PlasmicLink__
                 className={classNames(
                   projectcss.all,
                   projectcss.a,
@@ -209,6 +209,21 @@ function PlasmicHomepage__RenderFunc(props) {
                 style={{ whiteSpace: "nowrap" }}
               >
                 {"Audio / Video"}
+              </PlasmicLink__>
+              <PlasmicLink__
+                data-plasmic-name={"link3"}
+                data-plasmic-override={overrides.link3}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.a,
+                  projectcss.__wab_text,
+                  sty.link3
+                )}
+                component={Link}
+                href={`https://ghost.admins.live/location-based-services`}
+                platform={"gatsby"}
+              >
+                {"Subscribe"}
               </PlasmicLink__>
               <PlasmicLink__
                 className={classNames(
@@ -1503,6 +1518,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     overflow: "hidden"
                   }}>
                     <video
+                      ref={videoRef}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -1511,12 +1527,49 @@ function PlasmicHomepage__RenderFunc(props) {
                       }}
                       poster=""
                       preload="metadata"
-                      controls
-                      muted
+                      onPlay={() => setIsVideoPlaying(true)}
+                      onPause={() => setIsVideoPlaying(false)}
                     >
                       <source src="https://dfgnflfqxk4ps.cloudfront.net/LA/end.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+                    
+                    {/* Custom Play/Pause Button Overlay */}
+                    <button
+                      onClick={toggleVideoPlayPause}
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: "60px",
+                        height: "60px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(255, 255, 255, 0.15)",
+                        border: "2px solid rgba(255, 255, 255, 0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        fontSize: "2rem",
+                        transition: "all 0.3s ease",
+                        backdropFilter: "blur(10px)",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        zIndex: 10
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+                        e.target.style.borderColor = "rgba(255, 255, 255, 0.5)";
+                        e.target.style.transform = "translate(-50%, -50%) scale(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+                        e.target.style.borderColor = "rgba(255, 255, 255, 0.3)";
+                        e.target.style.transform = "translate(-50%, -50%) scale(1)";
+                      }}
+                    >
+                      {isVideoPlaying ? "⏸" : "▶"}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1537,127 +1590,21 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.h2__bsAh3
                 )}
               >
-                {"Choose Your Plan"}
+                {"New Courses Every Month"}
               </h2>
             </div>
             <div className={classNames(projectcss.all, sty.columns__enUtn)}>
               <div className={classNames(projectcss.all, sty.column__eVhgc)}>
                 <div
                   className={classNames(projectcss.all, sty.freeBox__hqIai)}
+                  style={{ textAlign: "center", padding: "2rem" }}
                 >
-                  <h3
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.h3,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"Starter"}
-                  </h3>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"For individuals and small teams"}
-                  </p>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"$49/mo"}
-                  </p>
                   <Button
                     className={classNames("__wab_instance", sty.button__nnY4I)}
                     color={"neutral"}
-                    label={"Get Started"}
+                    label={"Subscribe"}
                     roundedFull={true}
-                    link={"https://pinpal.io"}
-                  />
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.column__uMscq)}>
-                <div
-                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
-                >
-                  <h3
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.h3,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"Pro"}
-                  </h3>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"For growing businesses"}
-                  </p>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"$199/mo"}
-                  </p>
-                  <Button
-                    className={classNames("__wab_instance", sty.button__nnY4I)}
-                    color={"neutral"}
-                    label={"Get Started"}
-                    roundedFull={true}
-                    link={"https://pinpal.io"}
-                  />
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.column__d4XEl)}>
-                <div
-                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
-                >
-                  <h3
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.h3,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"Enterprise"}
-                  </h3>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"For large organizations"}
-                  </p>
-                  <p
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.p,
-                      projectcss.__wab_text
-                    )}
-                  >
-                    {"Contact us for pricing"}
-                  </p>
-                  <Button
-                    className={classNames("__wab_instance", sty.button__nnY4I)}
-                    color={"neutral"}
-                    label={"Contact Us"}
-                    roundedFull={true}
-                    link={`mailto:jay@admins.live`}
+                    link={"https://ghost.admins.live/location-based-services"}
                   />
                 </div>
               </div>
@@ -1815,10 +1762,10 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink4
                   )}
                   component={Link}
-                  href={`/#pricing`}
+                  href={`https://ghost.admins.live/location-based-services`}
                   platform={"gatsby"}
                 >
-                  {"Pricing"}
+                  {"Subscribe"}
                 </PlasmicLink__>
                 <PlasmicLink__
                   className={classNames(
