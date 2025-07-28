@@ -431,7 +431,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo1)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -445,7 +445,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo2)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -459,7 +459,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo3)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -473,7 +473,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo4)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -487,7 +487,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo5)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -501,7 +501,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo6)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -515,7 +515,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo7)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"60px"}
+                displayMaxWidth={"35px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
