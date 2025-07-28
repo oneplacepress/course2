@@ -320,20 +320,20 @@ function PlasmicHomepage__RenderFunc(props) {
                     data-plasmic-override={overrides.contentBlock}
                     className={classNames(projectcss.all, sty.contentBlock)}
                   >
-                    <h1
-                      data-plasmic-name={"mainHeading"}
-                      data-plasmic-override={overrides.mainHeading}
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.h1,
-                        projectcss.__wab_text,
-                        sty.mainHeading
-                      )}
-                    >
-                      {
-                        "The Ultimate Guide to AI-Powered Location-Based Applications"
-                      }
-                    </h1>
+                                                <h1
+                              data-plasmic-name={"mainHeading"}
+                              data-plasmic-override={overrides.mainHeading}
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.h1,
+                                projectcss.__wab_text,
+                                sty.mainHeading
+                              )}
+                            >
+                              {
+                                "Guide to AI-Powered Location-Based Applications"
+                              }
+                            </h1>
                     <p
                       data-plasmic-name={"peraBanner"}
                       data-plasmic-override={overrides.peraBanner}
@@ -351,7 +351,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         )}
                       >
                         {
-                          "Unlock the future of real estate and tourism with our courses on AI audio QR pins and embedded systems. We'll show you how to leverage tools like n8n to create amazing automation for your location-based applications."
+                          "Automate the world around you.  We will show you how to create tools for location-based applications, using advanced workflows, and set you on the path towards growing your business."
                         }
                       </div>
                     </p>
@@ -415,7 +415,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 sty.subHeading
               )}
             >
-              {"Trusted by industry leaders"}
+              {"PinPal Partners"}
             </h2>
             <Stack__
               as={"div"}
@@ -423,7 +423,106 @@ function PlasmicHomepage__RenderFunc(props) {
               data-plasmic-override={overrides.logoContainer}
               hasGap={true}
               className={classNames(projectcss.all, sty.logoContainer)}
-            ></Stack__>
+            >
+              <PlasmicImg__
+                data-plasmic-name={"logo1"}
+                data-plasmic-override={overrides.logo1}
+                alt={""}
+                className={classNames(sty.logo1)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group3MWjXt8Vs4OYf}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo2"}
+                data-plasmic-override={overrides.logo2}
+                alt={""}
+                className={classNames(sty.logo2)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group6Jl9Y9EZ2CXfg}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo3"}
+                data-plasmic-override={overrides.logo3}
+                alt={""}
+                className={classNames(sty.logo3)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={groupFo8MicJzjAhG}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo4"}
+                data-plasmic-override={overrides.logo4}
+                alt={""}
+                className={classNames(sty.logo4)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group5GbdDd7GnzVxw}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo5"}
+                data-plasmic-override={overrides.logo5}
+                alt={""}
+                className={classNames(sty.logo5)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group7PrOnVj2DmlBv}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo6"}
+                data-plasmic-override={overrides.logo6}
+                alt={""}
+                className={classNames(sty.logo6)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group2KziJpgqXNlyG}
+              />
+              <PlasmicImg__
+                data-plasmic-name={"logo7"}
+                data-plasmic-override={overrides.logo7}
+                alt={""}
+                className={classNames(sty.logo7)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"120px"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={group4BV7FeZ8CbuY7}
+              />
+            </Stack__>
           </Stack__>
           <section
             data-plasmic-name={"section3"}
@@ -1593,22 +1692,34 @@ function PlasmicHomepage__RenderFunc(props) {
                 {"New Courses Every Month"}
               </h2>
             </div>
-            <div className={classNames(projectcss.all, sty.columns__enUtn)}>
-              <div className={classNames(projectcss.all, sty.column__eVhgc)}>
-                <div
-                  className={classNames(projectcss.all, sty.freeBox__hqIai)}
-                  style={{ textAlign: "center", padding: "2rem" }}
-                >
-                  <Button
-                    className={classNames("__wab_instance", sty.button__nnY4I)}
-                    color={"neutral"}
-                    label={"Subscribe"}
-                    roundedFull={true}
-                    link={"https://ghost.admins.live/location-based-services"}
-                  />
+                            <div className={classNames(projectcss.all, sty.columns__enUtn)}>
+                  <div className={classNames(projectcss.all, sty.column__eVhgc)}>
+                    <div
+                      className={classNames(projectcss.all, sty.freeBox__hqIai)}
+                      style={{ 
+                        textAlign: "center", 
+                        padding: "2rem",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                      }}
+                    >
+                      <Button
+                        className={classNames("__wab_instance", sty.button__nnY4I)}
+                        color={"neutral"}
+                        label={"Subscribe"}
+                        roundedFull={true}
+                        link={"https://ghost.admins.live/location-based-services"}
+                        style={{
+                          fontSize: "1.5rem",
+                          padding: "1rem 3rem",
+                          minWidth: "200px",
+                          height: "auto"
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
           </section>
           <footer
             data-plasmic-name={"footer"}
@@ -1673,19 +1784,93 @@ function PlasmicHomepage__RenderFunc(props) {
                   {"Website"}
                 </PlasmicLink__>
                 <PlasmicLink__
-                  data-plasmic-name={"footerLink2"}
-                  data-plasmic-override={overrides.footerLink2}
                   className={classNames(
                     projectcss.all,
                     projectcss.a,
                     projectcss.__wab_text,
-                    sty.footerLink2
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/gallery`}
+                  platform={"gatsby"}
+                >
+                  {"Audio / Video"}
+                </PlasmicLink__>
+              </div>
+              <div className={classNames(projectcss.all, sty.column__oBhTf)}>
+                <h3
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.h3,
+                    projectcss.__wab_text,
+                    sty.h3___3QrAk
+                  )}
+                >
+                  {"About"}
+                </h3>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/story`}
+                  platform={"gatsby"}
+                >
+                  {"Story"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
                   )}
                   component={Link}
                   href={`mailto:jay@admins.live`}
                   platform={"gatsby"}
                 >
                   {"Contact"}
+                </PlasmicLink__>
+              </div>
+              <div className={classNames(projectcss.all, sty.column__oBhTf)}>
+                <h3
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.h3,
+                    projectcss.__wab_text,
+                    sty.h3___3QrAk
+                  )}
+                >
+                  {"Product"}
+                </h3>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/courses`}
+                  platform={"gatsby"}
+                >
+                  {"Courses"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`https://ghost.admins.live/location-based-services`}
+                  platform={"gatsby"}
+                >
+                  {"Subscribe"}
                 </PlasmicLink__>
               </div>
               <div className={classNames(projectcss.all, sty.column__oBhTf)}>
@@ -1728,83 +1913,6 @@ function PlasmicHomepage__RenderFunc(props) {
                   platform={"gatsby"}
                 >
                   {"Privacy Policy"}
-                </PlasmicLink__>
-              </div>
-              <div className={classNames(projectcss.all, sty.column__oBhTf)}>
-                <h3
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.h3,
-                    projectcss.__wab_text,
-                    sty.h3___3QrAk
-                  )}
-                >
-                  {"Navigation"}
-                </h3>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.footerLink4
-                  )}
-                  component={Link}
-                  href={`/story`}
-                  platform={"gatsby"}
-                >
-                  {"Story"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.footerLink4
-                  )}
-                  component={Link}
-                  href={`https://ghost.admins.live/location-based-services`}
-                  platform={"gatsby"}
-                >
-                  {"Subscribe"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.footerLink4
-                  )}
-                  component={Link}
-                  href={`/courses`}
-                  platform={"gatsby"}
-                >
-                  {"Courses"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.footerLink4
-                  )}
-                  component={Link}
-                  href={`/gallery`}
-                  platform={"gatsby"}
-                >
-                  {"Audio / Video"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.footerLink4
-                  )}
-                  component={Link}
-                  href={`mailto:jay@admins.live`}
-                  platform={"gatsby"}
-                >
-                  {"Contact"}
                 </PlasmicLink__>
               </div>
             </div>

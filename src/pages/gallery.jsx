@@ -125,23 +125,22 @@ const PinPalGalleryPage = () => {
         position: "relative",
         overflow: "hidden"
       }}>
-        <video
-          ref={heroVideoRef}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 1
-          }}
-          poster=""
-          preload="metadata"
-          muted
-          onPlay={() => setIsHeroPlaying(true)}
-          onPause={() => setIsHeroPlaying(false)}
-        >
+                 <video
+           ref={heroVideoRef}
+           style={{
+             width: "100%",
+             height: "100%",
+             objectFit: "cover",
+             position: "absolute",
+             top: 0,
+             left: 0,
+             zIndex: 1
+           }}
+           poster=""
+           preload="metadata"
+           onPlay={() => setIsHeroPlaying(true)}
+           onPause={() => setIsHeroPlaying(false)}
+         >
           <source src="https://workmates.live/wp-content/uploads/2025/07/Break-free-from-Big-Tech.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
