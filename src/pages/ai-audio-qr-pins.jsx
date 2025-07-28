@@ -160,7 +160,7 @@ const AIAudioQRPinsPage = () => {
             justifyContent: "center"
           }}>
             <a
-              href="https://pinpal.io"
+              href="https://ghost.admins.live/ai-audio-qr-pins"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -179,7 +179,7 @@ const AIAudioQRPinsPage = () => {
               onMouseEnter={(e) => e.target.style.backgroundColor = "#0056b3"}
               onMouseLeave={(e) => e.target.style.backgroundColor = "#007bff"}
             >
-              Start Learning
+              Buy Now
             </a>
             <Link 
               to="/courses"
