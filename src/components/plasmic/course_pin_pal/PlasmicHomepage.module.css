@@ -593,9 +593,9 @@
 .img__p2DZv {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 180px;
-  height: 77px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   flex-shrink: 0;
 }
@@ -604,7 +604,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img__p2DZv {
-    width: 100px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -612,9 +612,9 @@
 .img__b44Jv {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 180px;
-  height: 85px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   flex-shrink: 0;
 }
@@ -623,7 +623,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img__b44Jv {
-    width: 100px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -631,9 +631,9 @@
 .img__z4Vv6 {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 157px;
-  height: 66px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   flex-shrink: 0;
 }
@@ -642,7 +642,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img__z4Vv6 {
-    width: 120px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -650,9 +650,9 @@
 .img___6TiGi {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 164.999px;
-  height: 80.999px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   top: auto;
   left: auto;
@@ -663,7 +663,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img___6TiGi {
-    width: 100px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -671,8 +671,8 @@
 .img___2QO77 {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 143px;
+  max-width: 35px;
+  width: 35px;
   height: auto;
   display: block;
   top: auto;
@@ -684,7 +684,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img___2QO77 {
-    width: 100px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -692,9 +692,9 @@
 .img__ehMg {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 168.999px;
-  height: 76.999px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   top: auto;
   left: auto;
@@ -705,7 +705,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img__ehMg {
-    width: 138px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
@@ -713,9 +713,9 @@
 .img__svkMn {
   position: relative;
   object-fit: cover;
-  max-width: 100%;
-  width: 152.999px;
-  height: 87px;
+  max-width: 35px;
+  width: 35px;
+  height: auto;
   display: block;
   top: auto;
   left: auto;
@@ -726,7 +726,7 @@
 }
 @media (min-width: 0px) and (max-width: 768px) {
   .img__svkMn {
-    width: 100px;
+    width: 35px;
     height: auto;
     flex-shrink: 0;
   }
