@@ -18,7 +18,15 @@ function Button(props) {
   //
   // By default, we are just piping all ButtonProps here, but feel free
   // to do whatever works for you.
-  return <PlasmicButton {...props} />;
+  
+  // Map 'link' prop to 'linkTo' for PlasmicButton compatibility
+  const { link, ...otherProps } = props;
+  const plasmicProps = {
+    ...otherProps,
+    linkTo: link
+  };
+  
+  return <PlasmicButton {...plasmicProps} />;
 }
 
 export default Button;
