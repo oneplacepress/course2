@@ -431,7 +431,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo1)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -445,7 +445,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo2)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -459,7 +459,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo3)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -473,7 +473,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo4)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -487,7 +487,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo5)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -501,7 +501,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo6)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -515,7 +515,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 className={classNames(sty.logo7)}
                 displayHeight={"auto"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"120px"}
+                displayMaxWidth={"60px"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
                 displayWidth={"auto"}
@@ -1698,10 +1698,11 @@ function PlasmicHomepage__RenderFunc(props) {
                       className={classNames(projectcss.all, sty.freeBox__hqIai)}
                       style={{ 
                         textAlign: "center", 
-                        padding: "2rem",
+                        padding: "3rem",
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "center"
+                        alignItems: "center",
+                        width: "100%"
                       }}
                     >
                       <Button
@@ -1711,10 +1712,13 @@ function PlasmicHomepage__RenderFunc(props) {
                         roundedFull={true}
                         link={"https://ghost.admins.live/location-based-services"}
                         style={{
-                          fontSize: "1.5rem",
-                          padding: "1rem 3rem",
-                          minWidth: "200px",
-                          height: "auto"
+                          fontSize: "2.5rem",
+                          padding: "2rem 4rem",
+                          minWidth: "300px",
+                          height: "auto",
+                          fontWeight: "bold",
+                          boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                          transform: "scale(1.1)"
                         }}
                       />
                     </div>
