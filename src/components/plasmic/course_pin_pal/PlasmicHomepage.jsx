@@ -218,7 +218,7 @@ function PlasmicHomepage__RenderFunc(props) {
                   sty.link2
                 )}
                 component={Link}
-                href={`mailto:cto@pinpal.io`}
+                href={`mailto:jay@admins.live`}
                 platform={"gatsby"}
               >
                 {"Contact"}
@@ -1493,31 +1493,31 @@ function PlasmicHomepage__RenderFunc(props) {
                   data-plasmic-override={overrides.avatarImage}
                   className={classNames(projectcss.all, sty.avatarImage)}
                 >
-                  <PlasmicImg__
-                    alt={""}
-                    className={classNames(sty.img__urLOj)}
-                    displayHeight={
-                      hasVariant(globalVariants, "screen", "mobileOnly")
-                        ? "100%"
-                        : "auto"
-                    }
-                    displayMaxHeight={"none"}
-                    displayMaxWidth={"100%"}
-                    displayMinHeight={"0"}
-                    displayMinWidth={"0"}
-                    displayWidth={
-                      hasVariant(globalVariants, "screen", "mobileOnly")
-                        ? "400px"
-                        : "auto"
-                    }
-                    loading={"lazy"}
-                    src={{
-                      src: image44Y5ZUoV4FCbk,
-                      fullWidth: 930,
-                      fullHeight: 1162,
-                      aspectRatio: undefined
-                    }}
-                  />
+                  <div style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: hasVariant(globalVariants, "screen", "mobileOnly") ? "400px" : "600px",
+                    height: "auto",
+                    aspectRatio: "9/16",
+                    borderRadius: "8px",
+                    overflow: "hidden"
+                  }}>
+                    <video
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "8px"
+                      }}
+                      poster=""
+                      preload="metadata"
+                      controls
+                      muted
+                    >
+                      <source src="https://dfgnflfqxk4ps.cloudfront.net/LA/end.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1657,7 +1657,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     color={"neutral"}
                     label={"Contact Us"}
                     roundedFull={true}
-                    link={`mailto:cto@pinpal.io`}
+                    link={`mailto:jay@admins.live`}
                   />
                 </div>
               </div>
@@ -1735,7 +1735,7 @@ function PlasmicHomepage__RenderFunc(props) {
                     sty.footerLink2
                   )}
                   component={Link}
-                  href={`mailto:cto@pinpal.io`}
+                  href={`mailto:jay@admins.live`}
                   platform={"gatsby"}
                 >
                   {"Contact"}
@@ -1781,6 +1781,83 @@ function PlasmicHomepage__RenderFunc(props) {
                   platform={"gatsby"}
                 >
                   {"Privacy Policy"}
+                </PlasmicLink__>
+              </div>
+              <div className={classNames(projectcss.all, sty.column__oBhTf)}>
+                <h3
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.h3,
+                    projectcss.__wab_text,
+                    sty.h3___3QrAk
+                  )}
+                >
+                  {"Navigation"}
+                </h3>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/story`}
+                  platform={"gatsby"}
+                >
+                  {"Story"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/#pricing`}
+                  platform={"gatsby"}
+                >
+                  {"Pricing"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/courses`}
+                  platform={"gatsby"}
+                >
+                  {"Courses"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`/gallery`}
+                  platform={"gatsby"}
+                >
+                  {"Audio / Video"}
+                </PlasmicLink__>
+                <PlasmicLink__
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.a,
+                    projectcss.__wab_text,
+                    sty.footerLink4
+                  )}
+                  component={Link}
+                  href={`mailto:jay@admins.live`}
+                  platform={"gatsby"}
+                >
+                  {"Contact"}
                 </PlasmicLink__>
               </div>
             </div>

@@ -126,7 +126,7 @@ const PinPalGalleryPage = () => {
           preload="metadata"
           muted
         >
-          <source src="https://workmates.live/wp-content/uploads/2023/09/coffee-shop-evening-short-1080.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Break-free-from-Big-Tech.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
@@ -205,57 +205,6 @@ const PinPalGalleryPage = () => {
             🌟 Explore our collection of AI-generated audio content and video demonstrations showcasing PinPal.io's innovative technology.
           </p>
 
-          {/* Audio Section */}
-          <div style={{ marginBottom: "4rem" }}>
-            <h3 style={{
-              fontSize: "clamp(1.5rem, 4vw, 2rem)",
-              fontWeight: "600",
-              marginBottom: "2rem",
-              color: "#007bff",
-              textAlign: "center",
-              padding: "0 16px"
-            }}>
-              🎧 Audio Content
-            </h3>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "1.5rem",
-              padding: "0 8px"
-            }}>
-              {audioUrls.map((url, index) => (
-                <div key={index} style={{
-                  backgroundColor: "#f8f9fa",
-                  padding: "1.5rem",
-                  borderRadius: "12px",
-                  border: "1px solid #e9ecef",
-                  width: "100%",
-                  boxSizing: "border-box"
-                }}>
-                  <h4 style={{
-                    fontSize: "1.1rem",
-                    fontWeight: "600",
-                    marginBottom: "1rem",
-                    color: "#333",
-                    wordWrap: "break-word",
-                    overflowWrap: "break-word"
-                  }}>
-                    {getFileName(url)}
-                  </h4>
-                  <audio
-                    controls
-                    style={{ width: "100%" }}
-                    onPlay={() => handleAudioPlay(url)}
-                    onPause={() => handleAudioPause(url)}
-                  >
-                    <source src={url} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Video Section */}
           <div style={{ marginBottom: "4rem" }}>
             <h3 style={{
@@ -303,6 +252,57 @@ const PinPalGalleryPage = () => {
                     <source src={url} type="video/mp4" />
                     Your browser does not support the video element.
                   </video>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Audio Section */}
+          <div style={{ marginBottom: "4rem" }}>
+            <h3 style={{
+              fontSize: "clamp(1.5rem, 4vw, 2rem)",
+              fontWeight: "600",
+              marginBottom: "2rem",
+              color: "#007bff",
+              textAlign: "center",
+              padding: "0 16px"
+            }}>
+              🎧 Audio Content
+            </h3>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "1.5rem",
+              padding: "0 8px"
+            }}>
+              {audioUrls.map((url, index) => (
+                <div key={index} style={{
+                  backgroundColor: "#f8f9fa",
+                  padding: "1.5rem",
+                  borderRadius: "12px",
+                  border: "1px solid #e9ecef",
+                  width: "100%",
+                  boxSizing: "border-box"
+                }}>
+                  <h4 style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "1rem",
+                    color: "#333",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word"
+                  }}>
+                    {getFileName(url)}
+                  </h4>
+                  <audio
+                    controls
+                    style={{ width: "100%" }}
+                    onPlay={() => handleAudioPlay(url)}
+                    onPause={() => handleAudioPause(url)}
+                  >
+                    <source src={url} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
                 </div>
               ))}
             </div>

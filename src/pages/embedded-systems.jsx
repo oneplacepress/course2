@@ -80,7 +80,7 @@ const EmbeddedSystemsPage = () => {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         >
-          <source src="https://workmates.live/wp-content/uploads/2025/07/Choosing-a-suite-of-services-for-your-Dolla-Depot.mp4" type="video/mp4" />
+          <source src="https://workmates.live/wp-content/uploads/2025/07/Dojos-World_-Open-source-world-building-featuring-Foundry-VTT.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
