@@ -32,27 +32,16 @@ const PinPalGalleryPage = () => {
   ];
 
   const videoUrls = [
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/vincent_wrap.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/saoirse_detail.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/rosamund_due.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/rosamund_tote.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/robert_byte.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/poppy_spin.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/remi_math.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/margot_stick.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/margot_view.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/jen_view.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/jen_plan.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/jcs_thing.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/jen_jog.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/james_shout.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/end.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/alex_win.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/chris_thoughts.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/adam_snap2.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/alex_drag.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/adam_snap.mp4",
-    "https://dfgnflfqxk4ps.cloudfront.net/LA/adam_bag.mp4"
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/cheryl.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/deanne.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/emily.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/erica.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/hannah.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/jane.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/luke.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/marc.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/melania.mp4",
+    "https://dfgnflfqxk4ps.cloudfront.net/LA/michael.mp4"
   ];
 
   const handleAudioPlay = (url) => {
